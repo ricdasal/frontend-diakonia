@@ -1,9 +1,50 @@
-<form [formGroup]="form" (submit)="submit()">
-  <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="login.component.css">
+</head>
+<body>
 
-  <input formControlName="email" type="email" class="form-control"  placeholder="Email" required>
+  <div class="split left">
+      <div class="centered">
+          <img src="/assets/IMAGENES/logo.jpg" class="logo-login">
+          <form [formGroup]="form" (submit)="submit()">
+            <!--<h1 class="h3 mb-3 fw-normal">Please sign in</h1>-->
 
-  <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
+            <!--
+            <input formControlName="email" type="email" class="form-control"  placeholder="Email" required>
 
-  <button class="btn btn-primary w-100 btn-lg" type="submit">Sign in</button>
-</form>
+            <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
+            -->
+            <p class="container-login">
+              <mat-form-field appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <input formControlName="email" type="email" matInput placeholder="Ingreso Usuario">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              </mat-form-field>
+            </p>
+
+
+            <p class="container-login">
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your password</mat-label>
+                <input formControlName="password" type="password" matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+            </p>
+
+            <button class="btn btn-danger btn-lg" type="submit" style="width: 250px; margin-left:95px">Iniciar Sesion</button>
+          </form>
+
+      </div>
+
+
+  </div>
+
+  <div class="split right">
+      <img src="/assets/IMAGENES/login-2.jpg" class="imagen-login-derecha">
+  </div>
+
+</body>
+</html>

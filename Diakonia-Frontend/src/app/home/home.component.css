@@ -1,0 +1,17 @@
+.container-home{
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  margin-left: -150px;
+  padding-left: 25px;
+}
+
+.espaciador-botones{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.imagen-logo-home{
+  width: 550px;
+  height: 350px;
+}
