@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Emitters } from '../emitters/emitters';
 import { HttpClient } from '@angular/common/http';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-navigation',
@@ -10,9 +11,16 @@ import { HttpClient } from '@angular/common/http';
 export class NavigationComponent implements OnInit {
   authenticated = false;
 
+  isSmallScreen = false;
+  menuOpen = false;
+
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ){}
+
+  menuVariable:boolean = false;
+  menu_icon_variable:boolean = false;
+
 
   ngOnInit(): void {
       Emitters.authEmitter.subscribe(
@@ -25,5 +33,15 @@ export class NavigationComponent implements OnInit {
   logout(): void {
     this.http.post('http://localhost:8000/api/logout', {}, {withCredentials:true})
     .subscribe( () => this.authenticated = false);
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  openMenu(){
+    this.menuVariable =! this.menuVariable;
+    this.menu_icon_variable =! this.menu_icon_variable;
+
   }
 }

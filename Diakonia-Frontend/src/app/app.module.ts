@@ -16,13 +16,32 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
+
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { InstitucionesComponent } from './instituciones/instituciones.component';
+import { ModalInstitucionesComponent } from './modal-instituciones/modal-instituciones.component';
+import {MatSelectModule} from '@angular/material/select';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    NavigationComponent
+    NavigationComponent,
+    InstitucionesComponent,
+    ModalInstitucionesComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +50,19 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatFormFieldModule, MatInputModule, MatIconModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatSelectModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

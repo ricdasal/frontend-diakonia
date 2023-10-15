@@ -1,0 +1,217 @@
+<h1 mat-dialog-title>FORMULARIO PARA AGREGAR/EDITAR DATOS</h1>
+
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Anio de ingreso</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Mes de ingreso</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+  </div>
+
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre Institucion</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Ruc</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Caracterizacion</mat-label>
+      <mat-select>
+        <mat-option value="one">Albergue</mat-option>
+        <mat-option value="two">Alimentacion a indigentes</mat-option>
+        <mat-option value="two">Ayuda en control y prevencion</mat-option>
+        <mat-option value="two">Casa de acogida</mat-option>
+        <mat-option value="two">Centro de apoyo mujeres</mat-option>
+        <mat-option value="two">Centro de apoyo familiar</mat-option>
+        <mat-option value="two">Centro de educacion</mat-option>
+        <mat-option value="two">Centro de inclusion personas con discapacidad</mat-option>
+        <mat-option value="two">Centro rehabilitacion</mat-option>
+        <mat-option value="two">Centro medico</mat-option>
+        <mat-option value="two">CIBV</mat-option>
+        <mat-option value="two">Cuidado personas con discapacidad</mat-option>
+        <mat-option value="two">Cuidado personas con discapacidad y enfermedades catastroficas</mat-option>
+        <mat-option value="two">Rescate ninez y adolescencia</mat-option>
+        <mat-option value="two">So</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Clasificacion</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-select-trigger>
+          {{toppings.value?.[0] || ''}}
+          <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
+            (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Sectorizacion</mat-label>
+      <mat-select [formControl]="toppings2" multiple>
+        <mat-select-trigger>
+          {{toppings2.value?.[0] || ''}}
+          <span *ngIf="(toppings2.value?.length || 0) > 1" class="example-additional-selection">
+            (+{{(toppings2.value?.length || 0) - 1}} {{toppings2.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let topping of toppingList2" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Clasificacion</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-select-trigger>
+          {{toppings.value?.[0] || ''}}
+          <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
+            (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Tipo Poblacion</mat-label>
+      <mat-select [formControl]="toppings2" multiple>
+        <mat-select-trigger>
+          {{toppings2.value?.[0] || ''}}
+          <span *ngIf="(toppings2.value?.length || 0) > 1" class="example-additional-selection">
+            (+{{(toppings2.value?.length || 0) - 1}} {{toppings2.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let topping of toppingList2" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Actividad</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-select-trigger>
+          {{toppings.value?.[0] || ''}}
+          <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
+            (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre contacto</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Telefono</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Direccion</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+  </div>
+
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Url</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Latitud</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Longitud</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field class="espaciado-formfield" appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select>
+        <mat-option value="one">Activa</mat-option>
+        <mat-option value="two">Donacion</mat-option>
+        <mat-option value="two">En proceso desvinculacion</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="pat@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Numero de beneficiarios</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 25px; margin-bottom:20px">Cerrar</button>
+    <button mat-raised-button color="primary" style="margin-left: 5px; margin-bottom:20px">Guardar</button>
+  </div>
+
+
+
+

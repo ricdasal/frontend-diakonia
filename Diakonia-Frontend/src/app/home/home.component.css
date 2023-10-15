@@ -1,8 +1,7 @@
 .container-home{
   justify-content: center;
   align-items: center;
-  width: 600px;
-  margin-left: -150px;
+  width: 100%;
   padding-left: 25px;
 }
 
@@ -12,6 +11,98 @@
 }
 
 .imagen-logo-home{
-  width: 550px;
-  height: 350px;
+  width: 100%;
+  height: auto;
+}
+
+/* Estilos para pantallas grandes */
+@media screen and (min-width: 1024px) {
+    .container-home {
+        width: 600px;
+        margin-left: -150px;
+    }
+
+    .imagen-logo-home {
+        width: 550px;
+        height: auto;
+    }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .container-home {
+        width: 100%;
+        margin-left: -40%;
+    }
+
+    .imagen-logo-home {
+        width: 100%;
+        height: auto;
+        margin-left: 145px;
+    }
+}
+
+/* Estilos para pantallas pequeñas (teléfonos móviles) */
+@media screen and (max-width: 767px) {
+    .container-home {
+        width: 90%;
+        margin-left: -50%;
+        margin-top: 50px;
+    }
+
+    .imagen-logo-home {
+        width: 90%;
+        height: auto;
+        margin-left: 170px;
+        margin-top: 70px;
+    }
+
+}
+
+/*@media screen and (max-width: 766px) {
+  .container-home {
+      width: 90%;
+      margin-left: -70%;
+      margin-top: 50px;
+  }
+
+  .imagen-logo-home {
+      width: 90%;
+      height: auto;
+      margin-left: 180px;
+      margin-top: 70px;
+  }
+
+}*/
+
+@media screen and (width: 412px) and (height: 914px) {
+  .container-home {
+      width: 100%;
+      margin-left: -50%;
+      margin-top: 50px;
+  }
+
+  .imagen-logo-home {
+      width: 100%;
+      height: auto;
+      margin-left: 140px;
+      margin-top: 70px;
+  }
+
+}
+
+@media screen and (width: 280px) and (height: 653px) {
+  .container-home {
+      width: 100%;
+      margin-left: -70%;
+      margin-top: 50px;
+  }
+
+  .imagen-logo-home {
+      width: 100%;
+      height: auto;
+      margin-left: 160px;
+      margin-top: 70px;
+  }
+
 }

@@ -8,3 +8,339 @@
   height: 80px;
 }
 
+/* Estilos para pantallas grandes */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+header{
+  padding: 12px 0;
+  background: #222;
+}
+
+.menu{
+  margin-top: 12px;
+}
+
+.menu ul{
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li{
+  list-style-type:none;
+  color: #fff ;
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 24px;
+}
+
+.menu ul li:hover{
+  color:rgb(217, 255, 0);
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+}
+
+/* Estilos para pantallas grandes */
+@media only screen and (max-width: 1024px){
+    .menu{
+        position: fixed;
+        right: -280px;
+        top: 64px;
+        width: 280px;
+        height: 100%;
+        background: #222;
+    }
+
+    .menu ul li{
+        display: block;
+        text-align: left;
+        margin: 0;
+        padding: 10px 0 10px 26px;
+        border-bottom: 1px solid #312f2f;
+    }
+
+    .menu_icon{
+        display: inline-block;
+        position: relative;
+        right: 0;
+        top:20px;
+
+    }
+
+    .menu_icon span{
+        width: 32px;
+        height: 3px;
+        background: #fff;
+        display: block;
+        transition: 0.2s ease-in-out;
+
+    }
+
+    .menu_icon span:nth-child(2){
+        margin: 4px 0;
+    }
+
+    .menu_icon_Class span:nth-child(2){
+        display: none;
+    }
+
+    .menu_icon_Class span:nth-child(1){
+        transform: rotate(40deg);
+    }
+
+    .menu_icon_Class span:nth-child(3){
+        transform: rotate(-40deg);
+        margin-top: -3px;
+    }
+
+    .menuClass{
+        right: 0;
+        transition: 0.4s ease-in-out;
+    }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media only screen and (min-width :768px) and (max-width :1023px){
+    /* Aquí puedes agregar los estilos específicos para tabletas */
+    .menu{
+      position: fixed;
+      right: -280px;
+      top: 64px;
+      width: 285px;
+      height: 100%;
+      background: #222;
+  }
+
+  .menu ul li{
+      display: block;
+      text-align: left;
+      margin: 0;
+      padding: 10px 0 10px 26px;
+      border-bottom: 1px solid #312f2f;
+  }
+
+  .menu_icon{
+      display: inline-block;
+      position: relative;
+      right: 0;
+      top:20px;
+
+  }
+
+  .menu_icon span{
+      width: 32px;
+      height: 3px;
+      background: #fff;
+      display: block;
+      transition: 0.2s ease-in-out;
+
+  }
+
+  .menu_icon span:nth-child(2){
+      margin: 4px 0;
+  }
+
+  .menu_icon_Class span:nth-child(2){
+      display: none;
+  }
+
+  .menu_icon_Class span:nth-child(1){
+      transform: rotate(40deg);
+  }
+
+  .menu_icon_Class span:nth-child(3){
+      transform: rotate(-40deg);
+      margin-top: -3px;
+  }
+
+  .menuClass{
+      right: 0;
+      transition: 0.4s ease-in-out;
+  }
+}
+
+/* Estilos para pantallas pequeñas (teléfonos móviles) */
+@media only screen and (max-width :767px){
+    /* Aquí puedes agregar los estilos específicos para teléfonos móviles */
+    .menu{
+      position: fixed;
+      right: -280px;
+      top: 64px;
+      width: 155px;
+      height: 100%;
+      background: #222;
+  }
+
+  .menu ul li{
+      display: block;
+      text-align: left;
+      margin: 0;
+      padding: 10px 0 10px 26px;
+      border-bottom: 1px solid #312f2f;
+  }
+
+  .menu_icon{
+      display: inline-block;
+      position: relative;
+      right: 0;
+      top:20px;
+
+  }
+
+  .menu_icon span{
+      width: 32px;
+      height: 3px;
+      background: #fff;
+      display: block;
+      transition: 0.2s ease-in-out;
+
+  }
+
+  .menu_icon span:nth-child(2){
+      margin: 4px 0;
+  }
+
+  .menu_icon_Class span:nth-child(2){
+      display: none;
+  }
+
+  .menu_icon_Class span:nth-child(1){
+      transform: rotate(40deg);
+  }
+
+  .menu_icon_Class span:nth-child(3){
+      transform: rotate(-40deg);
+      margin-top: -3px;
+  }
+
+  .menuClass{
+      right: 0;
+      transition: 0.4s ease-in-out;
+  }
+}
+
+
+/* Estilos para pantallas pequeñas (teléfonos móviles) */
+@media only screen and (min-width :360px) and (max-width :740px){
+  /* Aquí puedes agregar los estilos específicos para teléfonos móviles */
+  .menu{
+    position: fixed;
+    right: -280px;
+    top: 64px;
+    width: 142px;
+    height: 100%;
+    background: #222;
+}
+
+.menu ul li{
+    display: block;
+    text-align: left;
+    margin: 0;
+    padding: 10px 0 10px 15px;
+    border-bottom: 1px solid #312f2f;
+}
+
+.menu_icon{
+    display: inline-block;
+    position: relative;
+    right: 0;
+    top:20px;
+
+}
+
+.menu_icon span{
+    width: 32px;
+    height: 3px;
+    background: #fff;
+    display: block;
+    transition: 0.2s ease-in-out;
+
+}
+
+.menu_icon span:nth-child(2){
+    margin: 4px 0;
+}
+
+.menu_icon_Class span:nth-child(2){
+    display: none;
+}
+
+.menu_icon_Class span:nth-child(1){
+    transform: rotate(40deg);
+}
+
+.menu_icon_Class span:nth-child(3){
+    transform: rotate(-40deg);
+    margin-top: -3px;
+}
+
+.menuClass{
+    right: 0;
+    transition: 0.4s ease-in-out;
+}
+}
+
+
+/* Estilos para pantallas pequeñas (teléfonos móviles) */
+@media only screen and (min-width :280px) and (max-width :653px){
+  /* Aquí puedes agregar los estilos específicos para teléfonos móviles */
+  .menu{
+    position: fixed;
+    right: -280px;
+    top: 88px;
+    width: 135px;
+    height: 100%;
+    background: #222;
+}
+
+.menu ul li{
+    display: block;
+    text-align: left;
+    margin: 0;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #312f2f;
+}
+
+.menu_icon{
+    display: inline-block;
+    position: relative;
+    right: 0;
+    top:20px;
+
+}
+
+.menu_icon span{
+    width: 32px;
+    height: 3px;
+    background: #fff;
+    display: block;
+    transition: 0.2s ease-in-out;
+
+}
+
+.menu_icon span:nth-child(2){
+    margin: 4px 0;
+}
+
+.menu_icon_Class span:nth-child(2){
+    display: none;
+}
+
+.menu_icon_Class span:nth-child(1){
+    transform: rotate(40deg);
+}
+
+.menu_icon_Class span:nth-child(3){
+    transform: rotate(-40deg);
+    margin-top: -3px;
+}
+
+.menuClass{
+    right: 0;
+    transition: 0.4s ease-in-out;
+}
+}
