@@ -9,3 +9,83 @@
 
   <button class="btn btn-primary w-100 btn-lg" type="submit">Submit</button>
 </form>
+<br>
+
+<section class="container">
+  <header>Formulario de Registro</header>
+  <form action="#" class="form">
+
+    <div class="input-box">
+      <label>Nombres</label>
+      <input type="text" placeholder="Ingrese Nombres" required />
+    </div>
+
+    <div class="input-box">
+      <label>Apellidos</label>
+      <input type="text" placeholder="Ingrese Apellidos" required />
+    </div>
+
+    <div class="input-box">
+      <label>Correo Electronico</label>
+      <input type="text" placeholder="Ingrese Correo Electronico" required />
+    </div>
+
+    <div class="column">
+      <div class="input-box">
+        <label>Numero Teléfonico</label>
+        <input type="number" placeholder="Ingrese Numero Teléfonico" required />
+      </div>
+      <div class="input-box">
+        <label>Fecha Nacimiento</label>
+        <input type="date" placeholder="Ingrese Fecha de Nacimiento" required />
+      </div>
+    </div>
+
+    <div class="gender-box">
+      <h3>Genero</h3>
+      <div class="gender-option">
+        <div class="gender">
+          <input type="radio" id="check-male" name="gender" checked class="gender"/>
+          <label for="check-male">Masculino</label>
+        </div>
+        <div class="gender">
+          <input type="radio" id="check-female" name="gender" class="gender"/>
+          <label for="check-female">Femenino</label>
+        </div>
+        <div class="gender">
+          <input type="radio" id="check-other" name="gender" class="gender"/>
+          <label for="check-other">Prefiero no decirlo</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-box address">
+      <label>Dirección</label>
+      <input type="text" placeholder="Ingrese Dirección" required />
+
+      <!--
+      <div class="column">
+        <div class="select-box">
+          <select>
+            <option hidden>Country</option>
+            <option>America</option>
+            <option>Japan</option>
+            <option>India</option>
+            <option>Nepal</option>
+          </select>
+        </div>
+        <input type="text" placeholder="Enter your city" required />
+      </div>
+      -->
+
+      <div class="column">
+        <input type="text" placeholder="Ingrese Contraseña" required />
+        <input type="text" placeholder="Confirmar Contraseña" required />
+      </div>
+
+
+    </div>
+
+    <button style="background-color:rgba(216, 37, 37); color:white">Confirmar</button>
+  </form>
+</section>
