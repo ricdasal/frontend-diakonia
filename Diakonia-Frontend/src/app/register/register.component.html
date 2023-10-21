@@ -1,3 +1,5 @@
+
+<!--
 <form [formGroup]="form" (submit)="submit()">
   <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 
@@ -7,40 +9,49 @@
 
   <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
 
+  <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
+
   <button class="btn btn-primary w-100 btn-lg" type="submit">Submit</button>
 </form>
 <br>
+-->
+
 
 <section class="container">
   <header>Formulario de Registro</header>
-  <form action="#" class="form">
+  <form class="form" [formGroup]="form" (submit)="submit()">
 
     <div class="input-box">
       <label>Nombres</label>
-      <input type="text" placeholder="Ingrese Nombres" required />
+      <input type="text" placeholder="Ingrese Nombres" required formControlName="name"/>
     </div>
 
     <div class="input-box">
       <label>Apellidos</label>
-      <input type="text" placeholder="Ingrese Apellidos" required />
+      <input type="text" placeholder="Ingrese Apellidos" required formControlName="apellido"/>
     </div>
 
     <div class="input-box">
       <label>Correo Electronico</label>
-      <input type="text" placeholder="Ingrese Correo Electronico" required />
+      <input type="email" placeholder="Ingrese Correo Electronico" required formControlName="email"/>
     </div>
 
     <div class="column">
       <div class="input-box">
         <label>Numero Teléfonico</label>
-        <input type="number" placeholder="Ingrese Numero Teléfonico" required />
+        <input type="number" placeholder="Ingrese Numero Teléfonico" required formControlName="telefono"/>
       </div>
+
+      <!--
       <div class="input-box">
         <label>Fecha Nacimiento</label>
         <input type="date" placeholder="Ingrese Fecha de Nacimiento" required />
       </div>
+      -->
+
     </div>
 
+    <!--
     <div class="gender-box">
       <h3>Genero</h3>
       <div class="gender-option">
@@ -58,10 +69,13 @@
         </div>
       </div>
     </div>
+    -->
+
 
     <div class="input-box address">
-      <label>Dirección</label>
-      <input type="text" placeholder="Ingrese Dirección" required />
+
+      <label>Cargo</label>
+      <input type="text" placeholder="Ingrese Cargo" required formControlName="cargo_institucional"/>
 
       <!--
       <div class="column">
@@ -79,13 +93,13 @@
       -->
 
       <div class="column">
-        <input type="text" placeholder="Ingrese Contraseña" required />
-        <input type="text" placeholder="Confirmar Contraseña" required />
+        <input type="password" placeholder="Ingrese Contraseña" required formControlName="password"/>
+        <input type="password" placeholder="Confirmar Contraseña" required formControlName="password"/>
       </div>
 
 
     </div>
 
-    <button style="background-color:rgba(216, 37, 37); color:white">Confirmar</button>
+    <button style="background-color:rgba(216, 37, 37); color:white" type="submit">Confirmar</button>
   </form>
 </section>

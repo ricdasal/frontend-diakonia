@@ -12,6 +12,9 @@ export class RegisterComponent implements OnInit{
 
   form: FormGroup = this.formBuilder.group({
     name: '',
+    apellido:'',
+    telefono:'',
+    cargo_institucional:'',
     email: '',
     password: ''
   });
@@ -26,6 +29,9 @@ export class RegisterComponent implements OnInit{
   ngOnInit(): void {
       this.form = this.formBuilder.group({
         name: '',
+        apellido:'',
+        telefono:'',
+        cargo_institucional:'',
         email: '',
         password: ''
       });
