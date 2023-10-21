@@ -13,15 +13,6 @@ body {
   padding: 20px;
   background: rgb(130, 106, 251);
 }
-/*.container {
-  position: relative;
-  max-width: 700px;
-  width: 100%;
-  background: #fff;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}*/
 
 .container {
   max-width: 2000px;

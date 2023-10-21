@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="box" style="background-color:lightblue">
+    <!---->
+    <google-map [center]="center"
+                height="400px"
+                width="630px"
+                [zoom]="zoom"
+                (mapClick)="addMarker($event)">
+      <map-marker *ngFor="let markerPosition of markerPositions"
+                  [position]="markerPosition"
+                  [options]="markerOptions"></map-marker>
+    </google-map>
+
+  </div>
+  <div class="box" style="background-color:lightgreen">
+    <!---->
+    <google-map [center]="center"
+                height="400px"
+                width="630px"
+                [zoom]="zoom"
+                (mapClick)="addMarker($event)">
+      <map-marker *ngFor="let markerPosition of markerPositions"
+                  [position]="markerPosition"
+                  [options]="markerOptions"></map-marker>
+    </google-map>
+
+  </div>
+</div>

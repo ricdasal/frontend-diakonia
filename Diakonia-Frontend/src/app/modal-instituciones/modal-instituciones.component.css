@@ -25,12 +25,12 @@
 .mat-mdc-dialog-container,
 .mat-mdc-dialog-container .mdc-dialog__container,
 .mat-mdc-dialog-container .mdc-dialog__surface {
-    max-height: inherit;
-    min-height: inherit;
-    min-width: inherit;
-    max-width: inherit;
-    width: 500px;
-    height: 650px;
+  max-height: inherit;
+  min-height: inherit;
+  min-width: inherit;
+  max-width: inherit;
+  width: 500px;
+  height: 650px;
 }
 
 .mdc-dialog .mdc-dialog__content {
@@ -38,93 +38,8 @@
 }
 
 
-@media only screen and (max-width: 600px) {
-  /* Tus estilos van aquí */
-  .example-container {
-    margin-left: 8px;
-  }
-
-  :host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .espaciado-formfield{
-    padding-left: 15px;
-  }
-
-  .espaciador-contenedor{
-    padding-bottom: 2px;
-
-  }
-
-  .title-space{
-    padding-bottom: 6px;
-  }
-
-
-  .mat-mdc-dialog-container,
-  .mat-mdc-dialog-container .mdc-dialog__container,
-  .mat-mdc-dialog-container .mdc-dialog__surface {
-      max-height: inherit;
-      min-height: inherit;
-      min-width: inherit;
-      max-width: inherit;
-      width: 500px;
-      height: 650px;
-  }
-
-  .mdc-dialog .mdc-dialog__content {
-    padding: 1px 24px 20px 24px;
-  }
-}
-
-/* Estilos para pantallas con un ancho máximo de 768px (típicamente tablets en modo retrato) */
-@media only screen and (max-width: 768px) {
-  /* Tus estilos van aquí */
-  .example-container {
-    margin-left: 8px;
-  }
-
-  :host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .espaciado-formfield{
-    padding-left: 15px;
-  }
-
-  .espaciador-contenedor{
-    padding-bottom: 2px;
-
-  }
-
-  .title-space{
-    padding-bottom: 6px;
-  }
-
-
-  .mat-mdc-dialog-container,
-  .mat-mdc-dialog-container .mdc-dialog__container,
-  .mat-mdc-dialog-container .mdc-dialog__surface {
-      max-height: inherit;
-      min-height: inherit;
-      min-width: inherit;
-      max-width: inherit;
-      width: 500px;
-      height: 650px;
-  }
-
-  .mdc-dialog .mdc-dialog__content {
-    padding: 1px 24px 20px 24px;
-  }
-}
-
 /* Estilos para pantallas con un ancho máximo de 1024px (típicamente tablets en modo paisaje) */
-@media screen and (min-width: 1280px) and (min-height: 800px){
+@media screen and (min-width: 1280px) and (max-width: 1280px) and (min-height: 800px) and (max-width: 800px) {
   /* Tus estilos van aquí */
   .example-container {
     margin-left: 8px;
@@ -148,18 +63,16 @@
     padding-bottom: 6px;
   }
 
-  .mat-mdc-dialog-container,
-  .mat-mdc-dialog-container .mdc-dialog__container,
-  .mat-mdc-dialog-container .mdc-dialog__surface {
+  .mat-mdc-dialog-container .mdc-dialog__container .mdc-dialog__surface {
       max-height: inherit;
       min-height: inherit;
       min-width: inherit;
       max-width: inherit;
-      width: 700px;
+      width: 1000px;
       height: 650px;
   }
 
-  .mdc-dialog .mdc-dialog__content {
+  /*.mdc-dialog .mdc-dialog__content {
     padding: 1px 24px 20px 24px;
-  }
+  }*/
 }
