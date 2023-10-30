@@ -2,10 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 86vh;
+  height: 770px;
   margin-left: -725px;
   width: 1750px;
-  background-color: blue;
+  background-color: white;
+  margin-top: -8px;
 }
 
 .container {
@@ -13,6 +14,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  margin-top: 5px;
 }
 
 .box {
@@ -20,6 +22,7 @@
   padding: 10px;
   box-sizing: border-box;
   min-height: 745px; /* Ajusta este valor según tus necesidades */
+  border-radius: 4px;
 }
 
 @media only screen and (min-width: 400px) {
