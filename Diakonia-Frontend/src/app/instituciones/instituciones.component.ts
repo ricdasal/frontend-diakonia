@@ -6,6 +6,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ModalInstitucionesComponent } from '../modal-instituciones/modal-instituciones.component';
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -39,6 +40,32 @@ export class InstitucionesComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  uploadFile(event: Event) {
+    let element = event.target as HTMLInputElement;
+    let file = element.files![0];
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      // Parsea el archivo .xlsx
+      let workbook = XLSX.read(fileReader.result, {type: 'binary'});
+      let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      let csvData = XLSX.utils.sheet_to_json(worksheet);
+      console.log(csvData);
+      // Envía los datos al backend
+
+      this.http.post('http://localhost:8000/api/readData', {data: csvData}).subscribe(
+        (response) => {
+          console.log(response); // Haz algo con la respuesta del servidor
+        },
+        (error) => {
+          console.error(error); // Maneja el error
+        }
+      );
+
+
+    };
+    fileReader.readAsBinaryString(file);
   }
 
 }

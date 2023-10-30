@@ -17,6 +17,20 @@
 
     </mat-toolbar-row>
   </mat-toolbar>
+
+  <mat-toolbar >
+    <mat-toolbar-row >
+      <div>
+        <input hidden type="file" #fileInput (change)="uploadFile($event)" />
+        <button mat-raised-button color="warn" (click)="fileInput.click()">
+          <mat-icon matSuffix>archive</mat-icon>
+        </button>
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
 </div>
 
 <div class="container">

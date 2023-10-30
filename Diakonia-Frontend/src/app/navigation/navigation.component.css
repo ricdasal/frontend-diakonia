@@ -6,6 +6,7 @@
 .logo-home{
   width: 200px;
   height: 80px;
+  border-radius: 4px;
 }
 
 /* Estilos para pantallas grandes */
@@ -19,6 +20,7 @@
 header{
   padding: 12px 0;
   background: #222;
+  border-radius: 2px;
 }
 
 .menu{

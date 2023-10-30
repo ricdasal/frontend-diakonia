@@ -1,18 +1,28 @@
+.body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 86vh;
+  margin-left: -725px;
+  width: 1750px;
+  background-color: blue;
+}
+
 .container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 1800px;
-  margin-left: -600px;
+  width: 100%;
 }
 
 .box {
-  width: 100%;
+  width: 1000px;
   padding: 10px;
   box-sizing: border-box;
+  min-height: 745px; /* Ajusta este valor según tus necesidades */
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 400px) {
   .box {
     width: 50%;
   }
