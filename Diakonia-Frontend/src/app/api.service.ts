@@ -15,5 +15,9 @@ export class ApiService {
   postInstitucion(data:any){
     return this.http.post<any>("http://localhost:8000/api/postInstitucion", data);
   }
+
+  DataInstituciones(){
+    return this.http.get<any>("http://localhost:8000/api/DataInstituciones");
+  }
 }
 

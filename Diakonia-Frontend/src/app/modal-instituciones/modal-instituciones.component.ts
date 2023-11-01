@@ -26,7 +26,8 @@ export class ModalInstitucionesComponent implements OnInit{
         nombre:['',Validators.required],
         numero_beneficiarios:['',Validators.required],
         ruc: ['',Validators.required],
-        nombre_estado:['',Validators.required],
+        mes_ingreso:['',Validators.required],
+        anio_ingreso:['',Validators.required],
       });
 
       if(this.editData){
@@ -34,7 +35,8 @@ export class ModalInstitucionesComponent implements OnInit{
         this.institucionForm.controls['nombre'].setValue(this.editData.nombre);
         this.institucionForm.controls['numero_beneficiarios'].setValue(this.editData.numero_beneficiarios);
         this.institucionForm.controls['ruc'].setValue(this.editData.ruc);
-        this.institucionForm.controls['nombre_estado'].setValue(this.editData.nombre_estado);
+        this.institucionForm.controls['mes_ingreso'].setValue(this.editData.mes_ingreso);
+        this.institucionForm.controls['anio_ingreso'].setValue(this.editData.anio_ingreso);
 
       }
   }

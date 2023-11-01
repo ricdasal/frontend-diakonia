@@ -33,7 +33,8 @@ import { ModalInstitucionesComponent } from './modal-instituciones/modal-institu
 import {MatSelectModule} from '@angular/material/select';
 
 import { GoogleMapsModule } from '@angular/google-maps';
-import { MapaComponent } from './mapa/mapa.component'
+import { MapaComponent } from './mapa/mapa.component';
+import { ModalInstitucionesDatosComponent } from './modal-instituciones-datos/modal-instituciones-datos.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MapaComponent } from './mapa/mapa.component'
     NavigationComponent,
     InstitucionesComponent,
     ModalInstitucionesComponent,
-    MapaComponent
+    MapaComponent,
+    ModalInstitucionesDatosComponent
   ],
   imports: [
     BrowserModule,

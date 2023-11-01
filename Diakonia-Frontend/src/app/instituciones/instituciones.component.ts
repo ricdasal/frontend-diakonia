@@ -9,6 +9,7 @@ import { ModalInstitucionesComponent } from '../modal-instituciones/modal-instit
 import * as XLSX from 'xlsx';
 import { ApiService } from '../api.service';
 import { Dialog } from '@angular/cdk/dialog';
+import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/modal-instituciones-datos.component';
 
 
 @Component({
@@ -17,7 +18,9 @@ import { Dialog } from '@angular/cdk/dialog';
   styleUrls: ['./instituciones.component.css']
 })
 export class InstitucionesComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'nombre', 'numero_beneficiarios', 'ruc', 'nombre_estado', 'acciones'];
+  //displayedColumns: string[] = ['id', 'nombre', 'numero_beneficiarios', 'ruc', 'nombre_estado', 'acciones'];
+
+  displayedColumns: string[] = ['id', 'nombre', 'numero_beneficiarios', 'ruc', 'mes_ingreso', 'anio_ingreso','mapa', 'acciones'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,14 +34,32 @@ export class InstitucionesComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getAllInstituciones();
+    //this.getAllInstituciones();
+    this.getDataInstituciones();
   }
 
 
+  /*
   getAllInstituciones(){
     this.api.AllInstituciones()
     .subscribe({
       next:(res)=>{
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort
+      },
+      error:(err)=>{
+        alert("Error while fetching the Records!!")
+      }
+    })
+  }*/
+
+
+  getDataInstituciones(){
+    this.api.DataInstituciones()
+    .subscribe({
+      next:(res)=>{
+        console.log(res[0].red_bda[0].mes_ingreso);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort
@@ -54,7 +75,19 @@ export class InstitucionesComponent implements OnInit{
       width:'30%'
     }).afterClosed().subscribe(val=>{
       if(val === 'save'){
-        this.getAllInstituciones();
+        //this.getAllInstituciones();
+        this.getDataInstituciones();
+      }
+    })
+  }
+
+  openDialogData() {
+    this.dialog.open(ModalInstitucionesDatosComponent, {
+      width:'30%'
+    }).afterClosed().subscribe(val=>{
+      if(val === 'save'){
+        //this.getAllInstituciones();
+        this.getDataInstituciones();
       }
     })
   }
@@ -74,7 +107,8 @@ export class InstitucionesComponent implements OnInit{
       data:row
     }).afterClosed().subscribe(val=>{
       if(val === 'update'){
-        this.getAllInstituciones();
+        //this.getAllInstituciones();
+        this.getDataInstituciones();
       }
     })
   }
