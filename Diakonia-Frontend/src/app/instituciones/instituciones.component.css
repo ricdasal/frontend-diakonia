@@ -42,14 +42,14 @@ td, th {
 .container{
   width: 1300px;
   margin: auto;
-  background-color: aqua;
+  background-color: white;
   margin-left: -500px;
 }
 
 .container-toolbar{
   width: 1300px;
   margin: auto;
-  background-color: aqua;
+  background-color: white;
   margin-left: -500px;
 }
 
@@ -83,7 +83,7 @@ td, th {
   .container-toolbar{
     width: 290px;
     margin: auto;
-    background-color: aqua;
+    background-color: white;
     margin-left: -105px;
   }
 
@@ -110,7 +110,7 @@ td, th {
     /* Ajusta el ancho del contenedor para móviles (portrait) */
     width: 120%;
     /* Añade más estilos según sea necesario */
-    background-color: aqua;
+    background-color: white;
     margin-left: -30px;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
@@ -132,7 +132,7 @@ td, th {
   .container-toolbar{
     width: 350px;
     margin: auto;
-    background-color: aqua;
+    background-color: white;
     margin-left: -30px;
   }
 
@@ -158,7 +158,7 @@ td, th {
     /* Ajusta el ancho del contenedor para móviles (portrait) */
     width: 280%;
     /* Añade más estilos según sea necesario */
-    background-color: aqua;
+    background-color: white;
     margin-left: -280px;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
@@ -180,7 +180,7 @@ td, th {
   .container-toolbar{
     width: 290px;
     margin: auto;
-    background-color: aqua;
+    background-color: white;
     margin-left: -280px;
   }
 
@@ -207,7 +207,7 @@ td, th {
     /* Ajusta el ancho del contenedor para móviles (portrait) */
     width: 100%;
     /* Añade más estilos según sea necesario */
-    background-color: aqua;
+    background-color: white;
     margin-left: -2px;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
@@ -229,7 +229,7 @@ td, th {
   .container-toolbar{
     width: 250px;
     margin: auto;
-    background-color: aqua;
+    background-color: white;
     margin-left: -5px;
   }
 
@@ -257,7 +257,7 @@ td, th {
     /* Ajusta el ancho del contenedor para móviles (portrait) */
     width: 170%;
     /* Añade más estilos según sea necesario */
-    background-color: aqua;
+    background-color: white;
     margin-left: -105px;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
@@ -289,7 +289,7 @@ td, th {
     /* Ajusta el ancho del contenedor para móviles (portrait) */
     width: 240%;
     /* Añade más estilos según sea necesario */
-    background-color: aqua;
+    background-color: white;
     margin-left: -210px;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
@@ -311,7 +311,7 @@ td, th {
   .container-toolbar{
     width: 290px;
     margin: auto;
-    background-color: aqua;
+    background-color: white;
     margin-left: -210px;
   }
 
@@ -338,7 +338,7 @@ td, th {
     /* Ajusta el ancho del contenedor para móviles (portrait) */
     width: 240%;
     /* Añade más estilos según sea necesario */
-    background-color: aqua;
+    background-color: white;
     margin-left: -210px;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
@@ -360,7 +360,7 @@ td, th {
   .container-toolbar{
     width: 290px;
     margin: auto;
-    background-color: aqua;
+    background-color: white;
     margin-left: -210px;
   }
 
@@ -387,7 +387,7 @@ td, th {
     /* Ajusta el ancho del contenedor para móviles (portrait) */
     width: 240%;
     /* Añade más estilos según sea necesario */
-    background-color: aqua;
+    background-color: white;
     margin-left: -210px;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
@@ -409,7 +409,7 @@ td, th {
   .container-toolbar{
     width: 290px;
     margin: auto;
-    background-color: aqua;
+    background-color: white;
     margin-left: -210px;
   }
 

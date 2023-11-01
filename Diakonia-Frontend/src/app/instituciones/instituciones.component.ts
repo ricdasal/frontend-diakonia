@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ModalInstitucionesComponent } from '../modal-instituciones/modal-instituciones.component';
 import * as XLSX from 'xlsx';
+import { ApiService } from '../api.service';
+import { Dialog } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -14,8 +16,8 @@ import * as XLSX from 'xlsx';
   templateUrl: './instituciones.component.html',
   styleUrls: ['./instituciones.component.css']
 })
-export class InstitucionesComponent {
-  displayedColumns: string[] = ['id', 'nombre_institucion', 'numero_beneficiarios', 'caracterizacion', 'clasificacion', 'acciones'];
+export class InstitucionesComponent implements OnInit{
+  displayedColumns: string[] = ['id', 'nombre', 'numero_beneficiarios', 'ruc', 'nombre_estado', 'acciones'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -23,14 +25,38 @@ export class InstitucionesComponent {
 
   constructor(private dialog:MatDialog,
     private http: HttpClient,
+    private api: ApiService,
     private router: Router){
 
+  }
+
+  ngOnInit() {
+    this.getAllInstituciones();
+  }
+
+
+  getAllInstituciones(){
+    this.api.AllInstituciones()
+    .subscribe({
+      next:(res)=>{
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort
+      },
+      error:(err)=>{
+        alert("Error while fetching the Records!!")
+      }
+    })
   }
 
   openDialog() {
     this.dialog.open(ModalInstitucionesComponent, {
       width:'30%'
-    });
+    }).afterClosed().subscribe(val=>{
+      if(val === 'save'){
+        this.getAllInstituciones();
+      }
+    })
   }
 
   applyFilter(event: Event) {
@@ -40,6 +66,17 @@ export class InstitucionesComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  editInstitucion(row:any){
+    this.dialog.open(ModalInstitucionesComponent, {
+      width:'30%',
+      data:row
+    }).afterClosed().subscribe(val=>{
+      if(val === 'update'){
+        this.getAllInstituciones();
+      }
+    })
   }
 
   uploadFile(event: Event) {
@@ -67,5 +104,7 @@ export class InstitucionesComponent {
     };
     fileReader.readAsBinaryString(file);
   }
+
+
 
 }
