@@ -7,9 +7,10 @@ import { RegisterComponent } from './register/register.component';
 import { InstitucionesComponent } from './instituciones/instituciones.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-instituciones.component';
+import { GuardLoginGuard } from './guards/guard-login.guard';
 
 const routes: Routes = [
-  {path: '', component:HomeComponent},
+  {path: '', component:HomeComponent, /*canActivate:[GuardLoginGuard]*/},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'instituciones', component: InstitucionesComponent},
