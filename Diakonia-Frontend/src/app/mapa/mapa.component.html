@@ -6,111 +6,70 @@
         <h4 class="mb-3 text-center">Nombre De La Institución</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
+
             <div class="col-sm-6">
               <label for="firstName" class="form-label">Latitud</label>
-              <input type="text" class="form-control" id="firstName" placeholder="-2.09820127126514" value="" required>
-              <div class="invalid-feedback">
-                Valid first name is required.
-              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>Coordenadas</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let item of latitudesList" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Longitud</label>
-              <input type="text" class="form-control" id="lastName" placeholder="-79.92495610674615" value="" required>
-              <div class="invalid-feedback">
-                Valid last name is required.
-              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>Coordenadas</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let item of longitudesList" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="address" placeholder="Bastion Popular Bl. 3 Mz. 688 Sl.4" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
+              <label for="address" class="form-label">Dirección</label> <br>
+              <mat-form-field appearance="outline">
+                <mat-label>Direcciones</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let item of direccionList" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Caracterización</label>
-              <input type="text" class="form-control" id="address" placeholder="Centro De Apoyo Familiar" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
+              <label for="address" class="form-label">Url Google Maps</label> <br>
+              <mat-form-field appearance="outline">
+                <mat-label>Google Maps</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let item of urlsList" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Sectorización</label>
-              <input type="text" class="form-control" id="address" placeholder="Sur" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
+              <label for="address" class="form-label">Sectorización</label> <br>
+              <mat-form-field appearance="outline">
+                <mat-label>Sectores</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let item of sectorizacionList" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
-            <div class="col-12">
-              <label for="address" class="form-label">Categoria</label>
-              <input type="text" class="form-control" id="address" placeholder="Oro" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
 
             <div class="col-12">
               <label for="address2" class="form-label"> Clasificación </label>
               <input type="text" class="form-control" id="address2" placeholder="Exclusión social">
             </div>
 
-            <!--
-            <div class="col-md-5">
-              <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" required>
-                <option value="">Choose...</option>
-                <option>United States</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
-                <option value="">Choose...</option>
-                <option>California</option>
-              </select>
-              <div class="invalid-feedback">
-                Please provide a valid state.
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
-              <div class="invalid-feedback">
-                Zip code required.
-              </div>
-            </div>
-            -->
 
           </div>
 
           <hr class="my-4">
 
-          <!--
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-          </div>
 
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this information for next time</label>
-          </div>
-
-          <hr class="my-4">
-          -->
-
-
-          <button class="w-100 btn btn-danger btn-lg" type="submit">Volver</button>
+          <button class="w-100 btn btn-danger btn-lg" type="submit" routerLink="/instituciones">Volver</button>
         </form>
       </div>
 

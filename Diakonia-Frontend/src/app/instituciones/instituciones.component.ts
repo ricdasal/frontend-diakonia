@@ -10,6 +10,7 @@ import * as XLSX from 'xlsx';
 import { ApiService } from '../api.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/modal-instituciones-datos.component';
+import { SharedService } from '../shared.service';
 
 
 @Component({
@@ -23,12 +24,15 @@ export class InstitucionesComponent implements OnInit{
   displayedColumns: string[] = ['id', 'nombre', 'numero_beneficiarios', 'ruc', 'mes_ingreso', 'anio_ingreso','mapa', 'acciones'];
   dataSource!: MatTableDataSource<any>;
 
+  elemento: string ='';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private dialog:MatDialog,
     private http: HttpClient,
     private api: ApiService,
+    private sharedService: SharedService,
     private router: Router){
 
   }
@@ -38,28 +42,12 @@ export class InstitucionesComponent implements OnInit{
     this.getDataInstituciones();
   }
 
-
-  /*
-  getAllInstituciones(){
-    this.api.AllInstituciones()
-    .subscribe({
-      next:(res)=>{
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort
-      },
-      error:(err)=>{
-        alert("Error while fetching the Records!!")
-      }
-    })
-  }*/
-
-
   getDataInstituciones(){
     this.api.DataInstituciones()
     .subscribe({
       next:(res)=>{
         console.log(res[0].red_bda[0].mes_ingreso);
+        //this.elemento = res
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort
@@ -69,6 +57,7 @@ export class InstitucionesComponent implements OnInit{
       }
     })
   }
+
 
   openDialog() {
     this.dialog.open(ModalInstitucionesComponent, {
@@ -81,7 +70,8 @@ export class InstitucionesComponent implements OnInit{
     })
   }
 
-  openDialogData() {
+  openDialogData(row: any) {
+    this.sharedService.changeId(row.id);
     this.dialog.open(ModalInstitucionesDatosComponent, {
       width:'30%'
     }).afterClosed().subscribe(val=>{

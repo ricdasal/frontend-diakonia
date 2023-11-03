@@ -74,7 +74,7 @@
         <ng-container matColumnDef="mapa">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Mapa </th>
           <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" routerLink="/mapa">
+            <button mat-icon-button color="primary" [routerLink]="['mapa/', row.id]">
               <mat-icon>location_on</mat-icon>
             </button>
           </td>
@@ -84,7 +84,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
           <td mat-cell *matCellDef="let row">
 
-            <button mat-icon-button color="accent" (click)="openDialogData()">
+            <button mat-icon-button color="accent" (click)="openDialogData(row)">
               <mat-icon>visibility</mat-icon>
             </button>
 
