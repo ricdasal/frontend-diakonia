@@ -6,12 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InstitucionesComponent } from './instituciones/instituciones.component';
 import { MapaComponent } from './mapa/mapa.component';
+import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-instituciones.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'instituciones', component: InstitucionesComponent},
+  {path: 'mapa', component: MapaInstitucionesComponent},
   { path: 'instituciones/mapa/:id', component: MapaComponent }
 ];
 

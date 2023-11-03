@@ -1,0 +1,20 @@
+.titulo-mapa{
+  background-color: white;
+  width: 1500px;
+  text-align: center;
+  margin-left: -600px;
+}
+
+.contenedor-mapa{
+  background-color: #4d9853;
+  width: 1360px;
+  height: 560px;
+  margin-left: -525px;
+  padding-left: 5px;
+  padding-top: 5px;
+  border-radius: 5px;
+}
+
+.contenedor-boton{
+  margin-top: 10px;
+}

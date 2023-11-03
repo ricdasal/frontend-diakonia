@@ -1,0 +1,19 @@
+<div class="titulo-mapa">
+  <h2>Instituciones Asociadas a Diakonia</h2>
+</div>
+
+<div class="contenedor-mapa">
+  <google-map [center]="center"
+          height="550px"
+          width="1350px"
+          [zoom]="zoom"
+          (mapClick)="addMarker($event)">
+  <map-marker *ngFor="let markerPosition of markerPositions"
+              [position]="markerPosition"
+              [options]="markerOptions"></map-marker>
+  </google-map>
+</div>
+
+<div class="contenedor-boton">
+  <button class="w-100 btn btn-danger btn-lg" type="submit" routerLink="/instituciones">Listado De Instituciones</button>
+</div>

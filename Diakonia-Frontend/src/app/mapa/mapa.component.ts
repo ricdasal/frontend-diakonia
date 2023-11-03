@@ -10,6 +10,11 @@ import { ApiService } from '../api.service';
 export class MapaComponent implements OnInit {
 
   id: string='';
+  nombreInstitucion: string='';
+  nombreContacto: string = '';
+  apellidoContacto: string = '';
+  correosContacto: string[] = [];
+  telefonosContacto: string[] = [];
 
   direccionList: string[] = [];
   sectorizacionList: string[] = [];
@@ -33,6 +38,27 @@ export class MapaComponent implements OnInit {
           //console.log(res[this.id]);
           let obj = res[this.id]
           if (obj) { // Asegúrate de que obj no es undefined
+
+            this.nombreInstitucion = obj.nombre
+            console.log(this.nombreInstitucion);
+
+
+            this.nombreContacto = obj.contactos[0].nombre
+            console.log(this.nombreContacto);
+
+            this.apellidoContacto = obj.contactos[0].apellido
+            console.log(this.apellidoContacto);
+
+            for (let item of obj.contactos[0].correos) {
+              this.correosContacto.push(item.correo_contacto); // Añadir cada item a la lista
+            }
+            console.log(this.correosContacto);
+
+            for (let item of obj.contactos[0].telefonos) {
+              this.telefonosContacto.push(item.telefono_contacto); // Añadir cada item a la lista
+            }
+            console.log(this.telefonosContacto);
+
             for (let item of obj.direccion) {
               this.direccionList.push(item.direccion_nombre); // Añadir cada item a la lista
             }

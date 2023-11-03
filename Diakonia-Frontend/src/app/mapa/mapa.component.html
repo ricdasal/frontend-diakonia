@@ -3,7 +3,7 @@
   <div class="container">
     <div class="box" style="background-color:white">
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3 text-center">Nombre De La Institución</h4>
+        <h4 class="mb-3 text-center">{{ nombreInstitucion }}</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
 
@@ -27,7 +27,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6">
               <label for="address" class="form-label">Dirección</label> <br>
               <mat-form-field appearance="outline">
                 <mat-label>Direcciones</mat-label>
@@ -37,7 +37,14 @@
               </mat-form-field>
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6">
+              <label for="contactoNombre" class="form-label">Contacto Nombre</label> <br>
+              <div style="background-color: white; border: 1px solid rgb(153, 153, 153); border-radius:3px; height: 55px; display: flex; align-items: center; justify-content: center">
+                <p style="margin: 0;">{{nombreContacto}}</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
               <label for="address" class="form-label">Url Google Maps</label> <br>
               <mat-form-field appearance="outline">
                 <mat-label>Google Maps</mat-label>
@@ -47,7 +54,14 @@
               </mat-form-field>
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6">
+              <label for="contactoNombre" class="form-label">Contacto Apellido</label> <br>
+              <div style="background-color: white; border: 1px solid rgb(153, 153, 153); border-radius:3px; height: 55px; display: flex; align-items: center; justify-content: center">
+                <p style="margin: 0;">{{apellidoContacto}}</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
               <label for="address" class="form-label">Sectorización</label> <br>
               <mat-form-field appearance="outline">
                 <mat-label>Sectores</mat-label>
@@ -57,10 +71,25 @@
               </mat-form-field>
             </div>
 
+            <div class="col-sm-6">
+              <label for="address" class="form-label">Correos Contacto</label> <br>
+              <mat-form-field appearance="outline">
+                <mat-label>Correos</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let item of correosContacto" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-            <div class="col-12">
-              <label for="address2" class="form-label"> Clasificación </label>
-              <input type="text" class="form-control" id="address2" placeholder="Exclusión social">
+
+            <div class="col-sm-6">
+              <label for="address" class="form-label">Telefonos Contacto</label> <br>
+              <mat-form-field appearance="outline">
+                <mat-label>Telefonos</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let item of telefonosContacto" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
 
@@ -69,7 +98,7 @@
           <hr class="my-4">
 
 
-          <button class="w-100 btn btn-danger btn-lg" type="submit" routerLink="/instituciones">Volver</button>
+          <button class="w-100 btn btn-danger btn-lg" type="submit" routerLink="/instituciones">Volver a Instituciones</button>
         </form>
       </div>
 
