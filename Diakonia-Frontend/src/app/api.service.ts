@@ -23,5 +23,9 @@ export class ApiService {
   DataInstitucionesId(id: string){
     return this.http.get<any>(`http://localhost:8000/api/DataInstituciones/${id}`);
   }
+
+  DataInstitucionesDirecciones(){
+    return this.http.get<any>(`http://localhost:8000/api/DataInstitucionesDirecciones`);
+  }
 }
 
