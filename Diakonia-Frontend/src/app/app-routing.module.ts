@@ -8,6 +8,7 @@ import { InstitucionesComponent } from './instituciones/instituciones.component'
 import { MapaComponent } from './mapa/mapa.component';
 import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-instituciones.component';
 import { GuardLoginGuard } from './guards/guard-login.guard';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent, /*canActivate:[GuardLoginGuard]*/},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'instituciones', component: InstitucionesComponent},
   {path: 'mapa', component: MapaInstitucionesComponent},
-  { path: 'instituciones/mapa/:id', component: MapaComponent }
+  { path: 'instituciones/mapa/:id', component: MapaComponent },
+  { path: 'adminuser', component: AdminUsersComponent }
 ];
 
 @NgModule({

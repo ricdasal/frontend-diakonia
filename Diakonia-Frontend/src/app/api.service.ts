@@ -20,6 +20,10 @@ export class ApiService {
     return this.http.get<any>("http://localhost:8000/api/DataInstituciones");
   }
 
+  DataUsers(){
+    return this.http.get<any>("http://localhost:8000/api/DataUsers");
+  }
+
   DataInstitucionesId(id: string){
     return this.http.get<any>(`http://localhost:8000/api/DataInstituciones/${id}`);
   }

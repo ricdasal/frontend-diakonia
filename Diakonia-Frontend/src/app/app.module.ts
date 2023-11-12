@@ -35,7 +35,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapaComponent } from './mapa/mapa.component';
 import { ModalInstitucionesDatosComponent } from './modal-instituciones-datos/modal-instituciones-datos.component';
-import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-instituciones.component'
+import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-instituciones.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { ModalAdminUsersComponent } from './modal-admin-users/modal-admin-users.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-institucio
     ModalInstitucionesComponent,
     MapaComponent,
     ModalInstitucionesDatosComponent,
-    MapaInstitucionesComponent
+    MapaInstitucionesComponent,
+    AdminUsersComponent,
+    ModalAdminUsersComponent
   ],
   imports: [
     BrowserModule,
