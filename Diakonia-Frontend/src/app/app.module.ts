@@ -27,6 +27,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { FirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/enviroment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { InstitucionesComponent } from './instituciones/instituciones.component';
 import { ModalInstitucionesComponent } from './modal-instituciones/modal-instituciones.component';
@@ -37,7 +42,8 @@ import { MapaComponent } from './mapa/mapa.component';
 import { ModalInstitucionesDatosComponent } from './modal-instituciones-datos/modal-instituciones-datos.component';
 import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-instituciones.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
-import { ModalAdminUsersComponent } from './modal-admin-users/modal-admin-users.component'
+import { ModalAdminUsersComponent } from './modal-admin-users/modal-admin-users.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -52,7 +58,8 @@ import { ModalAdminUsersComponent } from './modal-admin-users/modal-admin-users.
     ModalInstitucionesDatosComponent,
     MapaInstitucionesComponent,
     AdminUsersComponent,
-    ModalAdminUsersComponent
+    ModalAdminUsersComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +80,13 @@ import { ModalAdminUsersComponent } from './modal-admin-users/modal-admin-users.
     MatSortModule,
     MatDialogModule,
     MatSelectModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    /*
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    FirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule*/
+
 
   ],
   providers: [],
