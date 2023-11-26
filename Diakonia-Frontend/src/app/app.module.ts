@@ -28,10 +28,7 @@ import {MatSortModule} from '@angular/material/sort';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { FirestoreModule } from '@angular/fire/firestore';
-import { environment } from '../environments/enviroment';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 
 import { InstitucionesComponent } from './instituciones/instituciones.component';
 import { ModalInstitucionesComponent } from './modal-instituciones/modal-instituciones.component';
@@ -81,11 +78,6 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     MatDialogModule,
     MatSelectModule,
     GoogleMapsModule,
-    /*
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    FirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule*/
 
 
   ],
