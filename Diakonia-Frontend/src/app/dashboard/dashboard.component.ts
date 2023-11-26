@@ -33,19 +33,6 @@ export class DashboardComponent {
 
   }
 
-  /*ngOnInit() {
-    //this.getAllInstituciones();
-    this.getTopDataDashboard();
-    this.getClassificationDataDashboard();
-    this.getEstadoDataDashboard();
-    console.log(this.InstitucionesClasificacion);
-    console.log(this.BeneficiariosClasificacion);
-    this.chartBarGraphic(this.InstitucionesClasificacion, this.BeneficiariosClasificacion);
-    this.chartPieGraphic();
-    this.chartLineGraphic();
-    this.chartPolarAreaGraphic();
-
-  }*/
 
   ngOnInit() {
     //this.getAllInstituciones();
@@ -241,7 +228,10 @@ export class DashboardComponent {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Mejores Instituciones Sociales Oro, Plata y Bronce'
+                    text: 'Mejores Instituciones Sociales Oro, Plata y Bronce',
+                    font: {
+                      size: 24  // Cambia esto al tamaño de fuente que desees
+                    }
                 }
             }
       }
@@ -256,7 +246,7 @@ export class DashboardComponent {
         data: {
             labels: ['Activas', 'Inactivas'],
             datasets: [{
-                label: '# of Votes',
+                label: 'Cantidad total',
                 data: [this.institucionesActivas, this.institucionesPasivas],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -277,7 +267,10 @@ export class DashboardComponent {
                 },
                 title: {
                     display: true,
-                    text: 'Total De Instituciones Sociales Por Estado'
+                    text: 'Total De Instituciones Sociales Por Estado',
+                    font: {
+                      size: 24  // Cambia esto al tamaño de fuente que desees
+                    }
                 }
             }
         },
@@ -305,7 +298,10 @@ chartLineGraphic() {
               },
               title: {
                   display: true,
-                  text: 'Balance De Beneficiarios Por Año'
+                  text: 'Balance De Beneficiarios Por Año',
+                  font: {
+                    size: 24  // Cambia esto al tamaño de fuente que desees
+                  }
               }
           }
       },
@@ -346,7 +342,10 @@ chartPolarAreaGraphic(labels: string[], data: number[]) {
               },
               title: {
                   display: true,
-                  text: 'Top 5 De Mejores Instituciones Sociales'
+                  text: 'Top 5 De Mejores Instituciones Sociales',
+                  font: {
+                    size: 24  // Cambia esto al tamaño de fuente que desees
+                  }
               }
           }
       },
