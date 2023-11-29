@@ -12,14 +12,14 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: '', component:HomeComponent, /*canActivate:[GuardLoginGuard]*/},
+  {path: '', component:HomeComponent, canActivate:[GuardLoginGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'instituciones', component: InstitucionesComponent},
-  {path: 'mapa', component: MapaInstitucionesComponent},
-  { path: 'instituciones/mapa/:id', component: MapaComponent },
-  { path: 'adminuser', component: AdminUsersComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  {path: 'register', component: RegisterComponent, canActivate:[GuardLoginGuard]},
+  {path: 'instituciones', component: InstitucionesComponent, canActivate:[GuardLoginGuard]},
+  {path: 'mapa', component: MapaInstitucionesComponent, canActivate:[GuardLoginGuard]},
+  { path: 'instituciones/mapa/:id', component: MapaComponent, canActivate:[GuardLoginGuard]},
+  { path: 'adminuser', component: AdminUsersComponent, canActivate:[GuardLoginGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate:[GuardLoginGuard] }
 ];
 
 @NgModule({

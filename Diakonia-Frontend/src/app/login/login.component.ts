@@ -30,10 +30,13 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  submit(): void {
-    this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {
-      withCredentials:true
-    }).subscribe(() => this.router.navigate(['/']));
+  submit(form: any): void {
+    this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {withCredentials:true})
+    .subscribe((res: any) => {
+      console.log(res);
+      localStorage.setItem('ACCESS_TOKEN', res.token)
+      this.router.navigate(['/'])
+    });
   }
 
 }

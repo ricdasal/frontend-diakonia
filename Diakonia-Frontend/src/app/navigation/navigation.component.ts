@@ -33,6 +33,7 @@ export class NavigationComponent implements OnInit {
   }
 
   logout(): void {
+    localStorage.removeItem('ACCESS_TOKEN');
     this.http.post('http://localhost:8000/api/logout', {}, {withCredentials:true})
     .subscribe( () => {
         this.authenticated = false;
