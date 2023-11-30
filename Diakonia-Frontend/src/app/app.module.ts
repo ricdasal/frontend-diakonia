@@ -8,31 +8,29 @@ import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
-import {MatButtonModule} from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 
-
 import { InstitucionesComponent } from './instituciones/instituciones.component';
 import { ModalInstitucionesComponent } from './modal-instituciones/modal-instituciones.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapaComponent } from './mapa/mapa.component';
@@ -40,7 +38,7 @@ import { ModalInstitucionesDatosComponent } from './modal-instituciones-datos/mo
 import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-instituciones.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { ModalAdminUsersComponent } from './modal-admin-users/modal-admin-users.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +54,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     MapaInstitucionesComponent,
     AdminUsersComponent,
     ModalAdminUsersComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,11 +75,10 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     MatSortModule,
     MatDialogModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     GoogleMapsModule,
-
-
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

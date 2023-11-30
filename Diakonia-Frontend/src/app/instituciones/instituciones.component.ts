@@ -35,6 +35,9 @@ export class InstitucionesComponent implements OnInit {
 
   elemento: string = '';
 
+  uploadedFile: boolean = false;
+  messageLog: string = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -121,6 +124,7 @@ export class InstitucionesComponent implements OnInit {
 
   uploadFile(event: Event) {
     let element = event.target as HTMLInputElement;
+    this.messageLog = '';
     let file = element.files![0];
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
@@ -129,29 +133,36 @@ export class InstitucionesComponent implements OnInit {
       let worksheet = workbook.Sheets[workbook.SheetNames[0]];
       let header = XLSX.utils.sheet_to_json(worksheet).at(0) as Object;
       let headers = Object.values(header).map((elem: string) =>
-        elem.toLocaleLowerCase().split(' ').join('_')
+        elem.toLocaleLowerCase().trim().replaceAll(' ', '_')
       );
       let csvData = XLSX.utils.sheet_to_json(worksheet, {
         range: 1,
         header: headers,
       }) as InstitucionDataExcel[];
       csvData.shift();
-      console.log(JSON.stringify(csvData));
+      csvData.pop();
+      console.log(csvData);
       // Envía los datos al backend
+      this.uploadedFile = true;
 
       this.http
         .post('http://localhost:8000/api/readData', { data: csvData })
         .subscribe(
-          (response) => {
+          (response: any) => {
             console.log(response); // Haz algo con la respuesta del servidor
-            if (response) {
-              alert('Archivo Subido Correctamente!');
+            if (response.status === 200) {
+              this.messageLog = 'Archivo Subido Correctamente!';
+            } else {
+              this.messageLog =
+                'Algo salio mal. Intenta subir de nuevo el archivo.';
             }
+            this.uploadedFile = false;
           },
           (error) => {
             console.error(error); // Maneja el error
             console.log('Error');
-            alert('Ocurrio un error. Intenta mas tarde.');
+            this.messageLog = 'Ocurrio un error. Intenta mas tarde.';
+            this.uploadedFile = false;
           }
         );
     };

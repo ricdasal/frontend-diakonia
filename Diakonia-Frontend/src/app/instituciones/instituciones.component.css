@@ -2,6 +2,10 @@
   width:200px;
 }
 
+.text-sm {
+  font-size: 0.75rem;
+}
+
 .mat-toolbar-row, .mat-toolbar-single-row {
   display: flex;
   box-sizing: border-box;
