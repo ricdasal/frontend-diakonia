@@ -150,13 +150,15 @@ export class InstitucionesComponent implements OnInit {
         .subscribe(
           (response: any) => {
             console.log(response); // Haz algo con la respuesta del servidor
-            if (response.status === 200) {
+            if (response?.success) {
               this.messageLog = 'Archivo Subido Correctamente!';
             } else {
               this.messageLog =
                 'Algo salio mal. Intenta subir de nuevo el archivo.';
             }
             this.uploadedFile = false;
+            this.getDataInstituciones();
+            this.messageLog = '';
           },
           (error) => {
             console.error(error); // Maneja el error
