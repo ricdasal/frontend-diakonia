@@ -1,0 +1,19 @@
+<div class="body-container">
+  <div class="container">
+    <div class="box" style="background-color:#4d9853">
+      <google-map [center]="center"
+                  height="100%"
+                  width="100%"
+                  [zoom]="zoom"
+                  (mapClick)="addMarker($event)">
+        <map-marker *ngFor="let markerPosition of markerPositions"
+                    [position]="markerPosition"
+                    [options]="markerOptions"></map-marker>
+      </google-map>
+    </div>
+
+    <div class="boton-mapa">
+      <button class="w-100 btn btn-danger btn-lg" type="submit" routerLink="/informacion-instituciones">Volver a Instituciones</button>
+    </div>
+  </div>
+</div>

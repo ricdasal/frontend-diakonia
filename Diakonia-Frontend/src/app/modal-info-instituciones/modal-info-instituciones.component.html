@@ -1,0 +1,32 @@
+<h1 mat-dialog-title class="title-space">{{ institucionNombre }}</h1>
+
+  <div class="mat-mdc-dialog-container">
+
+    <div mdc-dialog mat-dialog-content class="espaciador-contenedor">
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Actividad</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let item of actividadList" [value]="item">{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="espaciado-formfield">
+        <mat-label>Tipo Poblacion</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let item of tipoPoblacionList" [value]="item">{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+    </div>
+
+    <div mat-dialog-action [align]="'end'">
+      <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 25px; margin-bottom:20px">Cerrar</button>
+    </div>
+
+
+
+
+
+  </div>

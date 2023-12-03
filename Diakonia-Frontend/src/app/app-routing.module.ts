@@ -10,6 +10,8 @@ import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-institucio
 import { GuardLoginGuard } from './guards/guard-login.guard';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { InformacionInstitucionesComponent } from './informacion-instituciones/informacion-instituciones.component';
+import { MapaInvitadoComponent } from './mapa-invitado/mapa-invitado.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent, canActivate:[GuardLoginGuard]},
@@ -19,7 +21,9 @@ const routes: Routes = [
   {path: 'mapa', component: MapaInstitucionesComponent, canActivate:[GuardLoginGuard]},
   { path: 'instituciones/mapa/:id', component: MapaComponent, canActivate:[GuardLoginGuard]},
   { path: 'adminuser', component: AdminUsersComponent, canActivate:[GuardLoginGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate:[GuardLoginGuard] }
+  { path: 'dashboard', component: DashboardComponent, canActivate:[GuardLoginGuard] },
+  { path: 'informacion-instituciones', component: InformacionInstitucionesComponent, canActivate:[GuardLoginGuard] },
+  { path: 'informacion-instituciones/mapa-invitado/:id', component: MapaInvitadoComponent, canActivate:[GuardLoginGuard] }
 ];
 
 @NgModule({

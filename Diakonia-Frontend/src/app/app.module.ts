@@ -39,6 +39,9 @@ import { MapaInstitucionesComponent } from './mapa-instituciones/mapa-institucio
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { ModalAdminUsersComponent } from './modal-admin-users/modal-admin-users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { InformacionInstitucionesComponent } from './informacion-instituciones/informacion-instituciones.component';
+import { ModalInfoInstitucionesComponent } from './modal-info-instituciones/modal-info-instituciones.component';
+import { MapaInvitadoComponent } from './mapa-invitado/mapa-invitado.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AdminUsersComponent,
     ModalAdminUsersComponent,
     DashboardComponent,
+    InformacionInstitucionesComponent,
+    ModalInfoInstitucionesComponent,
+    MapaInvitadoComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,93 @@
+<div class="container-toolbar">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <div class="contenedor-form-busqueda">
+        <mat-form-field appearance="outline" class="form-busqueda">
+          <mat-label>Busqueda</mat-label>
+          <input matInput placeholder="Buscar" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-flat-button color="warn" >
+          <mat-icon matSuffix>add</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+</div>
+
+<div class="container">
+  <div class="container-margen">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Nombre Institucion
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.nombre }}%</td>
+        </ng-container>
+
+        <ng-container matColumnDef="numero_beneficiarios">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Numero Beneficiarios
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.numero_beneficiarios }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="mapa">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mapa</th>
+          <td mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              color="primary"
+              [routerLink]="['mapa-invitado/', row.id]"
+            >
+              <mat-icon>location_on</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+
+            <a href="mailto:proyectos@diakonia-ec.org" (click)="$event.stopPropagation()">
+              <button mat-icon-button color="accent">
+                <mat-icon>contact_mail</mat-icon>
+              </button>
+            </a>
+
+            <a href="https://wa.me/593959867834" (click)="$event.stopPropagation()">
+              <button mat-icon-button color="primary">
+                <mat-icon>contact_phone</mat-icon>
+              </button>
+            </a>
+
+            <button mat-icon-button color="warn" (click)="openDialogData(row)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

@@ -174,9 +174,9 @@ export class DashboardComponent {
               this.nombresInstituciones.push(item.nombre);
               this.numeroBeneficiarios.push(parseFloat(item.numero_beneficiarios));
               this.totalEstado.push(item.estado[0].nombre_estado);
-              if (item.estado[0].nombre_estado === 'Activa') {
+              if (item.estado[0].nombre_estado.toLowerCase() === 'activa') {
                 totalActivas++;
-              } else if (item.estado[0].nombre_estado === 'Pasiva') {
+              } else if (item.estado[0].nombre_estado.toLowerCase() === 'pasiva') {
                 totalPasivas++;
               }
             }

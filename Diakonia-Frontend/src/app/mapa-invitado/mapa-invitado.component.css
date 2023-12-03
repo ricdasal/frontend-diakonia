@@ -1,0 +1,33 @@
+.body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 740px;
+  width: 1500px; /* Ajustado para ocupar todo el ancho */
+  background-color: white;
+  margin-left: -600px;
+  padding-top: 60px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.box {
+  width: 100%; /* Ajustado para ocupar todo el ancho */
+  padding: 10px;
+  box-sizing: border-box;
+  min-height: 745px; /* Ajusta este valor según tus necesidades */
+  border-radius: 4px;
+}
+
+.boton-mapa{
+  margin-top: 10px;
+  background-color: aqua;
+  width: 300px;
+  margin-left: 500px;
+  margin-bottom: 10px;
+}
