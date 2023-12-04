@@ -8,9 +8,12 @@
           width="1350px"
           [zoom]="zoom"
           (mapClick)="addMarker($event)">
-  <map-marker *ngFor="let markerPosition of markerPositions"
-              [position]="markerPosition"
-              [options]="markerOptions"></map-marker>
+    <map-marker *ngFor="let markerPosition of markerPositions"
+                  [position]="markerPosition"
+                  [options]="markerOptions">
+                  <map-circle [center]="markerPosition" [radius]="50000" />
+                </map-marker>
+  
   </google-map>
 </div>
 

@@ -76,3 +76,10 @@
     padding: 1px 24px 20px 24px;
   }*/
 }
+
+.formulario{
+  display: flex;
+  flex-direction: column;
+  gap:1rem;
+  align-items: center;
+}

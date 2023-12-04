@@ -1,11 +1,201 @@
-<h1 mat-dialog-title class="title-space">FORMULARIO PARA AGREGAR/EDITAR DATOS</h1>
+<h1 mat-dialog-title class="title-space">AGREGAR INSTITUCIÓN</h1>
+
+
+<form [formGroup]="registerForm" (ngSubmit)="registrarInstitucion(registerForm)" class="formulario">
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre Institucion</mat-label>
+      <input matInput formControlName="nombre_institucion">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Ruc</mat-label>
+      <input matInput formControlName="ruc">
+    </mat-form-field>
+
+  </div>
+
+  <div mdc-dialog mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Año de ingreso</mat-label>
+      <input matInput formControlName="anio_ingreso">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Mes de ingreso</mat-label>
+      <input matInput formControlName="mes_ingreso">
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Caracterizacion</mat-label>
+      <mat-select formControlName="caracterizacion_id">
+        <mat-option *ngFor="let caracterizacion of this.lista_caracterizaciones" value="{{caracterizacion.id}}">
+          {{caracterizacion.nombre_caracterizacion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Clasificacion</mat-label>
+      <mat-select formControlName="nombre_clasificacion">
+        <mat-option *ngFor="let clasificacion of lista_clasificacion" [value]="clasificacion">{{clasificacion}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Sectorizacion</mat-label>
+      <mat-select formControlName="sector_id">
+        <mat-option *ngFor="let sector of lista_sectores" [value]="sector.id">{{sector.nombre_sectorizacion}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Numero de beneficiarios</mat-label>
+      <input matInput formControlName="numero_beneficiarios">
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Tipo Poblacion</mat-label>
+      <mat-select multiple formControlName="tipo_poblacion">
+        <mat-option *ngFor="let tipo_poblacion of this.lista_tipo_poblacion" [value]="tipo_poblacion">{{tipo_poblacion}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Actividad</mat-label>
+      <mat-select multiple formControlName="actividad_id">
+        <mat-option *ngFor="let actividad of lista_actividades" [value]="actividad.id">{{actividad.nombre_actividad}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Nombre contacto</mat-label>
+      <input matInput formControlName="nombre_contacto">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Apellido contacto</mat-label>
+      <input matInput formControlName="apellido_contacto">
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo</mat-label>
+      <input matInput formControlName="correo_contacto">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Telefono</mat-label>
+      <input matInput formControlName="telefono_contacto">
+    </mat-form-field>
+
+    
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="direccion">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Url Dirección</mat-label>
+      <input matInput formControlName="url_direccion">
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Latitud</mat-label>
+      <input matInput formControlName="latitud">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <mat-label>Longitud</mat-label>
+      <input matInput formControlName="longitud">
+    </mat-form-field>
+
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Representante Legal</mat-label>
+      <input matInput formControlName="representante_legal">
+    </mat-form-field>
+
+    <mat-form-field class="espaciado-formfield" appearance="outline">
+      <mat-label>Condición</mat-label>
+      <mat-select formControlName="condicion">
+        <mat-option *ngFor="let condicion of lista_condicion" value="{{condicion}}">{{condicion}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content class="espaciador-contenedor">
+    
+    <mat-form-field class="espaciado-formfield" appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName='nombre_estado'>
+        <mat-option *ngFor="let estado of lista_estados" value="{{estado}}">{{estado}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="pat@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field> -->
+
+  </div>
+
+  <div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 25px; margin-bottom:20px">Cerrar</button>
+    <button mat-raised-button color="primary" style="margin-left: 5px; margin-bottom:20px" type="submit">{{actionBtn}}</button>
+  </div>
+
+
+
+</form>
+
+
+
+
+<!-- <h1 mat-dialog-title class="title-space">FORMULARIO PARA AGREGAR/EDITAR DATOS</h1>
 
   <div class="mat-mdc-dialog-container">
 
     <div mdc-dialog mat-dialog-content class="espaciador-contenedor">
 
       <mat-form-field appearance="outline">
-        <mat-label>Anio de ingreso</mat-label>
+        <mat-label>Año de ingreso</mat-label>
         <input matInput>
       </mat-form-field>
 
@@ -36,21 +226,9 @@
       <mat-form-field appearance="outline">
         <mat-label>Caracterizacion</mat-label>
         <mat-select>
-          <mat-option value="one">Albergue</mat-option>
-          <mat-option value="two">Alimentacion a indigentes</mat-option>
-          <mat-option value="two">Ayuda en control y prevencion</mat-option>
-          <mat-option value="two">Casa de acogida</mat-option>
-          <mat-option value="two">Centro de apoyo mujeres</mat-option>
-          <mat-option value="two">Centro de apoyo familiar</mat-option>
-          <mat-option value="two">Centro de educacion</mat-option>
-          <mat-option value="two">Centro de inclusion personas con discapacidad</mat-option>
-          <mat-option value="two">Centro rehabilitacion</mat-option>
-          <mat-option value="two">Centro medico</mat-option>
-          <mat-option value="two">CIBV</mat-option>
-          <mat-option value="two">Cuidado personas con discapacidad</mat-option>
-          <mat-option value="two">Cuidado personas con discapacidad y enfermedades catastroficas</mat-option>
-          <mat-option value="two">Rescate ninez y adolescencia</mat-option>
-          <mat-option value="two">So</mat-option>
+          <mat-option *ngFor="let caracterizacion of this.lista_caracterizaciones" value="{{caracterizacion.id}}">
+            {{caracterizacion.nombre_caracterizacion}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -81,7 +259,7 @@
               (+{{(toppings2.value?.length || 0) - 1}} {{toppings2.value?.length === 2 ? 'other' : 'others'}})
             </span>
           </mat-select-trigger>
-          <mat-option *ngFor="let topping of toppingList2" [value]="topping">{{topping}}</mat-option>
+          <mat-option *ngFor="let sector of lista_sectores" [value]="sector.id">{{sector.nombre_sectorizacion}}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -103,7 +281,7 @@
               (+{{(toppings2.value?.length || 0) - 1}} {{toppings2.value?.length === 2 ? 'other' : 'others'}})
             </span>
           </mat-select-trigger>
-          <mat-option *ngFor="let topping of toppingList2" [value]="topping">{{topping}}</mat-option>
+          <mat-option *ngFor="let tipo_poblacion of this.lista_tipo_poblacion" [value]="tipo_poblacion">{{tipo_poblacion}}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -203,4 +381,6 @@
 
 
 
-  </div>
+  </div> -->
+
+

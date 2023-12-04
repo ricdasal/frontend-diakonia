@@ -5,9 +5,13 @@ import { ApiService } from '../api.service';
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.component.html',
-  styleUrls: ['./mapa.component.css']
+  styleUrls: ['./mapa.component.css'],
 })
 export class MapaComponent implements OnInit {
+
+  circleCenter: google.maps.LatLngLiteral = {lat: 100, lng: 15};
+  radius = 3;
+
 
   id: string='';
   nombreInstitucion: string='';

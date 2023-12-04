@@ -70,32 +70,27 @@ export class InstitucionesComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog
-      .open(ModalInstitucionesComponent, {
-        width: '30%',
-      })
-      .afterClosed()
-      .subscribe((val) => {
-        if (val === 'save') {
-          //this.getAllInstituciones();
-          this.getDataInstituciones();
-        }
-      });
+    this.dialog.open(ModalInstitucionesComponent, {
+      width:'75vh',
+      height: '95vh'
+    }).afterClosed().subscribe(val=>{
+      if(val === 'save'){
+        //this.getAllInstituciones();
+        this.getDataInstituciones();
+      }
+    })
   }
 
   openDialogData(row: any) {
     this.sharedService.changeId(row.id);
-    this.dialog
-      .open(ModalInstitucionesDatosComponent, {
-        width: '30%',
-      })
-      .afterClosed()
-      .subscribe((val) => {
-        if (val === 'save') {
-          //this.getAllInstituciones();
-          this.getDataInstituciones();
-        }
-      });
+    this.dialog.open(ModalInstitucionesDatosComponent, {
+      width:'70vh'
+    }).afterClosed().subscribe(val=>{
+      if(val === 'save'){
+        //this.getAllInstituciones();
+        this.getDataInstituciones();
+      }
+    })
   }
 
   applyFilter(event: Event) {

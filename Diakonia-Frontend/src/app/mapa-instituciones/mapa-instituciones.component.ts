@@ -88,13 +88,16 @@ export class MapaInstitucionesComponent {
     lat: -2.2058400,
     lng: -79.9079500
   };
-  zoom = 4;
+  zoom = 8;
   markerOptions: google.maps.MarkerOptions = {
-      draggable: false
+      draggable: false,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
   };
   markerPositions: google.maps.LatLngLiteral[] = [];
   addMarker(event: google.maps.MapMouseEvent) {
       if (event.latLng != null) this.markerPositions.push(event.latLng.toJSON());
   }
+
+  
 
 }
