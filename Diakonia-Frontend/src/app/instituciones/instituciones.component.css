@@ -34,6 +34,10 @@ table {
   width: 100%;
 }
 
+.form {
+  width: 80%;
+}
+
 .mat-mdc-form-field {
   font-size: 14px;
   width: 100%;
