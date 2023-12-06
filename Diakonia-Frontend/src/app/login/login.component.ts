@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { UserService } from '../servicios/user.service';
+import { UserDto } from '../servicios/user.dto';
 
 @Component({
   selector: 'app-login',
@@ -14,29 +15,33 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup = this.formBuilder.group({
     name: '',
-    password: ''
+    password: '',
   });
 
   constructor(
     private formBuilder: FormBuilder,
+    private userService: UserService,
     private http: HttpClient,
     private router: Router
-    ){}
+  ) {}
 
   ngOnInit(): void {
-      this.form = this.formBuilder.group({
-        email:'',
-        password:''
-      });
-  }
-
-  submit(form: any): void {
-    this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {withCredentials:true})
-    .subscribe((res: any) => {
-      console.log(res);
-      localStorage.setItem('ACCESS_TOKEN', res.token)
-      this.router.navigate(['/'])
+    this.form = this.formBuilder.group({
+      email: '',
+      password: '',
     });
   }
 
+  submit(form: any): void {
+    this.http
+      .post('http://localhost:8000/api/login', this.form.getRawValue(), {
+        withCredentials: true,
+      })
+      .subscribe((res: any) => {
+        console.log(res);
+        this.userService.setCurrentUser(res as UserDto);
+        localStorage.setItem('ACCESS_TOKEN', res.token);
+        this.router.navigate(['/']);
+      });
+  }
 }

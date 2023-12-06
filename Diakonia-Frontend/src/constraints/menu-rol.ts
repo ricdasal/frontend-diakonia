@@ -18,3 +18,15 @@ export const menuRol = Object.freeze({
     { name: 'Ingresar Institucion', routerLink: '/instituciones' },
   ],
 });
+
+export const menuNagivation = {
+  ADMIN: [
+    { name: 'instituciones', routerLink: '/instituciones' },
+    { name: 'mapa', routerLink: '/mapa' },
+    { name: 'usuarios', routerLink: '/adminuser' },
+  ],
+  USUARIO_INVITADO: [],
+  USUARIO_GENERAL: [
+    { name: 'Ingresar Institucion', routerLink: '/instituciones' },
+  ],
+};

@@ -12,22 +12,67 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InformacionInstitucionesComponent } from './informacion-instituciones/informacion-instituciones.component';
 import { MapaInvitadoComponent } from './mapa-invitado/mapa-invitado.component';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
-  {path: '', component:HomeComponent, canActivate:[GuardLoginGuard]},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent, canActivate:[GuardLoginGuard]},
-  {path: 'instituciones', component: InstitucionesComponent, canActivate:[GuardLoginGuard]},
-  {path: 'mapa', component: MapaInstitucionesComponent, canActivate:[GuardLoginGuard]},
-  { path: 'instituciones/mapa/:id', component: MapaComponent, canActivate:[GuardLoginGuard]},
-  { path: 'adminuser', component: AdminUsersComponent, canActivate:[GuardLoginGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate:[GuardLoginGuard] },
-  { path: 'informacion-instituciones', component: InformacionInstitucionesComponent, canActivate:[GuardLoginGuard] },
-  { path: 'informacion-instituciones/mapa-invitado/:id', component: MapaInvitadoComponent, canActivate:[GuardLoginGuard] }
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'USUARIO_GENERAL', 'USUARIO_INVITADO'] },
+  },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [GuardLoginGuard],
+  },
+  {
+    path: 'instituciones',
+    component: InstitucionesComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'USUARIO_GENERAL'] },
+  },
+  {
+    path: 'mapa',
+    component: MapaInstitucionesComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN'] },
+  },
+  {
+    path: 'instituciones/mapa/:id',
+    component: MapaComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN'] },
+  },
+  {
+    path: 'adminuser',
+    component: AdminUsersComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN'] },
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN'] },
+  },
+  {
+    path: 'informacion-instituciones',
+    component: InformacionInstitucionesComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'USUARIO_INVITADO'] },
+  },
+  {
+    path: 'informacion-instituciones/mapa-invitado/:id',
+    component: MapaInvitadoComponent,
+    canActivate: [GuardLoginGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'USUARIO_INVITADO'] },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
