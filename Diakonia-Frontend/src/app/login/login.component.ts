@@ -37,11 +37,16 @@ export class LoginComponent implements OnInit {
       .post('http://localhost:8000/api/login', this.form.getRawValue(), {
         withCredentials: true,
       })
-      .subscribe((res: any) => {
-        console.log(res);
-        this.userService.setCurrentUser(res as UserDto);
-        localStorage.setItem('ACCESS_TOKEN', res.token);
-        this.router.navigate(['/']);
-      });
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          localStorage.setItem('USER_ROLE', res.user);
+          localStorage.setItem('ACCESS_TOKEN', res.token);
+          this.router.navigate(['/']);
+        },
+        (err: any) => {
+          alert('Inicia De Nuevo');
+        }
+      );
   }
 }

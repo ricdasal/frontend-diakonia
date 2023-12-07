@@ -22,6 +22,10 @@ export class UserService {
     );
   }
 
+  setRol(rol: string) {
+    this.user.cargo_institucional = rol;
+  }
+
   getCurrentUser() {
     return this.user;
   }

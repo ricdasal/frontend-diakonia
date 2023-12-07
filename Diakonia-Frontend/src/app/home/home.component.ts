@@ -18,8 +18,7 @@ export class HomeComponent implements OnInit {
 
   menu: MenuItems[] = [{ name: '', routerLink: '' }];
 
-  constructor(private http: HttpClient, private userService: UserService) {
-  }
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   ngOnInit(): void {
     this.http
@@ -28,11 +27,12 @@ export class HomeComponent implements OnInit {
         (res: any) => {
           this.message = `Hi ${res.name}`;
           this.userService.setCurrentUser(res as UserDto);
-          console.log(res, this.userService.getCurrentUser())
-          const rol: RolKey =
-            this.userService.getRol().toUpperCase() as RolKey;
+          const rol: RolKey = localStorage
+            .getItem('USER_ROLE')
+            ?.replace(' ', '_')
+            ?.toUpperCase() as RolKey;
           this.menu = menuRol[rol] as MenuItems[];
-          console.log(rol, this.userService)
+          console.log(this.menu, rol);
           Emitters.authEmitter.emit(true);
         },
         (err) => {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Emitters } from '../emitters/emitters';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { UserService } from '../servicios/user.service';
@@ -32,20 +32,31 @@ export class NavigationComponent implements OnInit {
   menuNagivation: MenuItems[] = [{ routerLink: '', name: '' }];
 
   ngOnInit(): void {
-    let rol: Rol = this.userService.getRol() as Rol;
-    this.menuNagivation = menuNagivation[rol];
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });
+    let rol: Rol = localStorage
+      .getItem('USER_ROLE')
+      ?.toUpperCase()
+      ?.replace(' ', '_') as Rol;
+    this.menuNagivation = menuNagivation[rol];
   }
 
   logout(): void {
-    localStorage.removeItem('ACCESS_TOKEN');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+    });
     this.http
-      .post('http://localhost:8000/api/logout', {}, { withCredentials: true })
+      .post(
+        'http://localhost:8000/api/logout',
+        {},
+        { headers: headers, withCredentials: true }
+      )
       .subscribe(() => {
         this.authenticated = false;
         this.router.navigate(['/login']);
+        localStorage.removeItem('ACCESS_TOKEN');
+        localStorage.removeItem('USER_TOKEN');
       });
   }
   toggleMenu() {
