@@ -22,7 +22,8 @@ export class RoleGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const rol = this.userService.getRol();
+    const rol = localStorage.getItem('USER_ROLE');
+    console.log(rol);
     let rolesAvialible = route.data['roles'];
     if (rolesAvialible.includes(rol)) return true;
     return false;

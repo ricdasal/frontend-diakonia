@@ -8,7 +8,9 @@ import { menuNagivation } from 'src/constraints/menu-rol';
 import { MenuItems } from 'src/constraints/interfaces/menu-items';
 
 type Rol = keyof typeof menuNagivation;
-
+const headers = new HttpHeaders({
+  Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+});
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -20,32 +22,29 @@ export class NavigationComponent implements OnInit {
   isSmallScreen = false;
   menuOpen = false;
 
+  menuVariable: boolean = false;
+  menu_icon_variable: boolean = false;
+
+  menuNagivation: MenuItems[];
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private userService: UserService
-  ) {}
-
-  menuVariable: boolean = false;
-  menu_icon_variable: boolean = false;
-
-  menuNagivation: MenuItems[] = [{ routerLink: '', name: '' }];
+  ) {
+    this.menuNagivation = [{ routerLink: '', name: '' }] as MenuItems[];
+  }
 
   ngOnInit(): void {
+    let rol: Rol = localStorage.getItem('USER_ROLE') as Rol;
+    this.menuNagivation = menuNagivation[rol] as MenuItems[];
+    console.log('NAGIVATION', this.menuNagivation, rol);
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });
-    let rol: Rol = localStorage
-      .getItem('USER_ROLE')
-      ?.toUpperCase()
-      ?.replace(' ', '_') as Rol;
-    this.menuNagivation = menuNagivation[rol];
   }
 
   logout(): void {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
-    });
     this.http
       .post(
         'http://localhost:8000/api/logout',
@@ -56,7 +55,8 @@ export class NavigationComponent implements OnInit {
         this.authenticated = false;
         this.router.navigate(['/login']);
         localStorage.removeItem('ACCESS_TOKEN');
-        localStorage.removeItem('USER_TOKEN');
+        localStorage.removeItem('USER_ROLE');
+        this.menuNagivation = [{ routerLink: '', name: '' }] as MenuItems[];
       });
   }
   toggleMenu() {

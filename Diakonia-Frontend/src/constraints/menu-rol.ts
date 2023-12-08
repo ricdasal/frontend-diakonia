@@ -1,5 +1,5 @@
 export const menuRol = Object.freeze({
-  ADMIN: [
+  ADMINISTRADOR: [
     { name: 'Mapa', routerLink: '/mapa' },
     { name: 'Ingresar Institucion', routerLink: '/instituciones' },
     { name: 'Dashboard', routerLink: '/dashboard' },
@@ -20,7 +20,7 @@ export const menuRol = Object.freeze({
 });
 
 export const menuNagivation = {
-  ADMIN: [
+  ADMINISTRADOR: [
     { name: 'instituciones', routerLink: '/instituciones' },
     { name: 'mapa', routerLink: '/mapa' },
     { name: 'usuarios', routerLink: '/adminuser' },

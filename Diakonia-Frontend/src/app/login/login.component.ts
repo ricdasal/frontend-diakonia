@@ -39,13 +39,17 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
-          console.log(res);
-          localStorage.setItem('USER_ROLE', res.user);
+          localStorage.setItem(
+            'USER_ROLE',
+            res.user?.replace(' ', '_')?.toUpperCase()
+          );
           localStorage.setItem('ACCESS_TOKEN', res.token);
-          this.router.navigate(['/']);
+          console.log(res);
+          this.router.navigateByUrl('/');
         },
         (err: any) => {
-          alert('Inicia De Nuevo');
+          alert('Parece que las credenciales no son autenticas');
+          this.form.reset();
         }
       );
   }
