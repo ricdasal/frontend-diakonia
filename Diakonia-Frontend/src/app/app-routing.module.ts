@@ -43,7 +43,7 @@ const routes: Routes = [
     path: 'instituciones/mapa/:id',
     component: MapaComponent,
     canActivate: [GuardLoginGuard, RoleGuard],
-    data: { roles: ['ADMINISTRADOR'] },
+    data: { roles: ['ADMINISTRADOR', 'USUARIO_GENERAL'] },
   },
   {
     path: 'adminuser',
