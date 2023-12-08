@@ -39,11 +39,10 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
-          localStorage.setItem(
-            'USER_ROLE',
-            res.user?.replace(' ', '_')?.toUpperCase()
-          );
+          let userRole = res.user?.replace(' ', '_')?.toUpperCase();
+          localStorage.setItem('USER_ROLE', userRole);
           localStorage.setItem('ACCESS_TOKEN', res.token);
+          this.userService.setRol(userRole);
           console.log(res);
           this.router.navigateByUrl('/');
         },

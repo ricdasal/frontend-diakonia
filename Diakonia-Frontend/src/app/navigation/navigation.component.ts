@@ -36,11 +36,12 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let rol: Rol = localStorage.getItem('USER_ROLE') as Rol;
-    this.menuNagivation = menuNagivation[rol] as MenuItems[];
-    console.log('NAGIVATION', this.menuNagivation, rol);
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
+      let rol: Rol = localStorage.getItem('USER_ROLE') as Rol;
+      console.log(rol);
+      this.menuNagivation = menuNagivation[rol] as MenuItems[];
+      console.log('NAGIVATION', this.menuNagivation);
     });
   }
 

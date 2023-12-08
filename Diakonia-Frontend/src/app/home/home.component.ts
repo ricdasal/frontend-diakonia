@@ -25,6 +25,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const rol: RolKey = localStorage.getItem('USER_ROLE') as RolKey;
+    this.menu = menuRol[rol] as MenuItems[];
+    console.log(this.menu, rol);
     this.http
       .get('http://localhost:8000/api/user', {
         headers: headers,
@@ -34,9 +37,6 @@ export class HomeComponent implements OnInit {
         (res: any) => {
           this.message = `Hi ${res.name}`;
           this.userService.setCurrentUser(res as UserDto);
-          const rol: RolKey = localStorage.getItem('USER_ROLE') as RolKey;
-          this.menu = menuRol[rol] as MenuItems[];
-          console.log(this.menu, rol);
           Emitters.authEmitter.emit(true);
         },
         (err) => {
