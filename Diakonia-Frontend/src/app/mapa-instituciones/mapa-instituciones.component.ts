@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 
+declare var google: any;
+
 @Component({
   selector: 'app-mapa-instituciones',
   templateUrl: './mapa-instituciones.component.html',
@@ -14,6 +16,7 @@ export class MapaInstitucionesComponent {
   latitudesMapList: number[] = [];
   longitudesMapList: number[] = [];
   radioAccionList:number[] = [];
+  map: any;
 
   constructor(private route: ActivatedRoute,
     private api: ApiService,) {}
@@ -74,6 +77,23 @@ export class MapaInstitucionesComponent {
               };
             });
 
+
+            // Crear los círculos alrededor de los marcadores
+            this.markerPositions.forEach((position, index) => {
+              const cityCircle = new google.maps.Circle({
+                strokeColor: "#fff",
+                strokeOpacity: 0.2,
+                strokeWeight: 1,
+                fillColor: "#fff",
+                fillOpacity: 0.15,
+                map: this.map,
+                center: position,
+                radius: this.radioAccionList[index]
+              });
+            });
+
+
+
           } else {
             console.log('No se encontró ningún objeto con id:', this.dato);
           }
@@ -95,9 +115,5 @@ export class MapaInstitucionesComponent {
   };
   markerPositions: google.maps.LatLngLiteral[] = [];
   addMarker(event: google.maps.MapMouseEvent) {
-      if (event.latLng != null) this.markerPositions.push(event.latLng.toJSON());
   }
-
-  
-
 }
