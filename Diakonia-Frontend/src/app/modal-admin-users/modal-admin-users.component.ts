@@ -28,33 +28,25 @@ export class ModalAdminUsersComponent implements OnInit{
         cargo_institucional:['',Validators.required],
         telefono:['',Validators.required],
       });
-
       if(this.editData){
-        this.usersForm.controls['id'].setValue(this.editData.id);
-        this.usersForm.controls['name'].setValue(this.editData.nombre);
-        this.usersForm.controls['apellido'].setValue(this.editData.numero_beneficiarios);
-        this.usersForm.controls['email'].setValue(this.editData.ruc);
-        this.usersForm.controls['cargo_institucional'].setValue(this.editData.mes_ingreso);
-        this.usersForm.controls['telefono'].setValue(this.editData.anio_ingreso);
-
+        this.usersForm.patchValue(this.editData);
       }
+
   }
 
   editUser(){
-    if(!this.editData){
-      if(this.usersForm.valid){
-        this.api.postInstitucion(this.usersForm.value).subscribe({
-          next:(res)=>{
-            alert("Usuario editado exitosamente");
-            this.usersForm.reset();
-            this.dialogRef.close('save');
-          },
-          error:()=>{
-            alert("Error al editar usuario");
-          }
-        })
-      }
-    }
+    if(this.usersForm.valid){
+      this.api.editUser(this.usersForm.value, this.editData.id).subscribe({
+        next:(res: any)=>{
+          alert("Usuario editado exitosamente");
+          this.usersForm.reset();
+          this.dialogRef.close('save');
+        },
+        error:()=>{
+          alert("Error al editar usuario");
+        }
+      })
+    } 
   }
 
   toppings = new FormControl('');

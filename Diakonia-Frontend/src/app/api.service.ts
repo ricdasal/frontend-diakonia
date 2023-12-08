@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 const headers = new HttpHeaders({
@@ -9,30 +9,41 @@ const headers = new HttpHeaders({
 })
 export class ApiService {
 
+  baseURL: string = "http://localhost:8000/api";
+
   constructor(private http: HttpClient) { }
 
   AllInstituciones(){
-    return this.http.get<any>("http://localhost:8000/api/AllInstituciones", {headers, withCredentials: true});
+    return this.http.get<any>(`${this.baseURL}/AllInstituciones`, {headers, withCredentials: true});
   }
 
   postInstitucion(data:any){
-    return this.http.post<any>("http://localhost:8000/api/postInstitucion", data, {headers, withCredentials: true});
+    return this.http.post<any>(`${this.baseURL}/postInstitucion`, data, {headers, withCredentials: true});
   }
 
   DataInstituciones(){
-    return this.http.get<any>("http://localhost:8000/api/DataInstituciones", {headers, withCredentials: true});
+    return this.http.get<any>(`${this.baseURL}/DataInstituciones`, {headers, withCredentials: true});
   }
 
   DataUsers(){
-    return this.http.get<any>("http://localhost:8000/api/DataUsers", {headers, withCredentials: true});
+    return this.http.get<any>(`${this.baseURL}/DataUsers`, {headers, withCredentials: true});
   }
 
   DataInstitucionesId(id: string){
-    return this.http.get<any>(`http://localhost:8000/api/DataInstituciones/${id}`, {headers, withCredentials: true});
+    return this.http.get<any>(`${this.baseURL}/DataInstituciones/${id}`, {headers, withCredentials: true});
   }
 
   DataInstitucionesDirecciones(){
-    return this.http.get<any>(`http://localhost:8000/api/DataInstitucionesDirecciones`, {headers, withCredentials: true});
+    return this.http.get<any>(`${this.baseURL}/DataInstitucionesDirecciones`, {headers, withCredentials: true});
+  }
+
+  editUser(data: any, id: number) {
+    console.log(data)
+    return this.http.put(`${this.baseURL}/users/${id}`, data, {headers, withCredentials: true});
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${this.baseURL}/users/${id}`, {headers, withCredentials: true});
   }
 }
 

@@ -89,4 +89,11 @@ export class AdminUsersComponent implements OnInit{
     })
   }
 
+  deleteUser(row: any) {
+    this.api.deleteUser(row.id).subscribe((res: any) => {
+      alert("Usuario Elimado Correctamente");
+      this.getDataUsers();
+    }, (res: any) => {alert("Ocurrio un error. Intenta mas tarde.")})
+  }
+
 }
