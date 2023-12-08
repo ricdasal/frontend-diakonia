@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ModalInstitucionesComponent } from '../modal-instituciones/modal-instituciones.component';
 import * as XLSX from 'xlsx';
@@ -12,6 +12,10 @@ import { Dialog } from '@angular/cdk/dialog';
 import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/modal-instituciones-datos.component';
 import { SharedService } from '../shared.service';
 import { InstitucionDataExcel } from './models/institucion';
+
+const headersAPI = new HttpHeaders({
+  Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+});
 
 @Component({
   selector: 'app-instituciones',
@@ -139,9 +143,9 @@ export class InstitucionesComponent implements OnInit {
       console.log(csvData);
       // Envía los datos al backend
       this.uploadedFile = true;
-
+      
       this.http
-        .post('http://localhost:8000/api/readData', { data: csvData })
+        .post('http://localhost:8000/api/readData', { data: csvData }, { withCredentials:true, headers: headersAPI})
         .subscribe(
           (response: any) => {
             console.log(response); // Haz algo con la respuesta del servidor

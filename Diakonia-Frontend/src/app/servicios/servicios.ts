@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
+const headers = new HttpHeaders({
+  Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
+})
 
 @Injectable({
   providedIn: 'root'
@@ -25,24 +28,24 @@ export class ClienteWAService {
     constructor(private http: HttpClient) { }
 
     login(form: any){
-      return this.http.post(this.URL_LOGIN, form.getRawValue(), {withCredentials:true})
+      return this.http.post(this.URL_LOGIN, form.getRawValue(), {headers, withCredentials:true})
     }
 
     obtenerCaracterizaciones(){
-      return this.http.get(this.URL_CARACTERIZACION, {withCredentials:true})
+      return this.http.get(this.URL_CARACTERIZACION, {headers, withCredentials:true})
     }
 
     obtenerSectores(){
-      return this.http.get(this.URL_SECTORIZACION, {withCredentials:true})
+      return this.http.get(this.URL_SECTORIZACION, {headers, withCredentials:true})
     }
 
     obtenerActividades(){
-      return this.http.get(this.URL_ACTIVIDADES, {withCredentials:true});
+      return this.http.get(this.URL_ACTIVIDADES, {headers, withCredentials:true});
     }
 
     ingresarInstitucion(form: any){
 
-      return this.http.post(this.URL_INGRESAR_INSTITUCION, form.value, {withCredentials:true})
+      return this.http.post(this.URL_INGRESAR_INSTITUCION, form.value, {headers, withCredentials:true})
 
     }
 
