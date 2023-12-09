@@ -127,18 +127,26 @@ export class InstitucionesComponent implements OnInit {
 
   editInstitucion(row: any) {
     //TODO: HACER PETICION POR ID DE INSTITUCION
-    this.dialog
-      .open(ModalInstitucionesComponent, {
-        width: '30%',
-        data: row,
-      })
-      .afterClosed()
-      .subscribe((val) => {
-        if (val === 'update') {
-          //this.getAllInstituciones();
-          this.getDataInstituciones();
-        }
-      });
+    this.api.DataInstitucionesId(row.id).subscribe({next: (res: any) => {
+      let institucion = res;
+      console.log(institucion)
+      // this.dialog
+      // .open(ModalInstitucionesComponent, {
+      //   width: '30%',
+      //   data: institucion,
+      // })
+      // .afterClosed()
+      // .subscribe((val) => {
+      //   if (val === 'update') {
+      //     //this.getAllInstituciones();
+      //     this.getDataInstituciones();
+      //   }
+      // });
+    }, error: (err: any) => {
+      console.log(err);
+      alert("Ocurrio un error intenta mas tarde.")
+      
+    }})
   }
 
   uploadFile(event: Event) {

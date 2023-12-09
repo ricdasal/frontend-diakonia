@@ -30,7 +30,7 @@ export class ApiService {
   }
 
   DataInstitucionesId(id: string){
-    return this.http.get<any>(`${this.baseURL}/DataInstituciones/${id}`, {headers, withCredentials: true});
+    return this.http.get<any>(`${this.baseURL}/DataInstitucionesId/${id}`, {headers, withCredentials: true});
   }
 
   DataInstitucionesDirecciones(){
