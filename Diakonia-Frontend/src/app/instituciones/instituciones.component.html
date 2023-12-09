@@ -26,7 +26,7 @@
         </button>
       </div>
       <div
-      *ngIf="uploadedFile"
+        *ngIf="uploadedFile"
         class="ms-2 d-flex flex-row justify-content-center align-items-center gap-3"
       >
         <span class="text-primary text-center text-sm">Subiendo Datos...</span>
@@ -35,6 +35,26 @@
       <span *ngIf="messageLog" class="ms-2 text-sm text-primary">{{
         messageLog
       }}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-toolbar class="mt-2">
+    <mat-toolbar-row>
+      <form [formGroup]="filterForm" (submit)="filterSubmit()">
+        <mat-form-field appearance="outline" class="espaciado-formfield w-50">
+          <mat-label>Nombre Actividad</mat-label>
+          <input matInput formControlName="nombre_actividad" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          class="espaciado-formfield ms-3 w-50"
+        >
+          <mat-label>Tipo Poblacion</mat-label>
+          <input matInput formControlName="tipo_poblacion" />
+        </mat-form-field>
+        <button class="btn btn-primary ms-3 text-center" type="submit">
+          <mat-icon fontIcon="filter_list_alt"></mat-icon>
+        </button>
+      </form>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>

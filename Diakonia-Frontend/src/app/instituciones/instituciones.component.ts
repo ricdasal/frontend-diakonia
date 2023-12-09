@@ -12,6 +12,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/modal-instituciones-datos.component';
 import { SharedService } from '../shared.service';
 import { InstitucionDataExcel } from './models/institucion';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 const headersAPI = new HttpHeaders({
   Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
@@ -41,6 +42,7 @@ export class InstitucionesComponent implements OnInit {
 
   uploadedFile: boolean = false;
   messageLog: string = '';
+  filterForm: FormGroup;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -50,12 +52,29 @@ export class InstitucionesComponent implements OnInit {
     private http: HttpClient,
     private api: ApiService,
     private sharedService: SharedService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.filterForm = this.fb.group({
+      nombre_actividad: new FormControl(""),
+      tipo_poblacion: new FormControl(""),
+  });
+  }
 
   ngOnInit() {
     //this.getAllInstituciones();
     this.getDataInstituciones();
+    
+  }
+
+  filterSubmit(): void {
+    this.api.filterInstitucion(this.filterForm.value).subscribe((res: any) => {
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, (err: any) => {
+      alert("Ocurrio un error. Intenta mas tarde");
+    })
   }
 
   getDataInstituciones() {
@@ -140,7 +159,6 @@ export class InstitucionesComponent implements OnInit {
       }) as InstitucionDataExcel[];
       csvData.shift();
       csvData.pop();
-      console.log(csvData);
       // Envía los datos al backend
       this.uploadedFile = true;
       
@@ -148,7 +166,6 @@ export class InstitucionesComponent implements OnInit {
         .post('http://localhost:8000/api/readData', { data: csvData }, { withCredentials:true, headers: headersAPI})
         .subscribe(
           (response: any) => {
-            console.log(response); // Haz algo con la respuesta del servidor
             if (response?.success) {
               this.messageLog = 'Archivo Subido Correctamente!';
             } else {
@@ -160,8 +177,6 @@ export class InstitucionesComponent implements OnInit {
             this.messageLog = '';
           },
           (error) => {
-            console.error(error); // Maneja el error
-            console.log('Error');
             this.messageLog = 'Ocurrio un error. Intenta mas tarde.';
             this.uploadedFile = false;
           }

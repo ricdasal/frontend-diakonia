@@ -38,12 +38,24 @@ export class ApiService {
   }
 
   editUser(data: any, id: number) {
-    console.log(data)
     return this.http.put(`${this.baseURL}/users/${id}`, data, {headers, withCredentials: true});
   }
 
   deleteUser(id: number) {
     return this.http.delete(`${this.baseURL}/users/${id}`, {headers, withCredentials: true});
+  }
+
+  disableInstitucion(id: number) {
+    return this.http.get(`${this.baseURL}/disableInstitucion/${id}`, {headers, withCredentials: true});
+  }
+
+  updateInformationInstitucion(data: any, id: number) {
+    return this.http.put(`${this.baseURL}/users/${id}`, data, {headers, withCredentials: true});
+  }
+
+  filterInstitucion(data: any) {
+    const params = new HttpParams().set("nombre_acitividad", data.nombre_acitividad).set("tipo_poblacion", data.tipo_poblacion);
+    return this.http.get(`${this.baseURL}/filter`, {headers, withCredentials: true, params});
   }
 }
 

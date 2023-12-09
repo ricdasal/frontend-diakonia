@@ -27,6 +27,7 @@ export class ModalAdminUsersComponent implements OnInit{
         email: ['',Validators.required],
         cargo_institucional:['',Validators.required],
         telefono:['',Validators.required],
+        password: ['', Validators.required]
       });
       if(this.editData){
         this.usersForm.patchValue(this.editData);
@@ -40,7 +41,7 @@ export class ModalAdminUsersComponent implements OnInit{
         next:(res: any)=>{
           alert("Usuario editado exitosamente");
           this.usersForm.reset();
-          this.dialogRef.close('save');
+          this.dialogRef.close('edit');
         },
         error:()=>{
           alert("Error al editar usuario");
