@@ -45,6 +45,7 @@ export class ModalInstitucionesComponent implements OnInit{
   lista_condicion = ['Salud', 'Rehabilitacion Social', 'Exclusion Social', 'Inseguridad Alimentaria', 'Situacion de calle', 'Albergues','Discapacidad'];
   lista_estados = ['ACTIVA', 'EN PROCESO DE DESVINCULACION', 'DONACION', ]
 
+  isAdmin:boolean;
 
   registerForm!: FormGroup;
 
@@ -52,30 +53,45 @@ export class ModalInstitucionesComponent implements OnInit{
     private api: ApiService,
     private servicios: ClienteWAService,
     @Inject(MAT_DIALOG_DATA) public editData : any,
-    private dialogRef: MatDialogRef<ModalInstitucionesComponent>){}
+    private dialogRef: MatDialogRef<ModalInstitucionesComponent>){
+      this.isAdmin = !(localStorage.getItem("USER_ROLE") === "ADMINISTRADOR");
+    }
 
   ngOnInit(): void {
       this.obtenerCaracterizaciones();
       this.obtenerSectores();
       this.obtenerActividades()
-      // this.institucionForm = this.formbuilder.group({
-      //   id:['',Validators.required],
-      //   nombre:['',Validators.required],
-      //   numero_beneficiarios:['',Validators.required],
-      //   ruc: ['',Validators.required],
-      //   mes_ingreso:['',Validators.required],
-      //   anio_ingreso:['',Validators.required],
-      // });
 
-      // if(this.editData){
-      //   this.institucionForm.controls['id'].setValue(this.editData.id);
-      //   this.institucionForm.controls['nombre'].setValue(this.editData.nombre);
-      //   this.institucionForm.controls['numero_beneficiarios'].setValue(this.editData.numero_beneficiarios);
-      //   this.institucionForm.controls['ruc'].setValue(this.editData.ruc);
-      //   this.institucionForm.controls['mes_ingreso'].setValue(this.editData.mes_ingreso);
-      //   this.institucionForm.controls['anio_ingreso'].setValue(this.editData.anio_ingreso);
+      this.institucionForm = new FormGroup({
+        nombre_institucion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        representante_legal: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),
+        ruc: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        sectorizacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        clasificacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        numero_beneficiarios: new FormControl(null, [Validators.required]),//
+        // Cambiar
+        nombre_actividad: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        caracterizacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        nombre_clasificacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        condicion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),
+        nombre_contacto: new FormControl(null, [Validators.required]),//
+        apellido_contacto: new FormControl(null, [Validators.required]),//
+        correo_contacto: new FormControl(null, [Validators.required]),//
+        telefono_contacto: new FormControl(null, [Validators.required]),//
+        direccion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        url_direccion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        latitud: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        longitud: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        nombre_estado: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),
+        mes_ingreso: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        anio_ingreso: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        sector_id: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+        tipo_poblacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+      })
 
-      // }
+      if(this.editData){
+        this.institucionForm.patchValue(this.editData);
+      }
 
       this.registerForm = new FormGroup({
         nombre_institucion: new FormControl(null, [Validators.required]),//
@@ -119,6 +135,17 @@ export class ModalInstitucionesComponent implements OnInit{
     }
   }
 
+  editInfoInstitucion() {
+    if(this.institucionForm.valid) {
+      this.api.updateInformationInstitucion(this.institucionForm.value, this.editData.id).subscribe(({next: (res:any) => {
+        alert("Informacion de la institucion actualizada sastifactoriamente");
+        this.institucionForm.reset();
+        this.dialogRef.close('update');
+      }, error: (res: any) => {
+        alert("Ocurrio un error");
+      }}))
+    }
+  }
 
 
   getErrorMessage() {

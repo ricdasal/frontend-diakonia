@@ -126,6 +126,7 @@ export class InstitucionesComponent implements OnInit {
   }
 
   editInstitucion(row: any) {
+    //TODO: HACER PETICION POR ID DE INSTITUCION
     this.dialog
       .open(ModalInstitucionesComponent, {
         width: '30%',
