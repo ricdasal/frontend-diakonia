@@ -38,7 +38,7 @@ export class MapaInstitucionesComponent {
                 this.longitudesMapList.push(parseFloat(direccion.longitud)); // Convertir a número y añadir a la lista
               }
             }
-            console.log(this.direccionMapList);
+            console.log('direcciones' ,this.direccionMapList);
             console.log(this.latitudesMapList);
             console.log(this.longitudesMapList);
 
