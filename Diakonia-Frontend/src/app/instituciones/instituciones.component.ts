@@ -68,19 +68,26 @@ export class InstitucionesComponent implements OnInit {
   }
 
   filterSubmit(): void {
-    this.api.filterInstitucion(this.filterForm.value).subscribe((res: any) => {
-      this.dataSource = new MatTableDataSource(res);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, (err: any) => {
-      alert("Ocurrio un error. Intenta mas tarde");
-    })
+    let validFilter = this.filterForm.get("nombre_actividad")?.value !== "" || this.filterForm.get("tipo_poblacion")?.value !== ""
+    if(validFilter) {
+      this.api.filterInstitucion(this.filterForm.value).subscribe((res: any) => {
+        this.dataSource = new MatTableDataSource(res);
+        if(!res) {
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      }, (err: any) => {
+        alert("Ocurrio un error. Intenta mas tarde");
+      })
+    }
+    else {
+      alert("Ingresa al menos un campo");
+    }
   }
 
   getDataInstituciones() {
     this.api.DataInstituciones().subscribe({
       next: (res) => {
-        console.log(res[0].red_bda[0].mes_ingreso);
         //this.elemento = res
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
@@ -129,21 +136,19 @@ export class InstitucionesComponent implements OnInit {
     //TODO: HACER PETICION POR ID DE INSTITUCION
     this.api.DataInstitucionesId(row.id).subscribe({next: (res: any) => {
       let institucion = res;
-      console.log(institucion)
-      // this.dialog
-      // .open(ModalInstitucionesComponent, {
-      //   width: '30%',
-      //   data: institucion,
-      // })
-      // .afterClosed()
-      // .subscribe((val) => {
-      //   if (val === 'update') {
-      //     //this.getAllInstituciones();
-      //     this.getDataInstituciones();
-      //   }
-      // });
+      this.dialog
+      .open(ModalInstitucionesComponent, {
+        width: '30%',
+        data: institucion,
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'update') {
+          //this.getAllInstituciones();
+          this.getDataInstituciones();
+        }
+      });
     }, error: (err: any) => {
-      console.log(err);
       alert("Ocurrio un error intenta mas tarde.")
       
     }})

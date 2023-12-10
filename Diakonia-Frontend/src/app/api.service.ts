@@ -54,7 +54,9 @@ export class ApiService {
   }
 
   filterInstitucion(data: any) {
-    const params = new HttpParams().set("nombre_acitividad", data.nombre_acitividad).set("tipo_poblacion", data.tipo_poblacion);
+    const {nombre_actividad, tipo_poblacion} = data
+    const params = new HttpParams().set("nombre_actividad", nombre_actividad).set("tipo_poblacion", tipo_poblacion);
+    console.log(params);
     return this.http.get(`${this.baseURL}/filter`, {headers, withCredentials: true, params});
   }
 }
