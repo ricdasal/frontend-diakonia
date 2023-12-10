@@ -46,25 +46,25 @@ export class MapaInstitucionesComponent {
               // Llenar radioAccionList basado en el número de beneficiarios
               let beneficiarios = item.numero_beneficiarios;
               if (beneficiarios <= 100) {
-                this.radioAccionList.push(1000);
+                this.radioAccionList.push(100);
               } else if (beneficiarios > 100 && beneficiarios <= 200) {
-                this.radioAccionList.push(2000);
+                this.radioAccionList.push(200);
               } else if (beneficiarios > 200 && beneficiarios <= 300) {
-                this.radioAccionList.push(3000);
+                this.radioAccionList.push(300);
               } else if (beneficiarios > 300 && beneficiarios <= 400) {
-                this.radioAccionList.push(4000);
+                this.radioAccionList.push(400);
               } else if (beneficiarios > 400 && beneficiarios <= 500) {
-                this.radioAccionList.push(5000);
+                this.radioAccionList.push(500);
               } else if (beneficiarios > 500 && beneficiarios <= 600) {
-                this.radioAccionList.push(6000);
+                this.radioAccionList.push(600);
               } else if (beneficiarios > 600 && beneficiarios <= 700) {
-                this.radioAccionList.push(7000);
+                this.radioAccionList.push(700);
               } else if (beneficiarios > 700 && beneficiarios <= 800) {
-                this.radioAccionList.push(8000);
+                this.radioAccionList.push(800);
               } else if (beneficiarios > 800 && beneficiarios <= 900) {
-                this.radioAccionList.push(9000);
+                this.radioAccionList.push(900);
               } else if (beneficiarios > 900) {
-                this.radioAccionList.push(10000);
+                this.radioAccionList.push(1000);
               }
             }
             console.log(this.radioAccionList);
@@ -113,6 +113,7 @@ export class MapaInstitucionesComponent {
       draggable: false,
       icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
   };
+
   markerPositions: google.maps.LatLngLiteral[] = [];
   addMarker(event: google.maps.MapMouseEvent) {
   }
