@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { ModalInstitucionesComponent } from '../modal-instituciones/modal-instituciones.component';
 import * as XLSX from 'xlsx';
 import { ApiService } from '../api.service';
-import { Dialog } from '@angular/cdk/dialog';
 import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/modal-instituciones-datos.component';
 import { SharedService } from '../shared.service';
 import { InstitucionDataExcel } from './models/institucion';
@@ -16,7 +15,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators,
 } from '@angular/forms';
 import { Actividad, TiposPoblacion } from '../modal-instituciones/models';
 import { catchError, switchMap, tap } from 'rxjs';
@@ -172,7 +170,7 @@ export class InstitucionesComponent implements OnInit {
   editInstitucion(row: any): void {
     this.api.DataInstitucionesId(row.id).subscribe({
       next: (res: any) => {
-        let institucion = res;
+        let institucion = res?.at(0);
         this.dialog
           .open(ModalInstitucionesComponent, {
             width: '30%',

@@ -225,7 +225,7 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
           <mat-label>Nombre Institucion</mat-label>
-          <input matInput formControlName="nombre_institucion" />
+          <input matInput formControlName="nombre" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
@@ -237,7 +237,7 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
           <mat-label>Caracterizacion</mat-label>
-          <mat-select formControlName="clasificacion">
+          <mat-select formControlName="caracterizacion">
             <mat-option
               *ngFor="let caracterizacion of this.lista_caracterizaciones"
               value="{{ caracterizacion.id }}"
@@ -249,17 +249,7 @@
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Clasificacion</mat-label>
-          <mat-select [formControl]="toppings" multiple>
-            <mat-select-trigger>
-              {{toppings.value?.[0] || ''}}
-              <span
-                *ngIf="(toppings.value?.length || 0) > 1"
-                class="example-additional-selection"
-              >
-                (+{{ (toppings.value?.length || 0) - 1 }}
-                {{ toppings.value?.length === 2 ? "other" : "others" }})
-              </span>
-            </mat-select-trigger>
+          <mat-select formControlName="nombre_clasificacion">
             <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
               topping
             }}</mat-option>
@@ -270,17 +260,7 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
           <mat-label>Sectorizacion</mat-label>
-          <mat-select formControlName="sectorizacion" multiple>
-            <!-- <mat-select-trigger>
-              {{toppings2.value?.[0] || ''}}
-              <span
-                *ngIf="(toppings2.value?.length || 0) > 1"
-                class="example-additional-selection"
-              >
-                (+{{ (toppings2.value?.length || 0) - 1 }}
-                {{ toppings2.value?.length === 2 ? "other" : "others" }})
-              </span>
-            </mat-select-trigger> -->
+          <mat-select formControlName="sectorizacion">
             <mat-option
               *ngFor="let sector of lista_sectores"
               [value]="sector.id"
@@ -298,17 +278,7 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
           <mat-label>Tipo Poblacion</mat-label>
-          <mat-select formControlName="tipo_poblacion" multiple>
-            <!-- <mat-select-trigger>
-              {{toppings2.value?.[0] || ''}}
-              <span
-                *ngIf="(toppings2.value?.length || 0) > 1"
-                class="example-additional-selection"
-              >
-                (+{{ (toppings2.value?.length || 0) - 1 }}
-                {{ toppings2.value?.length === 2 ? "other" : "others" }})
-              </span>
-            </mat-select-trigger> -->
+          <mat-select formControlName="tipo_poblacion">
             <mat-option
               *ngFor="let tipo_poblacion of this.lista_tipo_poblacion"
               [value]="tipo_poblacion"
@@ -320,16 +290,6 @@
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Actividad</mat-label>
           <mat-select formControlName="nombre_actividad">
-            <!-- <mat-select-trigger>
-              {{toppings.value?.[0] || ''}}
-              <span
-                *ngIf="(toppings.value?.length || 0) > 1"
-                class="example-additional-selection"
-              >
-                (+{{ (toppings.value?.length || 0) - 1 }}
-                {{ toppings.value?.length === 2 ? "other" : "others" }})
-              </span>
-            </mat-select-trigger> -->
             <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
               topping
             }}</mat-option>
@@ -345,7 +305,7 @@
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Telefono</mat-label>
-          <input matInput formControlName="telefono" />
+          <input matInput formControlName="telefono_contacto" />
         </mat-form-field>
       </div>
 
@@ -382,22 +342,9 @@
         <mat-form-field class="espaciado-formfield" appearance="outline">
           <mat-label>Estado</mat-label>
           <mat-select>
-            <mat-option value="one">Activa</mat-option>
-            <mat-option value="two">Pasiva</mat-option>
+            <mat-option value="ACTIVA">ACTIVA</mat-option>
+            <mat-option value="PASIVA">PASIVA</mat-option>
           </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div mat-dialog-content class="espaciador-contenedor">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="pat@example.com"
-            formControlName="email"
-            required
-          />
-          <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
       </div>
 

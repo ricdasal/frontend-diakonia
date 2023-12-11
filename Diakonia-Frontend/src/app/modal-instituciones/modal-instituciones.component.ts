@@ -56,24 +56,15 @@ export class ModalInstitucionesComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public editData : Institucion,
     private dialogRef: MatDialogRef<ModalInstitucionesComponent>){
       this.isAdmin = !(localStorage.getItem("USER_ROLE") === "ADMINISTRADOR");
-    }
-
-  ngOnInit(): void {
-      this.obtenerCaracterizaciones();
-      this.obtenerSectores();
-      this.obtenerActividades()
-
-      this.institucionForm = new FormGroup({
-        nombre_institucion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
+      this.institucionForm = this.formbuilder.group({
+        nombre: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         representante_legal: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),
         ruc: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         sectorizacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
-        clasificacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         numero_beneficiarios: new FormControl(null, [Validators.required]),//
         nombre_actividad: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         caracterizacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         nombre_clasificacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
-        condicion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),
         nombre_contacto: new FormControl(null, [Validators.required]),//
         apellido_contacto: new FormControl(null, [Validators.required]),//
         correo_contacto: new FormControl(null, [Validators.required]),//
@@ -88,24 +79,30 @@ export class ModalInstitucionesComponent implements OnInit{
         sector_id: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         tipo_poblacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
       })
+    }
+
+  ngOnInit(): void {
+      this.obtenerCaracterizaciones();
+      this.obtenerSectores();
+      this.obtenerActividades()
 
       if(this.editData){
         this.institucionForm.patchValue(this.editData);
-        this.institucionForm.controls["nombre_actividad"].setValue(this.editData.actividades.at(0)?.nombre_actividad);
-        this.institucionForm.controls["caracterizacion"].setValue(this.editData.caracterizacion.at(0)?.nombre_caracterizacion);
-        this.institucionForm.controls["sectorizacion"].setValue(this.editData.sectorizacion.at(0)?.nombre_sectorizacion);
-        this.institucionForm.controls["tipo_poblacion"].setValue(this.editData.tipos_poblacion.at(0)?.tipo_poblacion);
-        this.institucionForm.controls["estado"].setValue(this.editData.estado.at(0)?.nombre_estado);
-        this.institucionForm.controls["direccion"].setValue(this.editData.direccion.at(0)?.direccion_nombre);
-        this.institucionForm.controls["url_direccion"].setValue(this.editData.direccion.at(0)?.url_direccion);
-        this.institucionForm.controls["latitud"].setValue(this.editData.direccion.at(0)?.latitud);
-        this.institucionForm.controls["longitud"].setValue(this.editData.direccion.at(0)?.longitud);
-        this.institucionForm.controls["anio_ingreso"].setValue(this.editData.red_bda.at(0)?.anio_ingreso);
-        this.institucionForm.controls["mes_ingreso"].setValue(this.editData.red_bda.at(0)?.mes_ingreso);
-        this.institucionForm.controls["nombre_contacto"].setValue(this.editData.contactos.at(0)?.nombre);
-        this.institucionForm.controls["apellido_contacto"].setValue(this.editData.contactos.at(0)?.apellido);
-        this.institucionForm.controls["correo_contacto"].setValue(this.editData.contactos.at(0)?.correos.at(0)?.correo_contacto);
-        this.institucionForm.controls["telefono_contacto"].setValue(this.editData.contactos.at(0)?.telefonos.at(0)?.telefono_contacto);
+        this.institucionForm.controls["nombre_actividad"].setValue(this.editData.actividades?.at(0)?.nombre_actividad);
+        this.institucionForm.controls["caracterizacion"].setValue(this.editData.caracterizacion?.at(0)?.nombre_caracterizacion);
+        this.institucionForm.controls["sectorizacion"].setValue(this.editData.sectorizacion?.at(0)?.nombre_sectorizacion);
+        this.institucionForm.controls["tipo_poblacion"].setValue(this.editData.tipos_poblacion?.at(0)?.tipo_poblacion);
+        this.institucionForm.controls["nombre_estado"].setValue(this.editData.estado?.at(0)?.nombre_estado);
+        this.institucionForm.controls["direccion"].setValue(this.editData.direccion?.at(0)?.direccion_nombre);
+        this.institucionForm.controls["url_direccion"].setValue(this.editData.direccion?.at(0)?.url_direccion);
+        this.institucionForm.controls["latitud"].setValue(this.editData.direccion?.at(0)?.latitud);
+        this.institucionForm.controls["longitud"].setValue(this.editData.direccion?.at(0)?.longitud);
+        this.institucionForm.controls["anio_ingreso"].setValue(this.editData.red_bda?.at(0)?.anio_ingreso);
+        this.institucionForm.controls["mes_ingreso"].setValue(this.editData.red_bda?.at(0)?.mes_ingreso);
+        this.institucionForm.controls["nombre_contacto"].setValue(this.editData.contactos?.at(0)?.nombre);
+        this.institucionForm.controls["apellido_contacto"].setValue(this.editData.contactos?.at(0)?.apellido);
+        this.institucionForm.controls["correo_contacto"].setValue(this.editData.contactos?.at(0)?.correos.at(0)?.correo_contacto);
+        this.institucionForm.controls["telefono_contacto"].setValue(this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto);
       }
 
       this.registerForm = new FormGroup({
@@ -131,7 +128,7 @@ export class ModalInstitucionesComponent implements OnInit{
         sector_id: new FormControl(null, [Validators.required]),//
         tipo_poblacion: new FormControl(null, [Validators.required]),//
       })
-  }
+        }
 
   addInstitucion(){
     if(!this.editData){
@@ -174,7 +171,6 @@ export class ModalInstitucionesComponent implements OnInit{
   obtenerCaracterizaciones(){
     this.servicios.obtenerCaracterizaciones()
     .subscribe((res: any) =>{
-      console.log(res);
       this.lista_caracterizaciones = this.lista_caracterizaciones.concat(res);
     })
   }
