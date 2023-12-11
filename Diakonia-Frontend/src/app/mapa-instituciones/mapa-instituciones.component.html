@@ -8,14 +8,30 @@
           width="1350px"
           [zoom]="zoom"
           (mapClick)="addMarker($event)">
-    <map-marker *ngFor="let markerPosition of markerPositions; let i = index"
+          <map-marker *ngFor="let markerPosition of markerPositions; let i = index; trackBy: trackByFn"
+                  #marker="mapMarker"
+                  (mapClick)="abrirWindow(marker, i)"
                   [position]="markerPosition"
                   [options]="markerOptions">
-                  <map-info-window>
-                    {{this.direccionMapList[i]}}
+                  <map-circle [center]="markerPosition" 
+                  [radius]="radioAccionList[i]" 
+                  [options]="{ 
+                    fillColor: '#000000', 
+                    strokeOpacity: 0.5, 
+                    fillOpacity: 0.1, 
+                    strokeWeight: 1.5,
+                  }" />
+
+                  <map-info-window *ngIf="selectedMarkerIndex === i">
+                    <h6>{{nombreInstitucionList[i]}}</h6>
+                    <p>{{direccionMapList[i]}} </p> <br>
+                    <a href="{{urlDireccionList[i]}}" target="_blank">Tocar aquí para ir a Google Maps</a>
                   </map-info-window>
-                  <map-circle [center]="markerPosition" [radius]="radioAccionList[i]" [options]="{ fillColor: '#000000', strokeOpacity: 0.5, fillOpacity: 0.1, strokeWeight: 1.5,}" />
-                </map-marker>
+            </map-marker>
+
+            
+    
+
 
   </google-map>
 </div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 
 declare var google: any;
 
@@ -11,14 +12,21 @@ declare var google: any;
 })
 export class MapaInstitucionesComponent {
 
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow;
+
   dato: string='';
+  nombreInstitucionList: string[] = [];
   direccionMapList: string[] = [];
   latitudesMapList: number[] = [];
   longitudesMapList: number[] = [];
+  urlDireccionList: string[] = [];
   radioAccionList:number[] = [];
   map: any;
+  selectedMarkerIndex: any = -1;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private cdr: ChangeDetectorRef,
+    // private route: ActivatedRoute,
     private api: ApiService,) {}
     ngOnInit(): void {
       this.getDataInstitucionesDireccionesMapa();
@@ -28,17 +36,21 @@ export class MapaInstitucionesComponent {
       this.api.DataInstituciones()
       .subscribe({
         next:(res)=>{
-          console.log(res);
+          console.log('instituciones',res);
           let obj = res;
           if (obj) { // Asegúrate de que obj no es undefined
             for (let item of obj) {
+              this.nombreInstitucionList.push(item.nombre)
               for (let direccion of item.direccion) {
                 this.direccionMapList.push(direccion.direccion_nombre); // Añadir cada item a la lista
                 this.latitudesMapList.push(parseFloat(direccion.latitud)); // Convertir a número y añadir a la lista
                 this.longitudesMapList.push(parseFloat(direccion.longitud)); // Convertir a número y añadir a la lista
+                this.urlDireccionList.push(direccion.url_direccion);
               }
             }
+            console.log('nombre instituciones', this.nombreInstitucionList)
             console.log('direcciones' ,this.direccionMapList);
+            console.log('url direcciones', this.urlDireccionList);
             console.log(this.latitudesMapList);
             console.log(this.longitudesMapList);
 
@@ -91,6 +103,7 @@ export class MapaInstitucionesComponent {
                 radius: this.radioAccionList[index]
               });
             });
+            this.cdr.detectChanges();
 
 
 
@@ -116,5 +129,15 @@ export class MapaInstitucionesComponent {
 
   markerPositions: google.maps.LatLngLiteral[] = [];
   addMarker(event: google.maps.MapMouseEvent) {
+  }
+
+  abrirWindow(marker: MapMarker, index: any){
+    this.selectedMarkerIndex = index;
+    this.infoWindow.open(marker);
+
+  }
+
+  trackByFn(index: number, item: any) {
+    return index;
   }
 }
