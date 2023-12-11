@@ -5,6 +5,7 @@ import { ApiService } from '../api.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ClienteWAService } from '../servicios/servicios';
 import { AppModule } from '../app.module';
+import { Institucion } from './models';
 
 
 @Component({
@@ -45,14 +46,14 @@ export class ModalInstitucionesComponent implements OnInit{
   lista_condicion = ['Salud', 'Rehabilitacion Social', 'Exclusion Social', 'Inseguridad Alimentaria', 'Situacion de calle', 'Albergues','Discapacidad'];
   lista_estados = ['ACTIVA', 'EN PROCESO DE DESVINCULACION', 'DONACION', ]
 
-  isAdmin:boolean;
+  isAdmin: boolean;
 
   registerForm!: FormGroup;
 
   constructor(private formbuilder: FormBuilder,
     private api: ApiService,
     private servicios: ClienteWAService,
-    @Inject(MAT_DIALOG_DATA) public editData : any,
+    @Inject(MAT_DIALOG_DATA) public editData : Institucion,
     private dialogRef: MatDialogRef<ModalInstitucionesComponent>){
       this.isAdmin = !(localStorage.getItem("USER_ROLE") === "ADMINISTRADOR");
     }
@@ -69,7 +70,6 @@ export class ModalInstitucionesComponent implements OnInit{
         sectorizacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         clasificacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         numero_beneficiarios: new FormControl(null, [Validators.required]),//
-        // Cambiar
         nombre_actividad: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         caracterizacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
         nombre_clasificacion: new FormControl({value: null, disabled: this.isAdmin}, [Validators.required]),//
@@ -91,6 +91,21 @@ export class ModalInstitucionesComponent implements OnInit{
 
       if(this.editData){
         this.institucionForm.patchValue(this.editData);
+        this.institucionForm.controls["nombre_actividad"].setValue(this.editData.actividades.at(0)?.nombre_actividad);
+        this.institucionForm.controls["caracterizacion"].setValue(this.editData.caracterizacion.at(0)?.nombre_caracterizacion);
+        this.institucionForm.controls["sectorizacion"].setValue(this.editData.sectorizacion.at(0)?.nombre_sectorizacion);
+        this.institucionForm.controls["tipo_poblacion"].setValue(this.editData.tipos_poblacion.at(0)?.tipo_poblacion);
+        this.institucionForm.controls["estado"].setValue(this.editData.estado.at(0)?.nombre_estado);
+        this.institucionForm.controls["direccion"].setValue(this.editData.direccion.at(0)?.direccion_nombre);
+        this.institucionForm.controls["url_direccion"].setValue(this.editData.direccion.at(0)?.url_direccion);
+        this.institucionForm.controls["latitud"].setValue(this.editData.direccion.at(0)?.latitud);
+        this.institucionForm.controls["longitud"].setValue(this.editData.direccion.at(0)?.longitud);
+        this.institucionForm.controls["anio_ingreso"].setValue(this.editData.red_bda.at(0)?.anio_ingreso);
+        this.institucionForm.controls["mes_ingreso"].setValue(this.editData.red_bda.at(0)?.mes_ingreso);
+        this.institucionForm.controls["nombre_contacto"].setValue(this.editData.contactos.at(0)?.nombre);
+        this.institucionForm.controls["apellido_contacto"].setValue(this.editData.contactos.at(0)?.apellido);
+        this.institucionForm.controls["correo_contacto"].setValue(this.editData.contactos.at(0)?.correos.at(0)?.correo_contacto);
+        this.institucionForm.controls["telefono_contacto"].setValue(this.editData.contactos.at(0)?.telefonos.at(0)?.telefono_contacto);
       }
 
       this.registerForm = new FormGroup({

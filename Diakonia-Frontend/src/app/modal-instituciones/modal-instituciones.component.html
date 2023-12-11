@@ -1,4 +1,4 @@
-<ng-template *ngIf="!this.editData; else elseBlock">
+<div *ngIf="!this.editData; else elseBlock">
   <h1 mat-dialog-title class="title-space">AGREGAR INSTITUCIÓN</h1>
 
   <form
@@ -201,7 +201,7 @@
       </button>
     </div>
   </form>
-</ng-template>
+</div>
 
 <ng-template #elseBlock>
   <h1 mat-dialog-title class="title-space">

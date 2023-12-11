@@ -59,5 +59,13 @@ export class ApiService {
     console.log(params);
     return this.http.get(`${this.baseURL}/filter`, {headers, withCredentials: true, params});
   }
+
+  getAllActividades() {
+    return this.http.get<any>(`${this.baseURL}/actividades`, {headers, withCredentials: true});
+  }
+
+  getAllTiposPoblacion() {
+    return this.http.get<any>(`${this.baseURL}/tiposPoblacion`, {headers, withCredentials: true});
+  }
 }
 

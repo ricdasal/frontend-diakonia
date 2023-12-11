@@ -42,14 +42,26 @@
       <form [formGroup]="filterForm" (submit)="filterSubmit()">
         <mat-form-field appearance="outline" class="espaciado-formfield w-50">
           <mat-label>Nombre Actividad</mat-label>
-          <input matInput formControlName="nombre_actividad" />
+          <mat-select formControlName="nombre_actividad">
+            <mat-option
+              *ngFor="let actividad of actividades"
+              [value]="actividad.nombre_actividad"
+              >{{ actividad.nombre_actividad }}</mat-option
+            >
+          </mat-select>
         </mat-form-field>
         <mat-form-field
           appearance="outline"
           class="espaciado-formfield ms-3 w-50"
         >
           <mat-label>Tipo Poblacion</mat-label>
-          <input matInput formControlName="tipo_poblacion" />
+          <mat-select formControlName="tipo_poblacion">
+            <mat-option
+              *ngFor="let tipoPoblacion of tiposPoblacion"
+              [value]="tipoPoblacion.tipo_poblacion"
+              >{{ tipoPoblacion.tipo_poblacion }}</mat-option
+            >
+          </mat-select>
         </mat-form-field>
         <button class="btn btn-primary ms-3 text-center" type="submit">
           <mat-icon fontIcon="filter_list_alt"></mat-icon>
@@ -134,7 +146,11 @@
               <mat-icon>edit</mat-icon>
             </button>
 
-            <button mat-icon-button color="warn">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="disableInstitucion(row)"
+            >
               <mat-icon>not_interested</mat-icon>
             </button>
           </td>

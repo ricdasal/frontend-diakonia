@@ -12,7 +12,14 @@ import { Dialog } from '@angular/cdk/dialog';
 import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/modal-instituciones-datos.component';
 import { SharedService } from '../shared.service';
 import { InstitucionDataExcel } from './models/institucion';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Actividad, TiposPoblacion } from '../modal-instituciones/models';
+import { catchError, switchMap, tap } from 'rxjs';
 
 const headersAPI = new HttpHeaders({
   Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
@@ -47,6 +54,9 @@ export class InstitucionesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  actividades: Actividad[] = [];
+  tiposPoblacion: TiposPoblacion[] = [];
+
   constructor(
     private dialog: MatDialog,
     private http: HttpClient,
@@ -56,39 +66,60 @@ export class InstitucionesComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.filterForm = this.fb.group({
-      nombre_actividad: new FormControl(""),
-      tipo_poblacion: new FormControl(""),
-  });
+      nombre_actividad: new FormControl(''),
+      tipo_poblacion: new FormControl(''),
+    });
   }
 
   ngOnInit() {
     //this.getAllInstituciones();
     this.getDataInstituciones();
-    
+    this.api.getAllActividades().pipe(
+      tap((actividades: Actividad[]) => (this.actividades = actividades)),
+      switchMap(() => {
+        return this.api
+          .getAllTiposPoblacion()
+          .pipe(
+            tap(
+              (tiposPoblacion: TiposPoblacion[]) =>
+                (this.tiposPoblacion = tiposPoblacion)
+            )
+          );
+      }),
+      catchError((err: any) => {
+        throw new Error(err);
+      })
+    ).subscribe((res: any) => {
+      console.log("OK");
+    }, (err: any) => {console.log(err)});
+    console.log(this.actividades, this.tiposPoblacion);
   }
 
   filterSubmit(): void {
-    let validFilter = this.filterForm.get("nombre_actividad")?.value !== "" || this.filterForm.get("tipo_poblacion")?.value !== ""
-    if(validFilter) {
-      this.api.filterInstitucion(this.filterForm.value).subscribe((res: any) => {
-        this.dataSource = new MatTableDataSource(res);
-        if(!res) {
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+    let validFilter =
+      this.filterForm.get('nombre_actividad')?.value !== '' ||
+      this.filterForm.get('tipo_poblacion')?.value !== '';
+    if (validFilter) {
+      this.api.filterInstitucion(this.filterForm.value).subscribe(
+        (res: any) => {
+          this.dataSource = new MatTableDataSource(res.instituciones);
+          if (!res) {
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }
+        },
+        (err: any) => {
+          alert('Ocurrio un error. Intenta mas tarde');
         }
-      }, (err: any) => {
-        alert("Ocurrio un error. Intenta mas tarde");
-      })
-    }
-    else {
-      alert("Ingresa al menos un campo");
+      );
+    } else {
+      alert('Ingresa al menos un campo');
     }
   }
 
   getDataInstituciones() {
     this.api.DataInstituciones().subscribe({
       next: (res) => {
-        //this.elemento = res
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -100,27 +131,33 @@ export class InstitucionesComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(ModalInstitucionesComponent, {
-      width:'75vh',
-      height: '95vh'
-    }).afterClosed().subscribe(val=>{
-      if(val === 'save'){
-        //this.getAllInstituciones();
-        this.getDataInstituciones();
-      }
-    })
+    this.dialog
+      .open(ModalInstitucionesComponent, {
+        width: '75vh',
+        height: '95vh',
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'save') {
+          //this.getAllInstituciones();
+          this.getDataInstituciones();
+        }
+      });
   }
 
   openDialogData(row: any) {
     this.sharedService.changeId(row.id);
-    this.dialog.open(ModalInstitucionesDatosComponent, {
-      width:'70vh'
-    }).afterClosed().subscribe(val=>{
-      if(val === 'save'){
-        //this.getAllInstituciones();
-        this.getDataInstituciones();
-      }
-    })
+    this.dialog
+      .open(ModalInstitucionesDatosComponent, {
+        width: '70vh',
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'save') {
+          //this.getAllInstituciones();
+          this.getDataInstituciones();
+        }
+      });
   }
 
   applyFilter(event: Event) {
@@ -132,26 +169,43 @@ export class InstitucionesComponent implements OnInit {
     }
   }
 
-  editInstitucion(row: any) {
-    //TODO: HACER PETICION POR ID DE INSTITUCION
-    this.api.DataInstitucionesId(row.id).subscribe({next: (res: any) => {
-      let institucion = res;
-      this.dialog
-      .open(ModalInstitucionesComponent, {
-        width: '30%',
-        data: institucion,
-      })
-      .afterClosed()
-      .subscribe((val) => {
-        if (val === 'update') {
-          //this.getAllInstituciones();
+  editInstitucion(row: any): void {
+    this.api.DataInstitucionesId(row.id).subscribe({
+      next: (res: any) => {
+        let institucion = res;
+        this.dialog
+          .open(ModalInstitucionesComponent, {
+            width: '30%',
+            data: institucion,
+          })
+          .afterClosed()
+          .subscribe((val) => {
+            if (val === 'update') {
+              //this.getAllInstituciones();
+              this.getDataInstituciones();
+            }
+          });
+      },
+      error: (err: any) => {
+        alert('Ocurrio un error intenta mas tarde.');
+      },
+    });
+  }
+
+  disableInstitucion(row: any): void {
+    let res = confirm('Estas seguro de eliminar este usuario?');
+    if (res) {
+      this.api.disableInstitucion(row.id).subscribe(
+        (res: any) => {
+          alert('Institucion Desabilitada');
           this.getDataInstituciones();
+        },
+        (error: any) => {
+          alert('Ocurrio un error. Intenta de nuevo');
         }
-      });
-    }, error: (err: any) => {
-      alert("Ocurrio un error intenta mas tarde.")
-      
-    }})
+      );
+    }
+    return;
   }
 
   uploadFile(event: Event) {
@@ -175,9 +229,13 @@ export class InstitucionesComponent implements OnInit {
       csvData.pop();
       // Envía los datos al backend
       this.uploadedFile = true;
-      
+
       this.http
-        .post('http://localhost:8000/api/readData', { data: csvData }, { withCredentials:true, headers: headersAPI})
+        .post(
+          'http://localhost:8000/api/readData',
+          { data: csvData },
+          { withCredentials: true, headers: headersAPI }
+        )
         .subscribe(
           (response: any) => {
             if (response?.success) {
