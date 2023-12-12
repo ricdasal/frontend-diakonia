@@ -33,7 +33,7 @@
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Caracterizacion</mat-label>
-        <mat-select formControlName="caracterizacion_id">
+        <mat-select formControlName="nombre_caracterizacion">
           <mat-option
             *ngFor="let caracterizacion of caracterizaciones"
             value="{{ caracterizacion.id }}"
@@ -58,7 +58,7 @@
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Sectorizacion</mat-label>
-        <mat-select formControlName="sectorizacion" multiple>
+        <mat-select formControlName="nombre_sectorizacion" multiple>
           <mat-option
             *ngFor="let sector of sectorizaciones"
             [value]="sector.id"
@@ -87,7 +87,7 @@
 
       <mat-form-field appearance="outline" class="espaciado-formfield">
         <mat-label>Actividad</mat-label>
-        <mat-select multiple formControlName="actividad_id">
+        <mat-select multiple formControlName="nombre_actividad">
           <mat-option
             *ngFor="let actividad of actividades"
             [value]="actividad.id"
@@ -124,7 +124,7 @@
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Dirección</mat-label>
-        <input matInput formControlName="direccion" />
+        <input matInput formControlName="direccion_nombre" />
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="espaciado-formfield">
@@ -174,12 +174,6 @@
           >
         </mat-select>
       </mat-form-field>
-
-      <!-- <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="pat@example.com" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field> -->
     </div>
 
     <div mat-dialog-action [align]="'end'">
@@ -237,10 +231,10 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
           <mat-label>Caracterizacion</mat-label>
-          <mat-select formControlName="caracterizacion">
+          <mat-select formControlName="caracterizaciones" multiple>
             <mat-option
               *ngFor="let caracterizacion of caracterizaciones"
-              value="{{ caracterizacion.id }}"
+              [value]="caracterizacion.id"
             >
               {{ caracterizacion.nombre_caracterizacion }}
             </mat-option>
@@ -262,7 +256,7 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
           <mat-label>Sectorizacion</mat-label>
-          <mat-select formControlName="sectorizacion" multiple>
+          <mat-select formControlName="sectorizaciones" multiple>
             <mat-option
               *ngFor="let sector of sectorizaciones"
               [value]="sector.id"
@@ -291,7 +285,7 @@
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Actividad</mat-label>
-          <mat-select formControlName="nombre_actividad">
+          <mat-select formControlName="actividades" multiple>
             <mat-option
               *ngFor="let actividad of actividades"
               [value]="actividad.id"
@@ -322,7 +316,7 @@
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Direccion</mat-label>
-          <input matInput formControlName="url_direccion" />
+          <input matInput formControlName="direccion_nombre" />
         </mat-form-field>
       </div>
 
@@ -349,7 +343,7 @@
           <mat-select formControlName="nombre_estado">
             <mat-option
               *ngFor="let estado of estados"
-              [value]="estado.institucion_id"
+              [value]="estado.nombre_estado"
               >{{ estado.nombre_estado }}</mat-option
             >
           </mat-select>

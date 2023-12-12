@@ -90,7 +90,6 @@ export class InstitucionesComponent implements OnInit {
     ).subscribe((res: any) => {
       console.log("OK");
     }, (err: any) => {console.log(err)});
-    console.log(this.actividades, this.tiposPoblacion);
   }
 
   filterSubmit(): void {
