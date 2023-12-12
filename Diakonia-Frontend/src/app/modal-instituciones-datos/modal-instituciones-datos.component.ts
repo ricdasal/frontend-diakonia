@@ -13,19 +13,19 @@ import { SharedService } from '../shared.service';
 export class ModalInstitucionesDatosComponent implements OnInit{
   institucionForm !: FormGroup;
   actionBtn: string = 'Save';
-  id: string='';
   institucionNombre: string='';
 
   constructor(private formbuilder: FormBuilder,
     private api: ApiService,
-    private sharedService: SharedService){}
+    private sharedService: SharedService,
+    @Inject(MAT_DIALOG_DATA) public id: number,){}
 
   ngOnInit() {
     this.getDataInstitucionesId();
-    this.sharedService.currentId.subscribe(id => this.id = id);
+    // this.sharedService.currentId.subscribe(id => this.id = id);
     // Ahora puedes usar este ID para hacer una nueva solicitud a tu endpoint
-    this.id = this.id;
-    console.log(this.id);
+    // this.id = this.id;
+    // console.log(this.id);
   }
 
 
@@ -48,10 +48,10 @@ export class ModalInstitucionesDatosComponent implements OnInit{
   email = new FormControl('', [Validators.required, Validators.email]);
 
   getDataInstitucionesId(){
-    this.api.DataInstitucionesId(this.id)
+    this.api.DataInstitucionesId(this.id.toString())
     .subscribe({
       next:(res)=>{
-        let obj = res.find((item: { id: string; }) => item.id === this.id);
+        let obj = res.find((item: { id: string; }) => parseInt(item.id) === this.id);
         //console.log(obj.actividades);
         this.institucionNombre = obj.nombre;
 

@@ -27,11 +27,12 @@ export class MapaComponent implements OnInit {
   longitudesList: number[] = [];
 
   constructor(private route: ActivatedRoute,
-    private api: ApiService,) {}
+    private api: ApiService,) {
+      this.id = this.route.snapshot.paramMap.get('id') || '';
+    }
+
     ngOnInit(): void {
       this.getDataInstitucionesIdMapa();
-      this.id = this.route.snapshot.paramMap.get('id') || '';
-      console.log(this.id);
     }
 
 
@@ -40,7 +41,7 @@ export class MapaComponent implements OnInit {
       .subscribe({
         next:(res)=>{
           //console.log(res[this.id]);
-          let obj = res[this.id]
+          let obj = res.at(0)
           if (obj) { // Asegúrate de que obj no es undefined
 
             this.nombreInstitucion = obj.nombre

@@ -148,6 +148,7 @@ export class InstitucionesComponent implements OnInit {
     this.dialog
       .open(ModalInstitucionesDatosComponent, {
         width: '70vh',
+        data: row.id
       })
       .afterClosed()
       .subscribe((val) => {
