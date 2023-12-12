@@ -35,7 +35,7 @@
         <mat-label>Caracterizacion</mat-label>
         <mat-select formControlName="caracterizacion_id">
           <mat-option
-            *ngFor="let caracterizacion of this.lista_caracterizaciones"
+            *ngFor="let caracterizacion of caracterizaciones"
             value="{{ caracterizacion.id }}"
           >
             {{ caracterizacion.nombre_caracterizacion }}
@@ -47,9 +47,9 @@
         <mat-label>Clasificacion</mat-label>
         <mat-select formControlName="nombre_clasificacion">
           <mat-option
-            *ngFor="let clasificacion of lista_clasificacion"
-            [value]="clasificacion"
-            >{{ clasificacion }}</mat-option
+            *ngFor="let clasificacion of clasificaciones"
+            [value]="clasificacion.nombre_clasificacion"
+            >{{ clasificacion.nombre_clasificacion }}</mat-option
           >
         </mat-select>
       </mat-form-field>
@@ -58,9 +58,9 @@
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Sectorizacion</mat-label>
-        <mat-select formControlName="sector_id">
+        <mat-select formControlName="sectorizacion" multiple>
           <mat-option
-            *ngFor="let sector of lista_sectores"
+            *ngFor="let sector of sectorizaciones"
             [value]="sector.id"
             >{{ sector.nombre_sectorizacion }}</mat-option
           >
@@ -78,9 +78,9 @@
         <mat-label>Tipo Poblacion</mat-label>
         <mat-select multiple formControlName="tipo_poblacion">
           <mat-option
-            *ngFor="let tipo_poblacion of this.lista_tipo_poblacion"
-            [value]="tipo_poblacion"
-            >{{ tipo_poblacion }}</mat-option
+            *ngFor="let tipo_poblacion of tipos_poblacion"
+            [value]="tipo_poblacion.tipo_poblacion"
+            >{{ tipo_poblacion.tipo_poblacion }}</mat-option
           >
         </mat-select>
       </mat-form-field>
@@ -89,7 +89,7 @@
         <mat-label>Actividad</mat-label>
         <mat-select multiple formControlName="actividad_id">
           <mat-option
-            *ngFor="let actividad of lista_actividades"
+            *ngFor="let actividad of actividades"
             [value]="actividad.id"
             >{{ actividad.nombre_actividad }}</mat-option
           >
@@ -168,9 +168,9 @@
         <mat-label>Estado</mat-label>
         <mat-select formControlName="nombre_estado">
           <mat-option
-            *ngFor="let estado of lista_estados"
-            value="{{ estado }}"
-            >{{ estado }}</mat-option
+            *ngFor="let estado of estados"
+            [value]="estado.nombre_estado"
+            >{{ estado.nombre_estado }}</mat-option
           >
         </mat-select>
       </mat-form-field>
@@ -239,7 +239,7 @@
           <mat-label>Caracterizacion</mat-label>
           <mat-select formControlName="caracterizacion">
             <mat-option
-              *ngFor="let caracterizacion of this.lista_caracterizaciones"
+              *ngFor="let caracterizacion of caracterizaciones"
               value="{{ caracterizacion.id }}"
             >
               {{ caracterizacion.nombre_caracterizacion }}
@@ -250,9 +250,11 @@
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Clasificacion</mat-label>
           <mat-select formControlName="nombre_clasificacion">
-            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
-              topping
-            }}</mat-option>
+            <mat-option
+              *ngFor="let clasificacion of clasificaciones"
+              [value]="clasificacion.nombre_clasificacion"
+              >{{ clasificacion.nombre_clasificacion }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
       </div>
@@ -260,9 +262,9 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
           <mat-label>Sectorizacion</mat-label>
-          <mat-select formControlName="sectorizacion">
+          <mat-select formControlName="sectorizacion" multiple>
             <mat-option
-              *ngFor="let sector of lista_sectores"
+              *ngFor="let sector of sectorizaciones"
               [value]="sector.id"
               >{{ sector.nombre_sectorizacion }}</mat-option
             >
@@ -280,9 +282,9 @@
           <mat-label>Tipo Poblacion</mat-label>
           <mat-select formControlName="tipo_poblacion">
             <mat-option
-              *ngFor="let tipo_poblacion of this.lista_tipo_poblacion"
-              [value]="tipo_poblacion"
-              >{{ tipo_poblacion }}</mat-option
+              *ngFor="let tipo_poblacion of tipos_poblacion"
+              [value]="tipo_poblacion.tipo_poblacion"
+              >{{ tipo_poblacion.tipo_poblacion }}</mat-option
             >
           </mat-select>
         </mat-form-field>
@@ -290,9 +292,12 @@
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Actividad</mat-label>
           <mat-select formControlName="nombre_actividad">
-            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{
-              topping
-            }}</mat-option>
+            <mat-option
+              *ngFor="let actividad of actividades"
+              [value]="actividad.id"
+              multiple
+              >{{ actividad.nombre_actividad }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
       </div>
@@ -341,9 +346,12 @@
 
         <mat-form-field class="espaciado-formfield" appearance="outline">
           <mat-label>Estado</mat-label>
-          <mat-select>
-            <mat-option value="ACTIVA">ACTIVA</mat-option>
-            <mat-option value="PASIVA">PASIVA</mat-option>
+          <mat-select formControlName="nombre_estado">
+            <mat-option
+              *ngFor="let estado of estados"
+              [value]="estado.institucion_id"
+              >{{ estado.nombre_estado }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
       </div>

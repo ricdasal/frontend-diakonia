@@ -67,5 +67,9 @@ export class ApiService {
   getAllTiposPoblacion() {
     return this.http.get<any>(`${this.baseURL}/tiposPoblacion`, {headers, withCredentials: true});
   }
+
+  getAllInformation() {
+    return this.http.get<any>(`${this.baseURL}/getAllInformation`, {headers, withCredentials: true});
+  }
 }
 
