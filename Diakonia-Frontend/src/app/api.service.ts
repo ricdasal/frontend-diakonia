@@ -71,5 +71,9 @@ export class ApiService {
   getAllInformation() {
     return this.http.get<any>(`${this.baseURL}/getAllInformation`, {headers, withCredentials: true});
   }
+
+  addInstitucion(data: any) {
+    return this.http.post<any>(`${this.baseURL}/agregarInstitucion`, data, {headers, withCredentials: true});
+  }
 }
 

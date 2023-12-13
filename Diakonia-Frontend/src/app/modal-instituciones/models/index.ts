@@ -14,6 +14,7 @@ export interface Institucion {
   direccion: Direccion[];
   red_bda: RedBda[];
   contactos: Contacto[];
+  clasificacion: Clasificacion[];
 }
 
 export interface Actividad {

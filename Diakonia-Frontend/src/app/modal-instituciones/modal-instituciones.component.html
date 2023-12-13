@@ -3,7 +3,7 @@
 
   <form
     [formGroup]="registerForm"
-    (ngSubmit)="registrarInstitucion(registerForm)"
+    (submit)="addInstitucion()"
     class="formulario"
   >
     <div mat-dialog-content class="espaciador-contenedor">
@@ -33,10 +33,10 @@
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Caracterizacion</mat-label>
-        <mat-select formControlName="nombre_caracterizacion">
+        <mat-select formControlName="nombre_caracterizacion" multiple>
           <mat-option
             *ngFor="let caracterizacion of caracterizaciones"
-            value="{{ caracterizacion.id }}"
+            [value]="caracterizacion.id"
           >
             {{ caracterizacion.nombre_caracterizacion }}
           </mat-option>
@@ -76,7 +76,7 @@
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Tipo Poblacion</mat-label>
-        <mat-select multiple formControlName="tipo_poblacion">
+        <mat-select formControlName="tipo_poblacion">
           <mat-option
             *ngFor="let tipo_poblacion of tipos_poblacion"
             [value]="tipo_poblacion.tipo_poblacion"
@@ -156,7 +156,7 @@
         <mat-select formControlName="condicion">
           <mat-option
             *ngFor="let condicion of condiciones"
-            value="{{ condicion }}"
+            [value]="condicion"
             >{{ condicion }}</mat-option
           >
         </mat-select>
@@ -355,7 +355,7 @@
           <mat-select formControlName="condicion">
             <mat-option
               *ngFor="let condicion of condiciones"
-              value="{{ condicion }}"
+              [value]="condicion"
               >{{ condicion }}</mat-option
             >
           </mat-select>

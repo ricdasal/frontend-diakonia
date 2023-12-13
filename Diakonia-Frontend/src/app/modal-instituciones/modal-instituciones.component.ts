@@ -224,10 +224,10 @@ export class ModalInstitucionesComponent implements OnInit {
         this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
       );
       this.institucionForm.controls['nombre_clasificacion'].setValue(
-        this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
+        this.editData.clasificacion?.at(0)?.nombre_clasificacion
       );
       this.institucionForm.controls['condicion'].setValue(
-        this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
+        this.editData.clasificacion?.at(0)?.condicion
       );
     }
 
@@ -271,19 +271,21 @@ export class ModalInstitucionesComponent implements OnInit {
       }
     );
   }
+
   addInstitucion() {
     if (!this.editData) {
-      if (this.institucionForm.valid) {
-        this.api.postInstitucion(this.institucionForm.value).subscribe({
-          next: (res) => {
-            alert('Institucion agregada exitosamente');
-            this.institucionForm.reset();
-            this.dialogRef.close('save');
-          },
-          error: () => {
-            alert('Error al agregar producto');
-          },
-        });
+      if (this.registerForm.valid) {
+        console.log(this.registerForm.value);
+        // this.api.addInstitucion(this.institucionForm.value).subscribe({
+        //   next: (res) => {
+        //     alert('Institucion agregada exitosamente');
+        //     this.institucionForm.reset();
+        //     this.dialogRef.close('save');
+        //   },
+        //   error: () => {
+        //     alert('Error al agregar producto');
+        //   },
+        // });
       }
     }
   }
