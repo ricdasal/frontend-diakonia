@@ -226,9 +226,11 @@ export class ModalInstitucionesComponent implements OnInit {
       nombre_caracterizacion: new FormControl(null, [Validators.required]), //
       nombre_actividad: new FormControl(null, [Validators.required]),
       nombre_institucion: new FormControl(null, [Validators.required]), //
+      nombre_sectorizacion: new FormControl(null, [Validators.required]), //
       representante_legal: new FormControl(null, [Validators.required]), //
       ruc: new FormControl(null, [Validators.required]), //
       numero_beneficiarios: new FormControl(null, [Validators.required]), //
+      condicion: new FormControl(null, [Validators.required]),
       direccion_nombre: new FormControl(null, [Validators.required]), //
       url_direccion: new FormControl(null, [Validators.required]),
       latitud: new FormControl(null, [Validators.required]), //

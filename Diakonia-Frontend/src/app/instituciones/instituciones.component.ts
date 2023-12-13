@@ -11,11 +11,7 @@ import { ApiService } from '../api.service';
 import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/modal-instituciones-datos.component';
 import { SharedService } from '../shared.service';
 import { InstitucionDataExcel } from './models/institucion';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Actividad, TiposPoblacion } from '../modal-instituciones/models';
 import { catchError, switchMap, tap } from 'rxjs';
 
@@ -72,24 +68,32 @@ export class InstitucionesComponent implements OnInit {
   ngOnInit() {
     //this.getAllInstituciones();
     this.getDataInstituciones();
-    this.api.getAllActividades().pipe(
-      tap((actividades: Actividad[]) => (this.actividades = actividades)),
-      switchMap(() => {
-        return this.api
-          .getAllTiposPoblacion()
-          .pipe(
-            tap(
-              (tiposPoblacion: TiposPoblacion[]) =>
-                (this.tiposPoblacion = tiposPoblacion)
-            )
-          );
-      }),
-      catchError((err: any) => {
-        throw new Error(err);
-      })
-    ).subscribe((res: any) => {
-      console.log("OK");
-    }, (err: any) => {console.log(err)});
+    this.api
+      .getAllActividades()
+      .pipe(
+        tap((actividades: Actividad[]) => (this.actividades = actividades)),
+        switchMap(() => {
+          return this.api
+            .getAllTiposPoblacion()
+            .pipe(
+              tap(
+                (tiposPoblacion: TiposPoblacion[]) =>
+                  (this.tiposPoblacion = tiposPoblacion)
+              )
+            );
+        }),
+        catchError((err: any) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(
+        (res: any) => {
+          console.log('OK');
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
   }
 
   filterSubmit(): void {
@@ -130,7 +134,7 @@ export class InstitucionesComponent implements OnInit {
   openDialog() {
     this.dialog
       .open(ModalInstitucionesComponent, {
-        width: '75vh',
+        width: '60vh',
         height: '95vh',
       })
       .afterClosed()
@@ -147,7 +151,7 @@ export class InstitucionesComponent implements OnInit {
     this.dialog
       .open(ModalInstitucionesDatosComponent, {
         width: '70vh',
-        data: row.id
+        data: row.id,
       })
       .afterClosed()
       .subscribe((val) => {
@@ -253,5 +257,8 @@ export class InstitucionesComponent implements OnInit {
         );
     };
     fileReader.readAsBinaryString(file);
+    fileReader.onerror = (e) => {
+      alert('Ocurrio un error');
+    };
   }
 }
