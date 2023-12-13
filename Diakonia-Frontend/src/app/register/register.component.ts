@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     password: '',
   });
 
-  roles: String[] = ['ADMIN', 'USUARIO_INVITADO', 'USUARIO_GENERAL'];
+  roles: String[] = ['Administrador', 'Usuario Invitado', 'Usuario General'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,6 +40,14 @@ export class RegisterComponent implements OnInit {
   submit(): void {
     this.http
       .post('http://localhost:8000/api/register', this.form.getRawValue())
-      .subscribe(() => this.router.navigate(['/login']));
+      .subscribe(
+        (res: any) => {
+          alert('Usuario Creado');
+        },
+        (err: any) => {
+          console.log(err);
+          alert('Ocurrio un error');
+        }
+      );
   }
 }

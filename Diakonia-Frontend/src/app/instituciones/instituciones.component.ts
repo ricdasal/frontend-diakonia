@@ -247,7 +247,7 @@ export class InstitucionesComponent implements OnInit {
                 'Algo salio mal. Intenta subir de nuevo el archivo.';
             }
             this.uploadedFile = false;
-            this.getDataInstituciones();
+            this.ngOnInit();
             this.messageLog = '';
           },
           (error) => {

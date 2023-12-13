@@ -89,7 +89,7 @@ export class ModalInstitucionesComponent implements OnInit {
   // lista_estados = ['ACTIVA', 'EN PROCESO DE DESVINCULACION', 'DONACION'];
 
   isAdmin: boolean;
-
+  condiciones: boolean[] = [true, false];
   registerForm!: FormGroup;
   actividades: Actividad[] = [];
   tipos_poblacion: TiposPoblacion[] = [];
@@ -162,6 +162,9 @@ export class ModalInstitucionesComponent implements OnInit {
         { value: null, disabled: this.isAdmin },
         [Validators.required]
       ),
+      condicion: new FormControl({ value: null, disabled: this.isAdmin }, [
+        Validators.required,
+      ]),
     });
   }
 
@@ -218,6 +221,12 @@ export class ModalInstitucionesComponent implements OnInit {
         this.editData.contactos?.at(0)?.correos.at(0)?.correo_contacto
       );
       this.institucionForm.controls['telefono_contacto'].setValue(
+        this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
+      );
+      this.institucionForm.controls['nombre_clasificacion'].setValue(
+        this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
+      );
+      this.institucionForm.controls['condicion'].setValue(
         this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
       );
     }

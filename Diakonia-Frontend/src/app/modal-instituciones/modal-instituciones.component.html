@@ -155,7 +155,7 @@
         <mat-label>Condición</mat-label>
         <mat-select formControlName="condicion">
           <mat-option
-            *ngFor="let condicion of lista_condicion"
+            *ngFor="let condicion of condiciones"
             value="{{ condicion }}"
             >{{ condicion }}</mat-option
           >
@@ -345,6 +345,18 @@
               *ngFor="let estado of estados"
               [value]="estado.nombre_estado"
               >{{ estado.nombre_estado }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div mat-dialog-content class="espaciador-contenedor">
+        <mat-form-field class="espaciado-formfield" appearance="outline">
+          <mat-label>Condición</mat-label>
+          <mat-select formControlName="condicion">
+            <mat-option
+              *ngFor="let condicion of condiciones"
+              value="{{ condicion }}"
+              >{{ condicion }}</mat-option
             >
           </mat-select>
         </mat-form-field>
