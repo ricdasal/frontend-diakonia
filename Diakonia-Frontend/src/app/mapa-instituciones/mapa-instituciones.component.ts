@@ -23,6 +23,7 @@ export class MapaInstitucionesComponent {
   radioAccionList:number[] = [];
   map: any;
   selectedMarkerIndex: any = -1;
+  clasificacionList: string[] = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -57,6 +58,31 @@ export class MapaInstitucionesComponent {
             for (let item of obj) {
               // Llenar radioAccionList basado en el número de beneficiarios
               let beneficiarios = item.numero_beneficiarios;
+
+              if (beneficiarios <= 100) {
+                this.clasificacionList.push('bronce');
+              } else if (beneficiarios > 100 && beneficiarios <= 200) {
+                this.clasificacionList.push('bronce');
+              } else if (beneficiarios > 200 && beneficiarios <= 300) {
+                this.clasificacionList.push('bronce');
+              } else if (beneficiarios > 300 && beneficiarios <= 400) {
+                this.clasificacionList.push('plata');
+              } else if (beneficiarios > 400 && beneficiarios <= 500) {
+                this.clasificacionList.push('plata');
+              } else if (beneficiarios > 500 && beneficiarios <= 600) {
+                this.clasificacionList.push('plata');
+              } else if (beneficiarios > 600 && beneficiarios <= 700) {
+                this.clasificacionList.push('oro');
+              } else if (beneficiarios > 700 && beneficiarios <= 800) {
+                this.clasificacionList.push('oro');
+              } else if (beneficiarios > 800 && beneficiarios <= 900) {
+                this.clasificacionList.push('oro');
+              } else if (beneficiarios > 900) {
+                this.clasificacionList.push('oro');
+              }
+
+              
+
               if (beneficiarios <= 100) {
                 this.radioAccionList.push(100);
               } else if (beneficiarios > 100 && beneficiarios <= 200) {
@@ -124,7 +150,7 @@ export class MapaInstitucionesComponent {
   zoom = 8;
   markerOptions: google.maps.MarkerOptions = {
       draggable: false,
-      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png?color=000000',
   };
 
   markerPositions: google.maps.LatLngLiteral[] = [];
@@ -140,4 +166,25 @@ export class MapaInstitucionesComponent {
   trackByFn(index: number, item: any) {
     return index;
   }
+
+  obtenerMarcadorClasificacion(clasificacion: string) : string{
+    if(clasificacion === 'oro'){
+      return 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+
+    }
+    else if(clasificacion === 'plata'){
+      
+      return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+
+    }
+    else if(clasificacion === 'bronce'){
+      return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+    }
+
+    return '';
+
+  }
+
+
 }

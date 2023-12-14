@@ -12,7 +12,10 @@
                   #marker="mapMarker"
                   (mapClick)="abrirWindow(marker, i)"
                   [position]="markerPosition"
-                  [options]="markerOptions">
+                  [options]="{
+                      draggable: false,
+                      icon: this.obtenerMarcadorClasificacion(this.clasificacionList[i]),
+                  }">
                   <map-circle [center]="markerPosition" 
                   [radius]="radioAccionList[i]" 
                   [options]="{ 
@@ -39,3 +42,14 @@
 <div class="contenedor-boton">
   <button class="w-100 btn btn-danger btn-lg" type="submit" routerLink="/instituciones">Listado De Instituciones</button>
 </div>
+
+
+<!--
+      label: {
+                        text: nombreInstitucionList[i],
+                        color: 'black',
+                        fontSize: '8px',
+                        fontWeight: 'bold'
+
+                      } 
+-->
