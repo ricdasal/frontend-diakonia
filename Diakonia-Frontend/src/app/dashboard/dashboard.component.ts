@@ -43,7 +43,6 @@ export class DashboardComponent {
   }
 
 
-
   getTopDataDashboard(){
     this.api.DataInstituciones()
     .subscribe({
@@ -165,7 +164,7 @@ export class DashboardComponent {
     this.api.DataInstituciones()
     .subscribe({
       next:(res)=>{
-        console.log(res[0]);
+        console.log(res);
         let obj = res;
           if (obj) { // Asegúrate de que obj no es undefined
             let totalActivas = 0;
@@ -173,11 +172,16 @@ export class DashboardComponent {
             for (let item of obj) {
               this.nombresInstituciones.push(item.nombre);
               this.numeroBeneficiarios.push(parseFloat(item.numero_beneficiarios));
-              this.totalEstado.push(item.estado[0].nombre_estado);
-              if (item.estado[0].nombre_estado.toLowerCase() === 'activa') {
-                totalActivas++;
-              } else if (item.estado[0].nombre_estado.toLowerCase() === 'pasiva') {
-                totalPasivas++;
+              if (item.estado && item.estado[0] && item.estado[0].nombre_estado) {
+                this.totalEstado.push(item.estado[0].nombre_estado);
+                console.log(item.estado[0].nombre_estado.toLowerCase());
+                if (item.estado[0].nombre_estado.toLowerCase() == 'activa') {
+                  totalActivas++;
+                } else if (item.estado[0].nombre_estado.toLowerCase() == 'pasiva') {
+                  totalPasivas++;
+                }
+              } else {
+                console.log('Estado no definido para el ítem:', item);
               }
             }
             console.log(this.totalEstado)
