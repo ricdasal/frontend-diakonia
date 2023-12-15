@@ -77,15 +77,15 @@ export class ModalInstitucionesComponent implements OnInit {
   //   'Adolescentes, Adultos',
   // ];
   // lista_clasificacion = ['oro', 'plata', 'bronce'];
-  lista_condicion = [
-    'Salud',
-    'Rehabilitacion Social',
-    'Exclusion Social',
-    'Inseguridad Alimentaria',
-    'Situacion de calle',
-    'Albergues',
-    'Discapacidad',
-  ];
+  // lista_condicion = [
+  //   'Salud',
+  //   'Rehabilitacion Social',
+  //   'Exclusion Social',
+  //   'Inseguridad Alimentaria',
+  //   'Situacion de calle',
+  //   'Albergues',
+  //   'Discapacidad',
+  // ];
   // lista_estados = ['ACTIVA', 'EN PROCESO DE DESVINCULACION', 'DONACION'];
 
   isAdmin: boolean;
@@ -162,9 +162,6 @@ export class ModalInstitucionesComponent implements OnInit {
         { value: null, disabled: this.isAdmin },
         [Validators.required]
       ),
-      condicion: new FormControl({ value: null, disabled: this.isAdmin }, [
-        Validators.required,
-      ]),
     });
   }
 
@@ -224,11 +221,9 @@ export class ModalInstitucionesComponent implements OnInit {
         this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
       );
       this.institucionForm.controls['nombre_clasificacion'].setValue(
-        this.editData.clasificacion?.at(0)?.nombre_clasificacion
+        this.editData.clasificacion?.map((elem: Clasificacion) => elem.id)
       );
-      this.institucionForm.controls['condicion'].setValue(
-        this.editData.clasificacion?.at(0)?.condicion
-      );
+      console.log(this.editData);
     }
 
     this.registerForm = new FormGroup({
@@ -239,7 +234,6 @@ export class ModalInstitucionesComponent implements OnInit {
       representante_legal: new FormControl(null, [Validators.required]), //
       ruc: new FormControl(null, [Validators.required]), //
       numero_beneficiarios: new FormControl(null, [Validators.required]), //
-      condicion: new FormControl(null, [Validators.required]),
       direccion_nombre: new FormControl(null, [Validators.required]), //
       url_direccion: new FormControl(null, [Validators.required]),
       latitud: new FormControl(null, [Validators.required]), //
@@ -275,17 +269,16 @@ export class ModalInstitucionesComponent implements OnInit {
   addInstitucion() {
     if (!this.editData) {
       if (this.registerForm.valid) {
-        console.log(this.registerForm.value);
-        // this.api.addInstitucion(this.institucionForm.value).subscribe({
-        //   next: (res) => {
-        //     alert('Institucion agregada exitosamente');
-        //     this.institucionForm.reset();
-        //     this.dialogRef.close('save');
-        //   },
-        //   error: () => {
-        //     alert('Error al agregar producto');
-        //   },
-        // });
+        this.api.addInstitucion(this.registerForm.value).subscribe({
+          next: (res) => {
+            alert('Institucion agregada exitosamente');
+            this.institucionForm.reset();
+            this.dialogRef.close('save');
+          },
+          error: () => {
+            alert('Error al agregar producto');
+          },
+        });
       }
     }
   }

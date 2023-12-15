@@ -50,7 +50,7 @@ export class ApiService {
   }
 
   updateInformationInstitucion(data: any, id: number) {
-    return this.http.put(`${this.baseURL}/users/${id}`, data, {headers, withCredentials: true});
+    return this.http.put(`${this.baseURL}/editInstitucion/${id}`, data, {headers, withCredentials: true});
   }
 
   filterInstitucion(data: any) {

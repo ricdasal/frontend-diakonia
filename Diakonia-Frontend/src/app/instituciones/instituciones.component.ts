@@ -226,7 +226,7 @@ export class InstitucionesComponent implements OnInit {
       let csvData = XLSX.utils.sheet_to_json(worksheet, {
         range: 1,
         header: headers,
-      }) as InstitucionDataExcel[];
+      });
       csvData.shift();
       csvData.pop();
       // Envía los datos al backend
@@ -248,7 +248,6 @@ export class InstitucionesComponent implements OnInit {
             }
             this.uploadedFile = false;
             this.ngOnInit();
-            this.messageLog = '';
           },
           (error) => {
             this.messageLog = 'Ocurrio un error. Intenta mas tarde.';

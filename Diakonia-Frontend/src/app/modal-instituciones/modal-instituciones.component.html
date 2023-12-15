@@ -45,10 +45,10 @@
 
       <mat-form-field appearance="outline" class="espaciado-formfield">
         <mat-label>Clasificacion</mat-label>
-        <mat-select formControlName="nombre_clasificacion">
+        <mat-select formControlName="nombre_clasificacion" multiple>
           <mat-option
             *ngFor="let clasificacion of clasificaciones"
-            [value]="clasificacion.nombre_clasificacion"
+            [value]="clasificacion.id"
             >{{ clasificacion.nombre_clasificacion }}</mat-option
           >
         </mat-select>
@@ -152,19 +152,6 @@
       </mat-form-field>
 
       <mat-form-field class="espaciado-formfield" appearance="outline">
-        <mat-label>Condición</mat-label>
-        <mat-select formControlName="condicion">
-          <mat-option
-            *ngFor="let condicion of condiciones"
-            [value]="condicion"
-            >{{ condicion }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div mat-dialog-content class="espaciador-contenedor">
-      <mat-form-field class="espaciado-formfield" appearance="outline">
         <mat-label>Estado</mat-label>
         <mat-select formControlName="nombre_estado">
           <mat-option
@@ -243,10 +230,10 @@
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Clasificacion</mat-label>
-          <mat-select formControlName="nombre_clasificacion">
+          <mat-select formControlName="nombre_clasificacion" multiple>
             <mat-option
               *ngFor="let clasificacion of clasificaciones"
-              [value]="clasificacion.nombre_clasificacion"
+              [value]="clasificacion.id"
               >{{ clasificacion.nombre_clasificacion }}</mat-option
             >
           </mat-select>
@@ -345,18 +332,6 @@
               *ngFor="let estado of estados"
               [value]="estado.nombre_estado"
               >{{ estado.nombre_estado }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div mat-dialog-content class="espaciador-contenedor">
-        <mat-form-field class="espaciado-formfield" appearance="outline">
-          <mat-label>Condición</mat-label>
-          <mat-select formControlName="condicion">
-            <mat-option
-              *ngFor="let condicion of condiciones"
-              [value]="condicion"
-              >{{ condicion }}</mat-option
             >
           </mat-select>
         </mat-form-field>
