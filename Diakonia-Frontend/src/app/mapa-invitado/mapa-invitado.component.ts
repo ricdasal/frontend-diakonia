@@ -26,9 +26,9 @@ export class MapaInvitadoComponent implements OnInit{
   constructor(private route: ActivatedRoute,
     private api: ApiService,) {}
     ngOnInit(): void {
-      this.getDataInstitucionesIdMapa();
       this.id = this.route.snapshot.paramMap.get('id') || '';
       console.log(this.id);
+      this.getDataInstitucionesIdMapa();
     }
 
 
@@ -37,7 +37,7 @@ export class MapaInvitadoComponent implements OnInit{
       .subscribe({
         next:(res)=>{
           //console.log(res[this.id]);
-          let obj = res[this.id]
+          let obj = res.at(0)
           if (obj) { // Asegúrate de que obj no es undefined
 
             this.nombreInstitucion = obj.nombre

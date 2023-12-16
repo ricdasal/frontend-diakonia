@@ -71,6 +71,7 @@ export class InformacionInstitucionesComponent implements OnInit{
     this.dialog
       .open(ModalInfoInstitucionesComponent, {
         width: '30%',
+        data: row.id
       })
       .afterClosed()
       .subscribe((val) => {
