@@ -45,6 +45,8 @@ export class InstitucionesComponent implements OnInit {
   messageLog: string = '';
   filterForm: FormGroup;
 
+  nombreInstitucion = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -117,6 +119,22 @@ export class InstitucionesComponent implements OnInit {
       alert('Ingresa al menos un campo');
     }
   }
+
+  fitroPorInstitucion(){
+
+  if(this.nombreInstitucion == ''){
+    this.getDataInstituciones();
+  }
+   this.dataSource.data = this.dataSource.data.filter(
+    (item: { nombre: any; }) => {
+    return (
+      !this.nombreInstitucion || item.nombre.toLowerCase().includes(this.nombreInstitucion.toLowerCase())
+    );
+
+    })
+
+  }
+
 
   getDataInstituciones() {
     this.api.DataInstituciones().subscribe({
