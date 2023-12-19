@@ -110,7 +110,7 @@
     </div>
 
     <div mat-dialog-content class="espaciador-contenedor">
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <mat-label>Correo</mat-label>
         <input matInput formControlName="correo_contacto" />
       </mat-form-field>
@@ -118,11 +118,59 @@
       <mat-form-field appearance="outline" class="espaciado-formfield">
         <mat-label>Telefono</mat-label>
         <input matInput formControlName="telefono_contacto" />
-      </mat-form-field>
+      </mat-form-field> -->
+
+      <div formGroupName="telefonos">
+        <h6>Telefonos</h6>
+        <button type="button" (click)="addNewTelefono()">
+          Agregar Telefono
+        </button>
+        <div
+          *ngFor="let telefono of registerTelefonos.controls; let i = index"
+        >
+          <b>Telefono {{ i + 1 }}</b>
+          <button type="button" (click)="deleteRegisterTelefono(i)">
+            Eliminar
+          </button>
+          <mat-form-field
+            appearance="outline"
+            class="espaciado-formfield"
+            [formGroupName]="i"
+          >
+            <mat-label>Telefono</mat-label>
+            <input matInput formControlName="telefono_contacto" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div formGroupName="correos">
+        <h6>Correos</h6>
+        <button type="button" (click)="addNewCorreo()">Agregar Correos</button>
+        <div
+          *ngFor="
+            let correo of registerCorreos.controls;
+            in: telefonos;
+            let i = index
+          "
+        >
+          <b>Correo {{ i + 1 }}</b>
+          <button type="button" (click)="deleteRegisterCorreo(i)">
+            Eliminar
+          </button>
+          <mat-form-field
+            appearance="outline"
+            class="espaciado-formfield"
+            [formGroupName]="i"
+          >
+            <mat-label>Telefono</mat-label>
+            <input matInput formControlName="telefono_contacto" />
+          </mat-form-field>
+        </div>
+      </div>
     </div>
 
     <div mat-dialog-content class="espaciador-contenedor">
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <mat-label>Dirección</mat-label>
         <input matInput formControlName="direccion_nombre" />
       </mat-form-field>
@@ -130,10 +178,57 @@
       <mat-form-field appearance="outline" class="espaciado-formfield">
         <mat-label>Url Dirección</mat-label>
         <input matInput formControlName="url_direccion" />
-      </mat-form-field>
+      </mat-form-field> -->
+      <div formGroupName="direcciones">
+        <div class="row">
+          <h6>Direcciones</h6>
+          <button
+            type="button"
+            mat-button
+            color="primary"
+            (click)="addNewDireccion()"
+          >
+            Agregar Direccion
+          </button>
+        </div>
+        <div
+          *ngFor="let direccion of registerDirecciones.controls; let i = index"
+        >
+          <b>Direccion {{ i + 1 }}</b>
+          <button
+            type="button"
+            mat-raised-button
+            color="warn"
+            (click)="deleteRegisterDireccion(i)"
+          >
+            Eliminar Direccion
+          </button>
+          <div [formGroupName]="i">
+            <mat-form-field appearance="outline" class="espaciado-formfield">
+              <mat-label>Direccion</mat-label>
+              <input matInput formControlName="direccion_nombre" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Url</mat-label>
+              <input matInput formControlName="url_direccion" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="espaciado-formfield">
+              <mat-label>Latitud</mat-label>
+              <input matInput formControlName="latitud" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Longitud</mat-label>
+              <input matInput formControlName="longitud" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div mat-dialog-content class="espaciador-contenedor">
+    <!-- <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Latitud</mat-label>
         <input matInput formControlName="latitud" />
@@ -143,7 +238,7 @@
         <mat-label>Longitud</mat-label>
         <input matInput formControlName="longitud" />
       </mat-form-field>
-    </div>
+    </div> -->
 
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
@@ -289,41 +384,124 @@
           <input matInput formControlName="nombre_contacto" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="espaciado-formfield">
-          <mat-label>Telefono</mat-label>
-          <input matInput formControlName="telefono_contacto" />
-        </mat-form-field>
+        <div formGroupName="telefonos">
+          <h6>Telefonos</h6>
+          <button type="button" (click)="addTelefono()">
+            Agregar Telefono
+          </button>
+          <div
+            *ngFor="
+              let telefono of institucionTelefonos.controls;
+              let i = index
+            "
+          >
+            <b>Telefono {{ i + 1 }}</b>
+            <button type="button" (click)="deleteTelefono(i)">Eliminar</button>
+            <mat-form-field
+              appearance="outline"
+              class="espaciado-formfield"
+              [formGroupName]="i"
+            >
+              <mat-label>Telefono</mat-label>
+              <input matInput formControlName="telefono_contacto" />
+            </mat-form-field>
+          </div>
+        </div>
       </div>
 
       <div mat-dialog-content class="espaciador-contenedor">
-        <mat-form-field appearance="outline">
+        <div formGroupName="correos">
+          <h6>Correos</h6>
+          <button type="button" (click)="addCorreo()">Agregar Correos</button>
+          <div
+            *ngFor="
+              let correo of institucionCorreos.controls;
+              in: telefonos;
+              let i = index
+            "
+          >
+            <b>Correo {{ i + 1 }}</b>
+            <button type="button" (click)="deleteCorreo(i)">Eliminar</button>
+            <mat-form-field
+              appearance="outline"
+              class="espaciado-formfield"
+              [formGroupName]="i"
+            >
+              <mat-label>Telefono</mat-label>
+              <input matInput formControlName="contacto_correo" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Correo</mat-label>
           <input matInput formControlName="correo_contacto" />
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field appearance="outline" class="espaciado-formfield">
+        <!-- <mat-form-field appearance="outline" class="espaciado-formfield">
           <mat-label>Direccion</mat-label>
           <input matInput formControlName="direccion_nombre" />
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
 
       <div mat-dialog-content class="espaciador-contenedor">
-        <mat-form-field appearance="outline">
-          <mat-label>Url</mat-label>
-          <input matInput formControlName="url_direccion" />
-        </mat-form-field>
+        <div formGroupName="direcciones">
+          <h6>Direcciones</h6>
+          <button
+            type="button"
+            mat-button
+            color="primary"
+            (click)="addDireccion()"
+          >
+            Agregar Direccion
+          </button>
+          <div
+            *ngFor="
+              let direccion of institucionDirecciones.controls;
+              let i = index
+            "
+          >
+            <div class="d-flex justify-content-around align-items-center">
+              <b>Direccion {{ i + 1 }}</b>
+              <button
+                type="button"
+                mat-raised-button
+                color="warn"
+                (click)="deleteDireccion(i)"
+              >
+                Eliminar Direccion
+              </button>
+            </div>
+            <div [formGroupName]="i">
+              <mat-form-field appearance="outline" class="espaciado-formfield">
+                <mat-label>Direccion</mat-label>
+                <input matInput formControlName="direccion_nombre" />
+              </mat-form-field>
 
-        <mat-form-field appearance="outline" class="espaciado-formfield">
-          <mat-label>Latitud</mat-label>
-          <input matInput formControlName="latitud" />
-        </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Url</mat-label>
+                <input matInput formControlName="url_direccion" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="espaciado-formfield">
+                <mat-label>Latitud</mat-label>
+                <input matInput formControlName="latitud" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Longitud</mat-label>
+                <input matInput formControlName="longitud" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div mat-dialog-content class="espaciador-contenedor">
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Longitud</mat-label>
           <input matInput formControlName="longitud" />
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field class="espaciado-formfield" appearance="outline">
           <mat-label>Estado</mat-label>

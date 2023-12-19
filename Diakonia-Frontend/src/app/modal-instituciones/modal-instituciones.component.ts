@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   FormGroup,
   FormBuilder,
+  FormArray,
 } from '@angular/forms';
 import { NgIf, NgFor } from '@angular/common';
 import { ApiService } from '../api.service';
@@ -110,8 +111,6 @@ export class ModalInstitucionesComponent implements OnInit {
       numero_beneficiarios: new FormControl(null, [Validators.required]),
       nombre_contacto: new FormControl(null, [Validators.required]),
       apellido_contacto: new FormControl(null, [Validators.required]),
-      correo_contacto: new FormControl(null, [Validators.required]),
-      telefono_contacto: new FormControl(null, [Validators.required]),
       nombre: new FormControl({ value: null, disabled: this.isAdmin }, [
         Validators.required,
       ]),
@@ -145,6 +144,39 @@ export class ModalInstitucionesComponent implements OnInit {
       anio_ingreso: new FormControl({ value: null, disabled: this.isAdmin }, [
         Validators.required,
       ]),
+
+      nombre_clasificacion: new FormControl(
+        { value: null, disabled: this.isAdmin },
+        [Validators.required]
+      ),
+      // correo_contacto: new FormControl(null, [Validators.required]),
+      // telefono_contacto: new FormControl(null, [Validators.required]),
+      correos: this.formbuilder.array([this.correoForm()]),
+      direcciones: this.formbuilder.array([this.direccionForm()]),
+      telefonos: this.formbuilder.array([this.telefonoForm()]),
+    });
+  }
+
+  correoForm() {
+    return this.formbuilder.group({
+      contacto_correo: new FormControl(
+        { value: null, disabled: this.isAdmin },
+        Validators.required
+      ),
+    });
+  }
+
+  telefonoForm() {
+    return this.formbuilder.group({
+      telefono_contacto: new FormControl(
+        { value: null, disabled: this.isAdmin },
+        Validators.required
+      ),
+    });
+  }
+
+  direccionForm() {
+    return this.formbuilder.group({
       direccion_nombre: new FormControl(
         { value: null, disabled: this.isAdmin },
         [Validators.required]
@@ -158,11 +190,43 @@ export class ModalInstitucionesComponent implements OnInit {
       longitud: new FormControl({ value: null, disabled: this.isAdmin }, [
         Validators.required,
       ]),
-      nombre_clasificacion: new FormControl(
-        { value: null, disabled: this.isAdmin },
-        [Validators.required]
-      ),
     });
+  }
+
+  get institucionCorreos() {
+    return this.institucionForm.get('correos') as FormArray;
+  }
+
+  get institucionTelefonos() {
+    return this.institucionForm.get('telefonos') as FormArray;
+  }
+
+  get institucionDirecciones(): FormArray {
+    return this.institucionForm.get('direcciones') as FormArray;
+  }
+
+  addCorreo(): void {
+    this.institucionCorreos.push(this.correoForm());
+  }
+
+  addTelefono(): void {
+    this.institucionTelefonos.push(this.telefonoForm());
+  }
+
+  addDireccion(): void {
+    this.institucionDirecciones.push(this.direccionForm());
+  }
+
+  deleteCorreo(id: Required<number>) {
+    this.institucionCorreos.removeAt(id);
+  }
+
+  deleteTelefono(id: Required<number>) {
+    this.institucionTelefonos.removeAt(id);
+  }
+
+  deleteDireccion(id: Required<number>) {
+    this.institucionCorreos.removeAt(id);
   }
 
   ngOnInit(): void {
@@ -190,18 +254,22 @@ export class ModalInstitucionesComponent implements OnInit {
       this.institucionForm.controls['nombre_estado'].setValue(
         this.editData.estado?.at(0)?.nombre_estado
       );
-      this.institucionForm.controls['direccion_nombre'].setValue(
-        this.editData.direccion?.at(0)?.direccion_nombre
+      // this.institucionForm.controls['direccion_nombre'].setValue(
+      //   this.editData.direccion?.at(0)?.direccion_nombre
+      // );
+      // this.institucionForm.controls['url_direccion'].setValue(
+      //   this.editData.direccion?.at(0)?.url_direccion
+      // );
+      // this.institucionForm.controls['latitud'].setValue(
+      //   this.editData.direccion?.at(0)?.latitud
+      // );
+      // this.institucionForm.controls['longitud'].setValue(
+      //   this.editData.direccion?.at(0)?.longitud
+      // );
+      this.institucionForm.controls['direcciones'].setValue(
+        this.editData.direccion
       );
-      this.institucionForm.controls['url_direccion'].setValue(
-        this.editData.direccion?.at(0)?.url_direccion
-      );
-      this.institucionForm.controls['latitud'].setValue(
-        this.editData.direccion?.at(0)?.latitud
-      );
-      this.institucionForm.controls['longitud'].setValue(
-        this.editData.direccion?.at(0)?.longitud
-      );
+
       this.institucionForm.controls['anio_ingreso'].setValue(
         this.editData.red_bda?.at(0)?.anio_ingreso
       );
@@ -214,11 +282,17 @@ export class ModalInstitucionesComponent implements OnInit {
       this.institucionForm.controls['apellido_contacto'].setValue(
         this.editData.contactos?.at(0)?.apellido
       );
-      this.institucionForm.controls['correo_contacto'].setValue(
-        this.editData.contactos?.at(0)?.correos.at(0)?.correo_contacto
+      // this.institucionForm.controls['correo_contacto'].setValue(
+      //   this.editData.contactos?.at(0)?.correos.at(0)?.correo_contacto
+      // );
+      // this.institucionForm.controls['telefono_contacto'].setValue(
+      //   this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
+      // );
+      this.institucionForm.controls['correos'].setValue(
+        this.editData.contactos.at(0)?.correos
       );
-      this.institucionForm.controls['telefono_contacto'].setValue(
-        this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
+      this.institucionForm.controls['telefonos'].setValue(
+        this.editData.contactos.at(0)?.telefonos
       );
       this.institucionForm.controls['nombre_clasificacion'].setValue(
         this.editData.clasificacion?.map((elem: Clasificacion) => elem.id)
@@ -233,20 +307,59 @@ export class ModalInstitucionesComponent implements OnInit {
       representante_legal: new FormControl(null, [Validators.required]), //
       ruc: new FormControl(null, [Validators.required]), //
       numero_beneficiarios: new FormControl(null, [Validators.required]), //
-      direccion_nombre: new FormControl(null, [Validators.required]), //
-      url_direccion: new FormControl(null, [Validators.required]),
-      latitud: new FormControl(null, [Validators.required]), //
-      longitud: new FormControl(null, [Validators.required]), //
+      // direccion_nombre: new FormControl(null, [Validators.required]), //
+      // url_direccion: new FormControl(null, [Validators.required]),
+      // latitud: new FormControl(null, [Validators.required]), //
+      // longitud: new FormControl(null, [Validators.required]), //
       tipo_poblacion: new FormControl(null, [Validators.required]), //
       nombre_clasificacion: new FormControl(null, [Validators.required]), //
       nombre_estado: new FormControl(null, [Validators.required]), //
       mes_ingreso: new FormControl(null, [Validators.required]), //
       anio_ingreso: new FormControl(null, [Validators.required]), //
       nombre_contacto: new FormControl(null, [Validators.required]), //
-      apellido_contacto: new FormControl(null, [Validators.required]),
-      correo_contacto: new FormControl(null, [Validators.required]), //
+      // apellido_contacto: new FormControl(null, [Validators.required]),
+      // correo_contacto: new FormControl(null, [Validators.required]), //
       telefono_contacto: new FormControl(null, [Validators.required]), //
+      direcciones: this.formbuilder.array([this.direccionForm()]),
+      telefonos: this.formbuilder.array([this.telefonoForm()]),
+      correos: this.formbuilder.array([this.correoForm()]),
     });
+  }
+
+  get registerCorreos() {
+    return this.registerForm.get('correos') as FormArray;
+  }
+
+  get registerTelefonos() {
+    return this.registerForm.get('telefonos') as FormArray;
+  }
+
+  get registerDirecciones() {
+    return this.registerForm.get('direcciones') as FormArray;
+  }
+
+  addNewCorreo() {
+    this.registerCorreos.push(this.correoForm());
+  }
+
+  addNewTelefono() {
+    this.registerTelefonos.push(this.telefonoForm());
+  }
+
+  addNewDireccion() {
+    this.registerDirecciones.push(this.direccionForm());
+  }
+
+  deleteRegisterCorreo(id: Required<number>) {
+    this.registerCorreos.removeAt(id);
+  }
+
+  deleteRegisterTelefono(id: Required<number>) {
+    this.registerTelefonos.removeAt(id);
+  }
+
+  deleteRegisterDireccion(id: Required<number>) {
+    this.registerDirecciones.removeAt(id);
   }
 
   obtainAllInformation(): void {
