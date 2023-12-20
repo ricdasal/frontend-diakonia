@@ -17,6 +17,12 @@
 
 }
 
+.espaciador{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .title-space{
   padding-bottom: 6px;
 }

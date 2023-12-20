@@ -1,47 +1,42 @@
 <h1 mat-dialog-title class="title-space">{{ institucionNombre }}</h1>
 
 <div class="mat-mdc-dialog-container">
-  <div mdc-dialog mat-dialog-content class="espaciador-contenedor">
-    <mat-form-field appearance="outline">
+  <div mdc-dialog mat-dialog-content class="espaciador-contenedor espaciador">
+    <div >
       <mat-label>Actividad</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let item of actividadList" [value]="item">{{
-          item
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
 
-    <mat-form-field appearance="outline" class="espaciado-formfield">
+      <h6 *ngFor="let item of actividadList">{{
+        item
+      }}</h6>
+    </div>
+
+    <div>
       <mat-label>Caracterizacion</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let item of caracterizacionList" [value]="item">{{
-          item
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+      <h6 *ngFor="let item of caracterizacionList">{{
+        item
+      }} </h6>
 
-  <div mat-dialog-content class="espaciador-contenedor">
-    <mat-form-field appearance="outline">
+    </div>
+
+    <div>
       <mat-label>Tipo Poblacion</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let item of tipoPoblacionList" [value]="item">{{
-          item
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <h6 *ngFor="let item of tipoPoblacionList" >{{
+        item
+      }}</h6>
 
-    <mat-form-field appearance="outline" class="espaciado-formfield">
+    </div>
+
+    <div>
       <mat-label>Estado</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let item of estadoList" [value]="item">{{
-          item
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <h6 *ngFor="let item of estadoList">{{
+        item
+      }}</h6>
+
+    </div>
+
   </div>
 
-  <div mat-dialog-action [align]="'end'">
+  <div mat-dialog-action [align]="'center'">
     <button
       mat-raised-button
       color="warn"

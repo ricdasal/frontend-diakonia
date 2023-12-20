@@ -51,6 +51,7 @@ export class ModalInstitucionesDatosComponent implements OnInit{
     this.api.DataInstitucionesId(this.id.toString())
     .subscribe({
       next:(res)=>{
+        console.log(res)
         let obj = res.find((item: { id: string; }) => parseInt(item.id) === this.id);
         //console.log(obj.actividades);
         this.institucionNombre = obj.nombre;

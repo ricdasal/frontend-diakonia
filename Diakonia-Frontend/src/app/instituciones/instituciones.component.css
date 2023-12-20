@@ -1,6 +1,35 @@
-.contenedor-form-busqueda{
-  width:200px;
+.container-toolbar{
+  width: auto;
+  margin: auto;
+  background-color: white;
+  margin-left: -500px;
 }
+.contenedor-form-busqueda{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3vh;
+
+}
+
+.form-busqueda{
+  height: 10vh;
+  width: auto;
+}
+
+.boton-rojo{
+  display: flex;
+  flex-direction: row;
+  width: 10vh;
+  height: 8vh;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.caja-botones{
+  display: flex; flex-direction: row; gap: 2rem;
+}
+
 
 .text-sm {
   font-size: 0.75rem;
@@ -17,11 +46,6 @@
   background-color: white;
 }
 
-.form-busqueda{
-  padding-top: 24px;
-  padding-right: 10px;
-  height: 100px;
-}
 
 .example-icon {
   padding: 0 14px;
@@ -54,12 +78,7 @@ td, th {
   margin-left: -500px;
 }
 
-.container-toolbar{
-  width: 1300px;
-  margin: auto;
-  background-color: white;
-  margin-left: -500px;
-}
+
 
 .container-margen{
   margin-top: 10px;
@@ -431,3 +450,5 @@ td, th {
     height: 90px;
   }
 }
+
+
