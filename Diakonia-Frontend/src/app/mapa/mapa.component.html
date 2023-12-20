@@ -106,7 +106,10 @@
     </div>
     <div class="box" style="background-color:#4d9853">
       <!---->
-      <google-map [center]="center"
+      <google-map [center]="{
+        lat: this.latitudesList[0],
+        lng: this.longitudesList[0]
+      }"
               height="100%"
               width="100%"
               [zoom]="zoom"
@@ -115,6 +118,16 @@
               <map-marker *ngFor="let markerPosition of markerPositions"
                           [position]="markerPosition"
                           [options]="markerOptions">
+
+                          <map-circle [center]="markerPosition" 
+                            [radius]="this.numeroBeneficiarios" 
+                            [options]="{ 
+                              fillColor: '#000000', 
+                              strokeOpacity: 0.5, 
+                              fillOpacity: 0.1, 
+                              strokeWeight: 1.5,
+                            }"
+                          />
                           
               </map-marker>
   </google-map>
