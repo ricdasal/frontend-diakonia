@@ -300,9 +300,7 @@
 </div>
 
 <ng-template #elseBlock>
-  <h1 mat-dialog-title class="title-space">
-    EDITAR INSTITUCION
-  </h1>
+  <h1 mat-dialog-title class="title-space">EDITAR INSTITUCION</h1>
 
   <div class="mat-mdc-dialog-container">
     <form [formGroup]="institucionForm" (submit)="editInfoInstitucion()">
@@ -404,6 +402,17 @@
           <input matInput formControlName="nombre_contacto" />
         </mat-form-field>
 
+        <mat-form-field class="espaciado-formfield" appearance="outline">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="nombre_estado">
+            <mat-option
+              *ngFor="let estado of estados"
+              [value]="estado.nombre_estado"
+              >{{ estado.nombre_estado }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
         <div formGroupName="telefonos">
           <h6>Telefonos</h6>
           <button
@@ -420,15 +429,17 @@
               let i = index
             "
           >
-            <b>Telefono {{ i + 1 }}</b>
-            <button
-              mat-raised-button
-              color="warn"
-              type="button"
-              (click)="deleteTelefono(i)"
-            >
-              Eliminar
-            </button>
+            <div class="d-flex justify-content-around align-items-center my-4">
+              <b>Telefono {{ i + 1 }}</b>
+              <button
+                mat-raised-button
+                color="warn"
+                type="button"
+                (click)="deleteTelefono(i)"
+              >
+                Eliminar
+              </button>
+            </div>
             <mat-form-field
               appearance="outline"
               class="espaciado-formfield"
@@ -446,11 +457,11 @@
           <h6>Correos</h6>
           <button
             mat-raised-button
-            color="warn"
-            type="primary"
+            color="primary"
+            type="button"
             (click)="addCorreo()"
           >
-            Agregar Correos
+            Agregar Nuevo Correo
           </button>
           <div
             *ngFor="
@@ -459,22 +470,24 @@
               let i = index
             "
           >
-            <b>Correo {{ i + 1 }}</b>
-            <button
-              mat-raised-button
-              color="warn"
-              type="button"
-              (click)="deleteCorreo(i)"
-            >
-              Eliminar
-            </button>
+            <div class="d-flex justify-content-around align-items-center my-4">
+              <b>Correo {{ i + 1 }}</b>
+              <button
+                mat-raised-button
+                color="warn"
+                type="button"
+                (click)="deleteCorreo(i)"
+              >
+                Eliminar
+              </button>
+            </div>
             <mat-form-field
               appearance="outline"
               class="espaciado-formfield"
               [formGroupName]="i"
             >
-              <mat-label>Telefono</mat-label>
-              <input matInput formControlName="contacto_correo" />
+              <mat-label>Correo</mat-label>
+              <input matInput formControlName="correo_contacto" />
             </mat-form-field>
           </div>
         </div>
@@ -495,7 +508,7 @@
           <h6>Direcciones</h6>
           <button
             type="button"
-            mat-button
+            mat-raised-button
             color="primary"
             (click)="addDireccion()"
           >
@@ -507,7 +520,7 @@
               let i = index
             "
           >
-            <div class="d-flex justify-content-around align-items-center">
+            <div class="d-flex justify-content-around align-items-center my-4">
               <b>Direccion {{ i + 1 }}</b>
               <button
                 type="button"
@@ -543,23 +556,13 @@
         </div>
       </div>
 
-      <div mat-dialog-content class="espaciador-contenedor">
-        <!-- <mat-form-field appearance="outline">
+      <!-- <div mat-dialog-content class="espaciador-contenedor"> -->
+      <!-- <mat-form-field appearance="outline">
           <mat-label>Longitud</mat-label>
           <input matInput formControlName="longitud" />
         </mat-form-field> -->
 
-        <mat-form-field class="espaciado-formfield" appearance="outline">
-          <mat-label>Estado</mat-label>
-          <mat-select formControlName="nombre_estado">
-            <mat-option
-              *ngFor="let estado of estados"
-              [value]="estado.nombre_estado"
-              >{{ estado.nombre_estado }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <!-- </div> -->
 
       <div mat-dialog-action [align]="'center'">
         <button

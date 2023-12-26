@@ -159,7 +159,7 @@ export class ModalInstitucionesComponent implements OnInit {
 
   correoForm() {
     return this.formbuilder.group({
-      contacto_correo: new FormControl(
+      correo_contacto: new FormControl(
         { value: null, disabled: this.isAdmin },
         Validators.required
       ),
@@ -226,7 +226,7 @@ export class ModalInstitucionesComponent implements OnInit {
   }
 
   deleteDireccion(id: Required<number>) {
-    this.institucionCorreos.removeAt(id);
+    this.institucionDirecciones.removeAt(id);
   }
 
   ngOnInit(): void {
@@ -237,6 +237,12 @@ export class ModalInstitucionesComponent implements OnInit {
     this.obtainAllInformation();
 
     if (this.editData) {
+      console.log(
+        'data',
+        this.editData.direccion,
+        this.editData.contactos.at(0)?.correos,
+        this.editData.contactos.at(0)?.telefonos
+      );
       this.institucionForm.patchValue(this.editData);
       this.institucionForm.controls['actividades'].setValue(
         this.editData.actividades?.map((elem: Actividad) => elem.id)
@@ -297,8 +303,6 @@ export class ModalInstitucionesComponent implements OnInit {
       this.institucionForm.controls['nombre_clasificacion'].setValue(
         this.editData.clasificacion?.map((elem: Clasificacion) => elem.id)
       );
-
-      console.log(this.editData);
     }
 
     this.registerForm = new FormGroup({
