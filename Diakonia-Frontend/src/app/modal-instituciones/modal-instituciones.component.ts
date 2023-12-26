@@ -297,6 +297,8 @@ export class ModalInstitucionesComponent implements OnInit {
       this.institucionForm.controls['nombre_clasificacion'].setValue(
         this.editData.clasificacion?.map((elem: Clasificacion) => elem.id)
       );
+
+      console.log(this.editData);
     }
 
     this.registerForm = new FormGroup({

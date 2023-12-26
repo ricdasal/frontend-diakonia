@@ -122,14 +122,22 @@
 
       <div formGroupName="telefonos">
         <h6>Telefonos</h6>
-        <button type="button" (click)="addNewTelefono()">
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="addNewTelefono()"
+        >
           Agregar Telefono
         </button>
-        <div
-          *ngFor="let telefono of registerTelefonos.controls; let i = index"
-        >
+        <div *ngFor="let telefono of registerTelefonos.controls; let i = index">
           <b>Telefono {{ i + 1 }}</b>
-          <button type="button" (click)="deleteRegisterTelefono(i)">
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="deleteRegisterTelefono(i)"
+          >
             Eliminar
           </button>
           <mat-form-field
@@ -145,7 +153,14 @@
 
       <div formGroupName="correos">
         <h6>Correos</h6>
-        <button type="button" (click)="addNewCorreo()">Agregar Correos</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="addNewCorreo()"
+        >
+          Agregar Correos
+        </button>
         <div
           *ngFor="
             let correo of registerCorreos.controls;
@@ -154,7 +169,12 @@
           "
         >
           <b>Correo {{ i + 1 }}</b>
-          <button type="button" (click)="deleteRegisterCorreo(i)">
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="deleteRegisterCorreo(i)"
+          >
             Eliminar
           </button>
           <mat-form-field
@@ -386,7 +406,12 @@
 
         <div formGroupName="telefonos">
           <h6>Telefonos</h6>
-          <button type="button" (click)="addTelefono()">
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="addTelefono()"
+          >
             Agregar Telefono
           </button>
           <div
@@ -396,7 +421,14 @@
             "
           >
             <b>Telefono {{ i + 1 }}</b>
-            <button type="button" (click)="deleteTelefono(i)">Eliminar</button>
+            <button
+              mat-raised-button
+              color="warn"
+              type="button"
+              (click)="deleteTelefono(i)"
+            >
+              Eliminar
+            </button>
             <mat-form-field
               appearance="outline"
               class="espaciado-formfield"
@@ -412,7 +444,14 @@
       <div mat-dialog-content class="espaciador-contenedor">
         <div formGroupName="correos">
           <h6>Correos</h6>
-          <button type="button" (click)="addCorreo()">Agregar Correos</button>
+          <button
+            mat-raised-button
+            color="warn"
+            type="primary"
+            (click)="addCorreo()"
+          >
+            Agregar Correos
+          </button>
           <div
             *ngFor="
               let correo of institucionCorreos.controls;
@@ -421,7 +460,14 @@
             "
           >
             <b>Correo {{ i + 1 }}</b>
-            <button type="button" (click)="deleteCorreo(i)">Eliminar</button>
+            <button
+              mat-raised-button
+              color="warn"
+              type="button"
+              (click)="deleteCorreo(i)"
+            >
+              Eliminar
+            </button>
             <mat-form-field
               appearance="outline"
               class="espaciado-formfield"
