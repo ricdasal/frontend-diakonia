@@ -347,9 +347,9 @@ export class ModalInstitucionesComponent implements OnInit {
       mes_ingreso: new FormControl(null, [Validators.required]), //
       anio_ingreso: new FormControl(null, [Validators.required]), //
       nombre_contacto: new FormControl(null, [Validators.required]), //
-      // apellido_contacto: new FormControl(null, [Validators.required]),
+      apellido_contacto: new FormControl(null, [Validators.required]),
       // correo_contacto: new FormControl(null, [Validators.required]), //
-      telefono_contacto: new FormControl(null, [Validators.required]), //
+      // telefono_contacto: new FormControl(null, [Validators.required]), //
       direcciones: this.formbuilder.array([this.direccionForm()]),
       telefonos: this.formbuilder.array([this.telefonoForm()]),
       correos: this.formbuilder.array([this.correoForm()]),
@@ -409,19 +409,19 @@ export class ModalInstitucionesComponent implements OnInit {
   }
 
   addInstitucion() {
-    if (!this.editData) {
-      if (this.registerForm.valid) {
-        this.api.addInstitucion(this.registerForm.value).subscribe({
-          next: (res) => {
-            alert('Institucion agregada exitosamente');
-            this.institucionForm.reset();
-            this.dialogRef.close('save');
-          },
-          error: () => {
-            alert('Error al agregar producto');
-          },
-        });
-      }
+    if (this.registerForm.valid) {
+      this.api.addInstitucion(this.registerForm.value).subscribe({
+        next: (res) => {
+          alert('Institucion agregada exitosamente');
+          this.institucionForm.reset();
+          this.dialogRef.close('save');
+        },
+        error: () => {
+          alert('Error al agregar institucion');
+        },
+      });
+    } else {
+      alert('Rellena campo');
     }
   }
 

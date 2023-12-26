@@ -110,6 +110,24 @@
     </div>
 
     <div mat-dialog-content class="espaciador-contenedor">
+      <mat-form-field appearance="outline">
+        <mat-label>Representante Legal</mat-label>
+        <input matInput formControlName="representante_legal" />
+      </mat-form-field>
+
+      <mat-form-field class="espaciado-formfield" appearance="outline">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="nombre_estado">
+          <mat-option
+            *ngFor="let estado of estados"
+            [value]="estado.nombre_estado"
+            >{{ estado.nombre_estado }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-content class="espaciador-contenedor">
       <!-- <mat-form-field appearance="outline">
         <mat-label>Correo</mat-label>
         <input matInput formControlName="correo_contacto" />
@@ -146,7 +164,11 @@
             [formGroupName]="i"
           >
             <mat-label>Telefono</mat-label>
-            <input matInput formControlName="telefono_contacto" />
+            <input
+              matInput
+              formControlName="telefono_contacto"
+              maxlength="10"
+            />
           </mat-form-field>
         </div>
       </div>
@@ -182,49 +204,41 @@
             class="espaciado-formfield"
             [formGroupName]="i"
           >
-            <mat-label>Telefono</mat-label>
-            <input matInput formControlName="telefono_contacto" />
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="correo_contacto" />
           </mat-form-field>
         </div>
       </div>
     </div>
 
-    <div mat-dialog-content class="espaciador-contenedor">
-      <!-- <mat-form-field appearance="outline">
-        <mat-label>Dirección</mat-label>
-        <input matInput formControlName="direccion_nombre" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="espaciado-formfield">
-        <mat-label>Url Dirección</mat-label>
-        <input matInput formControlName="url_direccion" />
-      </mat-form-field> -->
+    <div mat-dialog-content class="espaciador-contenedor w-75">
       <div formGroupName="direcciones">
-        <div class="row">
-          <h6>Direcciones</h6>
-          <button
-            type="button"
-            mat-button
-            color="primary"
-            (click)="addNewDireccion()"
-          >
-            Agregar Direccion
-          </button>
-        </div>
+        <h6>Direcciones</h6>
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="addNewDireccion()"
+        >
+          Agregar Direccion
+        </button>
         <div
+          mat-dialog-content
           *ngFor="let direccion of registerDirecciones.controls; let i = index"
         >
-          <b>Direccion {{ i + 1 }}</b>
-          <button
-            type="button"
-            mat-raised-button
-            color="warn"
-            (click)="deleteRegisterDireccion(i)"
-          >
-            Eliminar Direccion
-          </button>
+          <div class="d-flex justify-content-around align-items-center my-4">
+            <b>Direccion {{ i + 1 }}</b>
+            <button
+              type="button"
+              mat-raised-button
+              color="warn"
+              (click)="deleteRegisterDireccion(i)"
+            >
+              Eliminar Direccion
+            </button>
+          </div>
           <div [formGroupName]="i">
-            <mat-form-field appearance="outline" class="espaciado-formfield">
+            <mat-form-field appearance="outline">
               <mat-label>Direccion</mat-label>
               <input matInput formControlName="direccion_nombre" />
             </mat-form-field>
@@ -234,7 +248,7 @@
               <input matInput formControlName="url_direccion" />
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="espaciado-formfield">
+            <mat-form-field appearance="outline">
               <mat-label>Latitud</mat-label>
               <input matInput formControlName="latitud" />
             </mat-form-field>
@@ -259,24 +273,6 @@
         <input matInput formControlName="longitud" />
       </mat-form-field>
     </div> -->
-
-    <div mat-dialog-content class="espaciador-contenedor">
-      <mat-form-field appearance="outline">
-        <mat-label>Representante Legal</mat-label>
-        <input matInput formControlName="representante_legal" />
-      </mat-form-field>
-
-      <mat-form-field class="espaciado-formfield" appearance="outline">
-        <mat-label>Estado</mat-label>
-        <mat-select formControlName="nombre_estado">
-          <mat-option
-            *ngFor="let estado of estados"
-            [value]="estado.nombre_estado"
-            >{{ estado.nombre_estado }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-    </div>
 
     <div mat-dialog-action [align]="'end'">
       <button
@@ -446,7 +442,11 @@
               [formGroupName]="i"
             >
               <mat-label>Telefono</mat-label>
-              <input matInput formControlName="telefono_contacto" />
+              <input
+                matInput
+                formControlName="telefono_contacto"
+                maxlength="10"
+              />
             </mat-form-field>
           </div>
         </div>
