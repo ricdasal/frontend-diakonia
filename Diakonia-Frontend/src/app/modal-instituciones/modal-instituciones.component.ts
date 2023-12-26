@@ -17,6 +17,7 @@ import {
   Actividad,
   Caracterizacion,
   Clasificacion,
+  Direccion,
   Estado,
   Institucion,
   Sectorizacion,
@@ -152,7 +153,7 @@ export class ModalInstitucionesComponent implements OnInit {
       // correo_contacto: new FormControl(null, [Validators.required]),
       // telefono_contacto: new FormControl(null, [Validators.required]),
       correos: this.formbuilder.array([this.correoForm()]),
-      direcciones: this.formbuilder.array([this.direccionForm()]),
+      direcciones: this.formbuilder.array([this.direccionEditForm()]),
       telefonos: this.formbuilder.array([this.telefonoForm()]),
     });
   }
@@ -193,6 +194,25 @@ export class ModalInstitucionesComponent implements OnInit {
     });
   }
 
+  direccionEditForm() {
+    return this.formbuilder.group({
+      id: new FormControl({ value: null, disabled: this.isAdmin }),
+      direccion_nombre: new FormControl(
+        { value: null, disabled: this.isAdmin },
+        [Validators.required]
+      ),
+      url_direccion: new FormControl({ value: null, disabled: this.isAdmin }, [
+        Validators.required,
+      ]),
+      latitud: new FormControl({ value: null, disabled: this.isAdmin }, [
+        Validators.required,
+      ]),
+      longitud: new FormControl({ value: null, disabled: this.isAdmin }, [
+        Validators.required,
+      ]),
+    });
+  }
+
   get institucionCorreos() {
     return this.institucionForm.get('correos') as FormArray;
   }
@@ -214,7 +234,7 @@ export class ModalInstitucionesComponent implements OnInit {
   }
 
   addDireccion(): void {
-    this.institucionDirecciones.push(this.direccionForm());
+    this.institucionDirecciones.push(this.direccionEditForm());
   }
 
   deleteCorreo(id: Required<number>) {
@@ -237,12 +257,7 @@ export class ModalInstitucionesComponent implements OnInit {
     this.obtainAllInformation();
 
     if (this.editData) {
-      console.log(
-        'data',
-        this.editData.direccion,
-        this.editData.contactos.at(0)?.correos,
-        this.editData.contactos.at(0)?.telefonos
-      );
+      console.log(this.editData.direccion);
       this.institucionForm.patchValue(this.editData);
       this.institucionForm.controls['actividades'].setValue(
         this.editData.actividades?.map((elem: Actividad) => elem.id)
@@ -260,21 +275,19 @@ export class ModalInstitucionesComponent implements OnInit {
       this.institucionForm.controls['nombre_estado'].setValue(
         this.editData.estado?.at(0)?.nombre_estado
       );
-      // this.institucionForm.controls['direccion_nombre'].setValue(
-      //   this.editData.direccion?.at(0)?.direccion_nombre
+      // this.institucionForm.controls['direcciones'].patchValue(
+
       // );
-      // this.institucionForm.controls['url_direccion'].setValue(
-      //   this.editData.direccion?.at(0)?.url_direccion
-      // );
-      // this.institucionForm.controls['latitud'].setValue(
-      //   this.editData.direccion?.at(0)?.latitud
-      // );
-      // this.institucionForm.controls['longitud'].setValue(
-      //   this.editData.direccion?.at(0)?.longitud
-      // );
-      this.institucionForm.controls['direcciones'].setValue(
-        this.editData.direccion
-      );
+      this.institucionDirecciones.clear();
+      this.editData.direccion.forEach((elem: any) => {
+        let formDireccion = this.direccionEditForm();
+        Object.keys(formDireccion.controls).forEach((key) => {
+          formDireccion.patchValue({
+            [key]: elem[key],
+          });
+        });
+        this.institucionDirecciones.controls.push(formDireccion);
+      });
 
       this.institucionForm.controls['anio_ingreso'].setValue(
         this.editData.red_bda?.at(0)?.anio_ingreso
@@ -288,18 +301,29 @@ export class ModalInstitucionesComponent implements OnInit {
       this.institucionForm.controls['apellido_contacto'].setValue(
         this.editData.contactos?.at(0)?.apellido
       );
-      // this.institucionForm.controls['correo_contacto'].setValue(
-      //   this.editData.contactos?.at(0)?.correos.at(0)?.correo_contacto
-      // );
-      // this.institucionForm.controls['telefono_contacto'].setValue(
-      //   this.editData.contactos?.at(0)?.telefonos.at(0)?.telefono_contacto
-      // );
-      this.institucionForm.controls['correos'].setValue(
-        this.editData.contactos.at(0)?.correos
-      );
-      this.institucionForm.controls['telefonos'].setValue(
-        this.editData.contactos.at(0)?.telefonos
-      );
+
+      this.institucionCorreos.clear();
+      this.editData.contactos.at(0)?.correos.forEach((elem: any) => {
+        let formCorreo = this.correoForm();
+        Object.keys(formCorreo.controls).forEach((key) => {
+          formCorreo.patchValue({
+            [key]: elem[key],
+          });
+        });
+        this.institucionCorreos.controls.push(formCorreo);
+      });
+
+      this.institucionTelefonos.clear();
+      this.editData.contactos.at(0)?.telefonos.forEach((elem: any) => {
+        let formTelefono = this.telefonoForm();
+        Object.keys(formTelefono.controls).forEach((key) => {
+          formTelefono.patchValue({
+            [key]: elem[key],
+          });
+        });
+        this.institucionTelefonos.controls.push(formTelefono);
+      });
+
       this.institucionForm.controls['nombre_clasificacion'].setValue(
         this.editData.clasificacion?.map((elem: Clasificacion) => elem.id)
       );
@@ -405,7 +429,7 @@ export class ModalInstitucionesComponent implements OnInit {
     if (this.institucionForm.valid) {
       this.api
         .updateInformationInstitucion(
-          this.institucionForm.value,
+          this.institucionForm.getRawValue(),
           this.editData.id
         )
         .subscribe({
