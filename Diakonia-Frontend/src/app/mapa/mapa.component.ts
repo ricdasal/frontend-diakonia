@@ -26,6 +26,8 @@ export class MapaComponent implements OnInit {
   latitudesList: number[] = [];
   longitudesList: number[] = [];
 
+  numeroBeneficiarios: number = 0;
+
   constructor(private route: ActivatedRoute,
     private api: ApiService,) {
       this.id = this.route.snapshot.paramMap.get('id') || '';
@@ -41,9 +43,12 @@ export class MapaComponent implements OnInit {
       .subscribe({
         next:(res)=>{
           //console.log(res[this.id]);
+          
           let obj = res.at(0)
+          
           if (obj) { // Asegúrate de que obj no es undefined
 
+            console.log('objeto' ,obj)
             this.nombreInstitucion = obj.nombre
             console.log(this.nombreInstitucion);
 
@@ -89,6 +94,9 @@ export class MapaComponent implements OnInit {
             }
             console.log(this.urlsList);
 
+            this.numeroBeneficiarios = obj['numero_beneficiarios']
+
+            console.log('numero beneficiarios', this.numeroBeneficiarios)
            // Crear las posiciones de los marcadores
            this.markerPositions = this.latitudesList.map((lat, index) => {
               return {
@@ -115,7 +123,7 @@ export class MapaComponent implements OnInit {
         lat: -2.2058400,
         lng: -79.9079500
     };
-    zoom = 4;
+    zoom = 16;
     markerOptions: google.maps.MarkerOptions = {
         draggable: false
     };

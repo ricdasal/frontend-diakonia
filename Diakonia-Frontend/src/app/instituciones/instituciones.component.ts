@@ -45,6 +45,8 @@ export class InstitucionesComponent implements OnInit {
   messageLog: string = '';
   filterForm: FormGroup;
 
+  nombreInstitucion = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -118,6 +120,22 @@ export class InstitucionesComponent implements OnInit {
     }
   }
 
+  fitroPorInstitucion(){
+
+  if(this.nombreInstitucion == ''){
+    this.getDataInstituciones();
+  }
+   this.dataSource.data = this.dataSource.data.filter(
+    (item: { nombre: any; }) => {
+    return (
+      !this.nombreInstitucion || item.nombre.toLowerCase().includes(this.nombreInstitucion.toLowerCase())
+    );
+
+    })
+
+  }
+
+
   getDataInstituciones() {
     this.api.DataInstituciones().subscribe({
       next: (res) => {
@@ -131,10 +149,10 @@ export class InstitucionesComponent implements OnInit {
     });
   }
 
-  openDialog() {
+  openModalInstituciones() {
     this.dialog
       .open(ModalInstitucionesComponent, {
-        width: '60vh',
+        width: '75vh',
         height: '95vh',
       })
       .afterClosed()
@@ -151,6 +169,7 @@ export class InstitucionesComponent implements OnInit {
     this.dialog
       .open(ModalInstitucionesDatosComponent, {
         width: '70vh',
+        height: '80vh',
         data: row.id,
       })
       .afterClosed()
@@ -177,7 +196,7 @@ export class InstitucionesComponent implements OnInit {
         let institucion = res?.at(0);
         this.dialog
           .open(ModalInstitucionesComponent, {
-            width: '30%',
+            width: '70vh',
             data: institucion,
           })
           .afterClosed()
