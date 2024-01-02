@@ -12,7 +12,7 @@ const headers = new HttpHeaders({
 export class ClienteWAService {
 
     URL_DESARROLLO = "http://localhost:8000/api/"
-    URL_PRODUCCION = ""
+    URL_PRODUCCION = "https://select-monkey-highly.ngrok-free.app"
 
     URL_APIS: string = this.URL_DESARROLLO;
 

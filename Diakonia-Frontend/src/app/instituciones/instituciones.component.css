@@ -68,7 +68,12 @@ table {
 }
 
 td, th {
-  width: 25%;
+  text-align: start;
+  /* width: 15%; */
+}
+
+td{
+  font-size: 0.75rem;
 }
 
 .container{

@@ -9,7 +9,9 @@ const headers = new HttpHeaders({
 })
 export class ApiService {
 
-  baseURL: string = "http://localhost:8000/api";
+  URL_DESARROLLO = 'http://localhost:8000/api';
+  URL_PRODUCCION = 'https://select-monkey-highly.ngrok-free.app';
+  baseURL: string = this.URL_DESARROLLO;
 
   constructor(private http: HttpClient) { }
 

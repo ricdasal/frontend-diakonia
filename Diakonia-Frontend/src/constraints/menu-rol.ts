@@ -1,10 +1,10 @@
 export const menuRol = Object.freeze({
   ADMINISTRADOR: [
     { name: 'Mapa', routerLink: '/mapa' },
-    { name: 'Ingresar Institucion', routerLink: '/instituciones' },
+    { name: 'Instituciones Sociales', routerLink: '/instituciones' },
     { name: 'Dashboard', routerLink: '/dashboard' },
     {
-      name: 'Instituciones Sociales',
+      name: 'Instituciones Invitado',
       routerLink: '/informacion-instituciones',
     },
   ],
@@ -15,18 +15,18 @@ export const menuRol = Object.freeze({
     },
   ],
   USUARIO_GENERAL: [
-    { name: 'Ingresar Institucion', routerLink: '/instituciones' },
+    { name: 'Instituciones', routerLink: '/instituciones' },
   ],
 });
 
 export const menuNagivation = {
   ADMINISTRADOR: [
-    { name: 'instituciones', routerLink: '/instituciones' },
-    { name: 'mapa', routerLink: '/mapa' },
-    { name: 'usuarios', routerLink: '/adminuser' },
+    { name: 'Instituciones', routerLink: '/instituciones' },
+    { name: 'Mapa', routerLink: '/mapa' },
+    { name: 'Usuarios', routerLink: '/adminuser' },
   ],
   USUARIO_INVITADO: [],
   USUARIO_GENERAL: [
-    { name: 'Ingresar Institucion', routerLink: '/instituciones' },
+    { name: 'Instituciones', routerLink: '/instituciones' },
   ],
 };
