@@ -1,17 +1,17 @@
 <div class="container-toolbar">
 
   <div class="contenedor-form-busqueda">
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre Institución</mat-label>
-      <input matInput placeholder="Buscar" (input)="fitroPorInstitucion()" [(ngModel)]="nombreInstitucion"/>
-      <mat-icon (click)="fitroPorInstitucion()" matSuffix>search</mat-icon>
-    </mat-form-field>
+   
+    <form [formGroup]="filterForm" (submit)="filterSubmit()" style="display: flex; flex-direction: row; gap: 0.25rem">
 
-
-
-    <form [formGroup]="filterForm" (submit)="filterSubmit()" style="display: flex; flex-direction: row; gap: 1rem">
       <mat-form-field appearance="outline" class="espaciado-formfield w-50">
-        <mat-label>Nombre Actividad</mat-label>
+        <mat-label>Institución</mat-label>
+        <input matInput placeholder="Buscar" (input)="fitroPorInstitucion()" [(ngModel)]="nombreInstitucion"/>
+        <mat-icon (click)="fitroPorInstitucion()" matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="espaciado-formfield w-50">
+        <mat-label>Actividad</mat-label>
         <mat-select formControlName="nombre_actividad">
           <mat-option
             *ngFor="let actividad of actividades"
@@ -24,7 +24,7 @@
         appearance="outline"
         class="espaciado-formfield ms-3 w-50"
       >
-        <mat-label>Tipo Población</mat-label>
+        <mat-label>Población</mat-label>
         <mat-select formControlName="tipo_poblacion">
           <mat-option
             *ngFor="let tipoPoblacion of tiposPoblacion"
@@ -37,8 +37,8 @@
         <mat-icon fontIcon="filter_list_alt"></mat-icon>
       </button>
 
-      <button mat-flat-button color="primary" class="boton-rojo">
-        <mat-icon>replay</mat-icon>
+      <button mat-flat-button color="primary" type="button" class="boton-rojo" (click)="this.getDataInstituciones()">
+        <mat-icon >replay</mat-icon>
       </button>
     </form>
 
@@ -83,50 +83,51 @@
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- ID Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">ID</th>
+          <td mat-cell *matCellDef="let row" [class]="row.estado[0].nombre_estado">{{ row.id }}</td>
         </ng-container>
 
         <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">
             Institución
           </th>
-          <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+          <td mat-cell *matCellDef="let row" [class]="row.estado[0].nombre_estado">{{ row.nombre }}</td>
         </ng-container>
 
         <ng-container matColumnDef="numero_beneficiarios">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">
             Beneficiarios
           </th>
-          <td mat-cell *matCellDef="let row" style="text-align: center;">{{ row.numero_beneficiarios }}</td>
+          <td mat-cell *matCellDef="let row" style="text-align: center;" [class]="row.estado[0].nombre_estado">{{ row.numero_beneficiarios }}</td>
         </ng-container>
 
         <ng-container matColumnDef="ruc">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ruc</th>
-          <td mat-cell *matCellDef="let row">{{ row.ruc }}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">Ruc</th>
+          <td mat-cell *matCellDef="let row" [class]="row.estado[0].nombre_estado">{{ row.ruc }}</td>
         </ng-container>
 
         <ng-container matColumnDef="mes_ingreso">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mes Ingreso</th>
-          <td mat-cell *matCellDef="let row">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">Mes Ingreso</th>
+          <td mat-cell *matCellDef="let row" [class]="row.estado[0].nombre_estado">
             {{ row.red_bda[0].mes_ingreso }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="anio_ingreso">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Año Ingreso</th>
-          <td mat-cell *matCellDef="let row">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">Año Ingreso</th>
+          <td mat-cell *matCellDef="let row" [class]="row.estado[0].nombre_estado" >
             {{ row.red_bda[0].anio_ingreso }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="mapa">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mapa</th>
-          <td mat-cell *matCellDef="let row">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">Mapa</th>
+          <td mat-cell *matCellDef="let row" [class]="row.estado[0].nombre_estado" >
             <button
               mat-icon-button
               color="primary"
               [routerLink]="['mapa/', row.id]"
+              style="color: rgb(194, 89, 89)"
             >
               <mat-icon>location_on</mat-icon>
             </button>
@@ -134,14 +135,15 @@
         </ng-container>
 
         <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-          <td mat-cell *matCellDef="let row" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="color-header">Acciones</th>
+          <td mat-cell *matCellDef="let row" [class]="row.estado[0].nombre_estado">
             <div>
 
               <button
               mat-icon-button
-              color="accent"
+              color="primary"
               (click)="openDialogData(row)"
+              style="color: rgb(70, 80, 59)"
             >
               <mat-icon>visibility</mat-icon>
             </button>
@@ -150,14 +152,16 @@
               mat-icon-button
               color="primary"
               (click)="editInstitucion(row)"
+              style="color: rgb(96, 150, 90)"
             >
               <mat-icon>edit</mat-icon>
             </button>
 
             <button
               mat-icon-button
-              color="warn"
+              
               (click)="disableInstitucion(row)"
+              style="color: rgb(197, 97, 98)"
             >
               <mat-icon>not_interested</mat-icon>
             </button>

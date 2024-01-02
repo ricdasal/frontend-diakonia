@@ -139,6 +139,7 @@ export class InstitucionesComponent implements OnInit {
   getDataInstituciones() {
     this.api.DataInstituciones().subscribe({
       next: (res) => {
+        console.log('instituciones',res)
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

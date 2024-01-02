@@ -18,17 +18,32 @@
 }
 
 .boton-rojo{
-  display: flex;
-  flex-direction: row;
-  width: 10vh;
+  width: auto;
   height: 8vh;
-  margin-bottom: 20px;
-  align-items: center;
+  
 }
 
 .caja-botones{
-  display: flex; flex-direction: row; gap: 2rem;
+  display: flex; flex-direction: row; gap: 0.25rem;
 }
+
+.PASIVA{
+  background-color: gainsboro !important;
+  color: rgb(84, 92, 74);
+  font-weight: bolder;
+}
+
+.ACTIVA{
+  color: rgb(84, 92, 74);
+  font-weight: bolder;
+  
+}
+
+.color-header{
+  background-color: rgb(57, 68, 45) !important;
+  color: white;
+}
+
 
 
 .text-sm {
@@ -454,6 +469,10 @@ td{
     padding-top: -100px;
     height: 90px;
   }
+}
+
+.mat-align-icon {
+  vertical-align: middle;
 }
 
 
