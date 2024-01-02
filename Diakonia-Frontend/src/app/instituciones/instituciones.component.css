@@ -17,8 +17,16 @@
   width: auto;
 }
 
-.boton-rojo{
+.boton-formulario{
   background-color: rgb(96, 150, 90) !important;
+  color: white;
+  width: auto;
+  height: 8vh;
+  
+}
+
+.boton-rojo{
+  background-color: rgb(70, 80, 59) !important;
   color: white;
   width: auto;
   height: 8vh;

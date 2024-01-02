@@ -8,91 +8,76 @@
           <div class="row g-3">
 
             <div class="col-sm-6">
+              <label for="contactoNombre" class="form-label">Nombre Contacto</label> <br>
+              <!-- <div style="background-color: white; border: 1px solid rgb(153, 153, 153); border-radius:3px; height: 55px; display: flex; align-items: center; justify-content: center">
+                <p style="margin: 0;">{{nombreContacto}}</p>
+              </div> -->
+              <h6>{{nombreContacto}}</h6>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="contactoNombre" class="form-label">Apellido Contacto</label> <br>
+              <!-- <div style="background-color: white; border: 1px solid rgb(153, 153, 153); border-radius:3px; height: 55px; display: flex; align-items: center; justify-content: center">
+                <p style="margin: 0;">{{apellidoContacto}}</p>
+              </div> -->
+              <h6>{{apellidoContacto}}</h6>
+            </div>
+
+
+            <div class="col-sm-6">
               <label for="firstName" class="form-label">Latitud</label>
-              <mat-form-field appearance="outline">
-                <mat-label>Coordenadas</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let item of latitudesList" [value]="item">{{item}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <ul>
+                <li *ngFor="let item of latitudesList">{{item}}</li>
+              </ul>
             </div>
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Longitud</label>
-              <mat-form-field appearance="outline">
-                <mat-label>Coordenadas</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let item of longitudesList" [value]="item">{{item}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <ul>
+                <li *ngFor="let item of longitudesList">{{item}}</li>
+              </ul>
             </div>
 
             <div class="col-sm-6">
               <label for="address" class="form-label">Dirección</label> <br>
-              <mat-form-field appearance="outline">
-                <mat-label>Direcciones</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let item of direccionList" [value]="item">{{item}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <ul>
+                <li *ngFor="let item of direccionList">{{item}}</li>
+              </ul>
             </div>
 
-            <div class="col-sm-6">
-              <label for="contactoNombre" class="form-label">Contacto Nombre</label> <br>
-              <div style="background-color: white; border: 1px solid rgb(153, 153, 153); border-radius:3px; height: 55px; display: flex; align-items: center; justify-content: center">
-                <p style="margin: 0;">{{nombreContacto}}</p>
-              </div>
-            </div>
+            
 
             <div class="col-sm-6">
               <label for="address" class="form-label">Url Google Maps</label> <br>
-              <mat-form-field appearance="outline">
-                <mat-label>Google Maps</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let item of urlsList" [value]="item">{{item}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <ul>
+                <li *ngFor="let item of urlsList">{{item}}</li>
+              </ul>
+
             </div>
 
-            <div class="col-sm-6">
-              <label for="contactoNombre" class="form-label">Contacto Apellido</label> <br>
-              <div style="background-color: white; border: 1px solid rgb(153, 153, 153); border-radius:3px; height: 55px; display: flex; align-items: center; justify-content: center">
-                <p style="margin: 0;">{{apellidoContacto}}</p>
-              </div>
-            </div>
-
+            
             <div class="col-sm-6">
               <label for="address" class="form-label">Sectorización</label> <br>
-              <mat-form-field appearance="outline">
-                <mat-label>Sectores</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let item of sectorizacionList" [value]="item">{{item}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <ul>
+                <li *ngFor="let item of sectorizacionList">{{item}}</li>
+              </ul>
             </div>
 
             <div class="col-sm-6">
               <label for="address" class="form-label">Correos Contacto</label> <br>
-              <mat-form-field appearance="outline">
-                <mat-label>Correos</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let item of correosContacto" [value]="item">{{item}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <ul>
+                <li *ngFor="let item of correosContacto">{{item}}</li>
+              </ul>
             </div>
 
 
             <div class="col-sm-6">
               <label for="address" class="form-label">Telefonos Contacto</label> <br>
-              <mat-form-field appearance="outline">
-                <mat-label>Telefonos</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let item of telefonosContacto" [value]="item">{{item}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <ul>
+                <li *ngFor="let item of telefonosContacto">{{item}}</li>
+              </ul>
             </div>
-
-
+            
           </div>
 
           <hr class="my-4">

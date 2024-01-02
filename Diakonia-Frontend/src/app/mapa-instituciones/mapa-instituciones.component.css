@@ -1,14 +1,15 @@
 .titulo-mapa{
   background-color: white;
+  color: rgb(57, 68, 45);
   width: 1500px;
   text-align: center;
   margin-left: -600px;
 }
 
 .contenedor-mapa{
-  background-color: #4d9853;
-  width: 1360px;
-  height: 560px;
+  /* background-color: #4d9853; */
+  width: 100vh;
+  height: 80vh;
   margin-left: -525px;
   padding-left: 5px;
   padding-top: 5px;

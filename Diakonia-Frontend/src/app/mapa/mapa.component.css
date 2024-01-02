@@ -30,3 +30,13 @@
     width: 50%;
   }
 }
+
+label{
+  font-weight: bolder;
+  color: rgb(63, 73, 52);
+}
+
+li, h6{
+  color: rgb(84, 92, 74);
+}
+

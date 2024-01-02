@@ -153,7 +153,7 @@ export class InstitucionesComponent implements OnInit {
   openModalInstituciones() {
     this.dialog
       .open(ModalInstitucionesComponent, {
-        width: '75vh',
+        width: '130vh',
         height: '95vh',
       })
       .afterClosed()
