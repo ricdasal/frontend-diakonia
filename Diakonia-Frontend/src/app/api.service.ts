@@ -78,5 +78,11 @@ export class ApiService {
   addInstitucion(data: any) {
     return this.http.post<any>(`${this.baseURL}/agregarInstitucion`, data, {headers, withCredentials: true});
   }
+
+  getBeneficiariosXAnio(){
+
+    return this.http.get<any>(`${this.baseURL}/beneficiarios`, {headers, withCredentials: true});
+
+  }
 }
 

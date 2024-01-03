@@ -31,5 +31,6 @@
   /*background-color:aqua;*/
   width: 800px;
   margin-left: -250px;
-  font-style:italic
+  font-style:italic;
+  color: rgb(63, 73, 52);
 }

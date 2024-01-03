@@ -25,6 +25,10 @@ export class DashboardComponent {
   BeneficiariosClasificacion: number[] = [];
   ClasificacionInstituciones: string [] = [];
 
+  listaBeneficiarios: any[][] = [[], []];
+
+  datosCargados = false;
+
   constructor(
     private http: HttpClient,
     private api: ApiService,
@@ -36,9 +40,11 @@ export class DashboardComponent {
 
   ngOnInit() {
     //this.getAllInstituciones();
+    this.getBeneficiariosXAnio()
     this.getTopDataDashboard();
     this.getClassificationDataDashboard();
     this.getEstadoDataDashboard();
+    
     // Las llamadas a chartBarGraphic() y otras funciones de gráficos se han movido a los callbacks de suscripción
   }
 
@@ -201,6 +207,43 @@ export class DashboardComponent {
     })
   }
 
+  async getBeneficiariosXAnio(){
+    // let listaBeneficiarios: any[][] = [];
+    // //index 0 labels
+    // listaBeneficiarios.push([]);
+    // //index 1 data
+    // listaBeneficiarios.push([]); const resp: any = await this.historiaService.getAntecedentesSinCambios(this.secuenciaAtencion).toPromise();
+    try {
+      this.datosCargados = false;
+      const resp: any = await this.api.getBeneficiariosXAnio()
+      .subscribe({
+        next: (data: any) => {
+          let obj = data;
+            if (obj) { // Asegúrate de que obj no es undefined
+              console.log('Beneficiarios por anio', obj)
+              for(let i of obj){
+                console.log(i['anio'])
+                this.listaBeneficiarios[0].push(i['anio']);
+                this.listaBeneficiarios[1].push(i['numero_beneficiarios']);
+      
+              }
+              console.log(this.listaBeneficiarios)
+              this.chartLineGraphic();
+              
+      
+            }
+         
+        }
+      })
+      
+
+      this.datosCargados = true
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   chartBarGraphic(labels: string[], data: number[]){
     let myChart = new Chart("myChart", {
       type: 'bar',
@@ -285,10 +328,10 @@ chartLineGraphic() {
   new Chart("myLineChart", {
       type: 'line',
       data: {
-          labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+          labels: this.listaBeneficiarios[0],//['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
           datasets: [{
               label: 'Número De Beneficiarios Por Año',
-              data: [650, 359, 280, 181, 256, 355, 140],
+              data: this.listaBeneficiarios[1],//[650, 359, 280, 181, 256, 355, 140],
               fill: false,
               borderColor: 'rgb(75, 192, 192)',
               tension: 0.1
