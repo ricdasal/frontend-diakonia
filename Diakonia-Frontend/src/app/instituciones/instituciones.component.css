@@ -486,3 +486,6 @@ td{
 }
 
 
+button:disabled{
+  color: gray !important;
+}
