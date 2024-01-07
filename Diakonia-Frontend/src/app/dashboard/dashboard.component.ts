@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ApiService } from '../api.service';
 import { SharedService } from '../shared.service';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js/auto';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,9 @@ import { Chart } from 'chart.js/auto';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+
+  @ViewChild(MatAccordion)
+  accordion!: MatAccordion;
 
   nombresInstituciones: string[] = [];
   numeroBeneficiarios: number[] = [];
@@ -27,7 +31,12 @@ export class DashboardComponent {
 
   listaBeneficiarios: any[][] = [[], []];
 
-  datosCargados = false;
+  datosCargados = false
+  showFiller = false;
+
+  anioInicio = 0;
+  anioFinal = 0;
+  lineChart!: Chart;
 
   constructor(
     private http: HttpClient,
@@ -208,11 +217,6 @@ export class DashboardComponent {
   }
 
   async getBeneficiariosXAnio(){
-    // let listaBeneficiarios: any[][] = [];
-    // //index 0 labels
-    // listaBeneficiarios.push([]);
-    // //index 1 data
-    // listaBeneficiarios.push([]); const resp: any = await this.historiaService.getAntecedentesSinCambios(this.secuenciaAtencion).toPromise();
     try {
       this.datosCargados = false;
       const resp: any = await this.api.getBeneficiariosXAnio()
@@ -221,6 +225,12 @@ export class DashboardComponent {
           let obj = data;
             if (obj) { // Asegúrate de que obj no es undefined
               console.log('Beneficiarios por anio', obj)
+              if(this.lineChart){
+                this.lineChart.destroy();
+              }
+              if(this.listaBeneficiarios){
+                this.listaBeneficiarios = [[], []]; 
+              }
               for(let i of obj){
                 console.log(i['anio'])
                 this.listaBeneficiarios[0].push(i['anio']);
@@ -325,7 +335,7 @@ export class DashboardComponent {
 }
 
 chartLineGraphic() {
-  new Chart("myLineChart", {
+  this.lineChart =  new Chart("myLineChart", {
       type: 'line',
       data: {
           labels: this.listaBeneficiarios[0],//['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
@@ -397,6 +407,41 @@ chartPolarAreaGraphic(labels: string[], data: number[]) {
           }
       },
   });
+}
+
+async obtenerChartPorAnios(){
+  console.log(this.anioFinal, this.anioInicio)
+  const resp: any = await this.api.getBeneficiariosRangoAnio(this.anioInicio, this.anioFinal)
+  .subscribe({
+    next: (data: any)=>{
+      // this.datosCargados = false;
+      console.log(data)
+      let obj = data;
+      if (obj) { // Asegúrate de que obj no es undefined
+        if(this.lineChart){
+          this.lineChart.destroy();
+        }
+        this.listaBeneficiarios = [[],[]];
+        for(let i of obj){
+          console.log(i)
+          this.listaBeneficiarios[0].push(i['anio']);
+          this.listaBeneficiarios[1].push(i['numero_beneficiarios']);
+
+        }
+        this.chartLineGraphic();
+
+      }
+      
+    }
+  })
+  
+}
+
+limpiarFiltroLine(){
+  this.anioInicio = 0;
+  this.anioFinal = 0;
+
+  this.getBeneficiariosXAnio();
 }
 
 

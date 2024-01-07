@@ -84,5 +84,12 @@ export class ApiService {
     return this.http.get<any>(`${this.baseURL}/beneficiarios`, {headers, withCredentials: true});
 
   }
+
+  getBeneficiariosRangoAnio(anioInicio: any, anioFinal: any){
+
+    return this.http.get<any>(`${this.baseURL}/beneficiarios-anio?anioInicio=${anioInicio}&anioFin=${anioFinal}`, {headers, withCredentials: true});
+
+  }
+
 }
 
