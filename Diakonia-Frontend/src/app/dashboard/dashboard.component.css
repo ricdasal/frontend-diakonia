@@ -48,3 +48,13 @@
 .example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
   margin-left: 8px;
 }
+
+.boton-formulario{
+  background-color: rgb(96, 150, 90) !important;
+  color: white;
+  width: auto;
+  height: 8vh;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  
+}

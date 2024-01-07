@@ -29,8 +29,11 @@
         <input matInput type="number" [(ngModel)]="anioFinal">
       </mat-form-field>
 
-      <button mat-button (click)="this.obtenerChartPorAnios()">Filtrar</button>
-      <button mat-button (click)="this.limpiarFiltroLine()">Limpiar Filtro</button>
+      <button mat-button (click)="this.obtenerChartPorAnios()" class="boton-formulario">
+        <mat-icon fontIcon="filter_list_alt"></mat-icon></button>
+      <button mat-button (click)="this.limpiarFiltroLine()" class="boton-formulario">
+        <mat-icon >replay</mat-icon>
+      </button>
   
     </mat-expansion-panel>
     <!-- <mat-expansion-panel disabled>
