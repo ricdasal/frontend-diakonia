@@ -1,3 +1,8 @@
+.color-header{
+  background-color: rgb(57, 68, 45) !important;
+  color: white;
+}
+
 .contenedor-form-busqueda{
   width:200px;
 }
@@ -39,12 +44,13 @@ table {
   width: 100%;
 }
 
-td, th {
+/* td, th {
   width: 25%;
-}
+} */
 
 .container{
-  width: 1300px;
+  /* width: 1300px; */
+  width: 200vh;
   margin: auto;
   background-color: white;
   margin-left: -500px;

@@ -35,6 +35,8 @@ export class InformacionInstitucionesComponent implements OnInit{
   uploadedFile: boolean = false;
   messageLog: string = '';
 
+  nombreInstitucion = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -81,5 +83,34 @@ export class InformacionInstitucionesComponent implements OnInit{
         }
       });
   }
+
+  getDataInstituciones() {
+    this.api.DataInstituciones().subscribe({
+      next: (res) => {
+        console.log('instituciones',res)
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: (err) => {
+        alert('Error while fetching the Records!!');
+      },
+    });
+  }
+
+  fitroPorInstitucion(){
+
+    if(this.nombreInstitucion == ''){
+      this.getDataInstituciones();
+    }
+     this.dataSource.data = this.dataSource.data.filter(
+      (item: { nombre: any; }) => {
+      return (
+        !this.nombreInstitucion || item.nombre.toLowerCase().includes(this.nombreInstitucion.toLowerCase())
+      );
+  
+      })
+  
+    }
 
 }

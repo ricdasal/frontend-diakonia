@@ -54,7 +54,7 @@
         <div class="menu" [class.menuClass]="menuVariable">
           <ul>
             <li *ngFor="let item of menuNagivation" [routerLink]="item.routerLink">{{item.name}}</li>
-            <li (click)="logout()">logout</li>
+            <li (click)="logout()">Salir</li>
           </ul>
         </div>
       </div>
