@@ -9,7 +9,7 @@
 
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline" class="espaciado-formfield">
-        <mat-label>Nombre Institucion</mat-label>
+        <mat-label>Nombre Institución</mat-label>
         <input matInput formControlName="nombre_institucion" />
       </mat-form-field>
 
@@ -19,7 +19,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="espaciado-formfield">
-        <mat-label>Caracterizacion</mat-label>
+        <mat-label>Caracterización</mat-label>
         <mat-select formControlName="nombre_caracterizacion" multiple>
           <mat-option
             *ngFor="let caracterizacion of caracterizaciones"
@@ -29,11 +29,11 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      
+
     </div>
 
     <div mdc-dialog mat-dialog-content class="espaciador-contenedor">
-      
+
 
       <mat-form-field appearance="outline" class="espaciado-formfield">
         <mat-label>Mes de ingreso</mat-label>
@@ -46,7 +46,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="espaciado-formfield">
-        <mat-label>Clasificacion</mat-label>
+        <mat-label>Clasificación</mat-label>
         <mat-select formControlName="nombre_clasificacion" multiple>
           <mat-option
             *ngFor="let clasificacion of clasificaciones"
@@ -60,7 +60,7 @@
 
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
-        <mat-label>Sectorizacion</mat-label>
+        <mat-label>Sectorización</mat-label>
         <mat-select formControlName="nombre_sectorizacion" multiple>
           <mat-option
             *ngFor="let sector of sectorizaciones"
@@ -71,14 +71,14 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="espaciado-formfield">
-        <mat-label>Numero de beneficiarios</mat-label>
+        <mat-label>Número de beneficiarios</mat-label>
         <input matInput formControlName="numero_beneficiarios" />
       </mat-form-field>
     </div>
 
     <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline" class="espaciado-formfield">
-        <mat-label>Tipo Poblacion</mat-label>
+        <mat-label>Tipo Población</mat-label>
         <mat-select formControlName="tipo_poblacion">
           <mat-option
             *ngFor="let tipo_poblacion of tipos_poblacion"
@@ -148,7 +148,7 @@
           *ngFor="let direccion of registerDirecciones.controls; let i = index"
         >
           <div class="d-flex justify-content-around align-items-center my-4">
-            <b>Direccion {{ i + 1 }}</b>
+            <b>Dirección {{ i + 1 }}</b>
 
             <button mat-fab color="warn" type="button" (click)="deleteRegisterDireccion(i)" style="margin-bottom: 1rem;">
               x
@@ -156,7 +156,7 @@
           </div>
           <div [formGroupName]="i" style="display: flex; gap: 0.25rem;">
             <mat-form-field appearance="outline">
-              <mat-label>Direccion</mat-label>
+              <mat-label>Dirección</mat-label>
               <input matInput formControlName="direccion_nombre" />
             </mat-form-field>
 
@@ -183,20 +183,20 @@
     <div mat-dialog-content class="espaciador-contenedor" style="display: flex; flex-direction: row; gap: 2rem;">
       <div formGroupName="telefonos" style="display: flex; flex-direction: column; gap: 0.5rem; justify-content: center;">
         <div style="display: flex; flex-direction: row; gap: 0.5rem;">
-          <h6>Telefonos</h6>
+          <h6>Teléfonos</h6>
           <button mat-raised-button color="primary" type="button" (click)="addNewTelefono()" >
             <mat-icon >add</mat-icon>
           </button>
         </div>
         <div *ngFor="let telefono of registerTelefonos.controls; let i = index" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
           <b>{{ i + 1 }}</b>
-         
+
           <mat-form-field
             appearance="outline"
             class="espaciado-formfield"
             [formGroupName]="i"
           >
-            <mat-label>Telefono</mat-label>
+            <mat-label>Teléfono</mat-label>
             <input
               matInput
               formControlName="telefono_contacto"
@@ -207,7 +207,7 @@
             x
           </button>
 
-         
+
         </div>
       </div>
 
@@ -225,7 +225,7 @@
         </button>
 
         </div>
-        
+
         <div
           *ngFor="
             let correo of registerCorreos.controls;
@@ -250,11 +250,11 @@
           </button>
         </div>
       </div>
-      
+
 
     </div>
 
-    
+
     <!-- <div mat-dialog-content class="espaciador-contenedor">
       <mat-form-field appearance="outline">
         <mat-label>Latitud</mat-label>
@@ -289,7 +289,7 @@
 </div>
 
 <ng-template #elseBlock>
-  <h1 mat-dialog-title class="title-space">EDITAR INSTITUCION</h1>
+  <h1 mat-dialog-title class="title-space">EDITAR INSTITUCIÓN</h1>
 
   <div class="mat-mdc-dialog-container">
     <form [formGroup]="institucionForm" (submit)="editInfoInstitucion()">
@@ -307,7 +307,7 @@
 
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
-          <mat-label>Nombre Institucion</mat-label>
+          <mat-label>Nombre Institución</mat-label>
           <input matInput formControlName="nombre" />
         </mat-form-field>
 
@@ -319,7 +319,7 @@
 
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
-          <mat-label>Caracterizacion</mat-label>
+          <mat-label>Caracterización</mat-label>
           <mat-select formControlName="caracterizaciones" multiple>
             <mat-option
               *ngFor="let caracterizacion of caracterizaciones"
@@ -331,7 +331,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
-          <mat-label>Clasificacion</mat-label>
+          <mat-label>Clasificación</mat-label>
           <mat-select formControlName="nombre_clasificacion" multiple>
             <mat-option
               *ngFor="let clasificacion of clasificaciones"
@@ -344,7 +344,7 @@
 
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
-          <mat-label>Sectorizacion</mat-label>
+          <mat-label>Sectorización</mat-label>
           <mat-select formControlName="sectorizaciones" multiple>
             <mat-option
               *ngFor="let sector of sectorizaciones"
@@ -355,14 +355,14 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="espaciado-formfield">
-          <mat-label>Numero de beneficiarios</mat-label>
+          <mat-label>Número de beneficiarios</mat-label>
           <input matInput formControlName="numero_beneficiarios" />
         </mat-form-field>
       </div>
 
       <div mat-dialog-content class="espaciador-contenedor">
         <mat-form-field appearance="outline">
-          <mat-label>Tipo Poblacion</mat-label>
+          <mat-label>Tipo Población</mat-label>
           <mat-select formControlName="tipo_poblacion">
             <mat-option
               *ngFor="let tipo_poblacion of tipos_poblacion"
@@ -403,14 +403,14 @@
         </mat-form-field>
 
         <div formGroupName="telefonos">
-          <h6>Telefonos</h6>
+          <h6>Teléfonos</h6>
           <button
             mat-raised-button
             color="primary"
             type="button"
             (click)="addTelefono()"
           >
-            Agregar Telefono
+            Agregar Teléfono
           </button>
           <div
             *ngFor="
@@ -419,7 +419,7 @@
             "
           >
             <div class="d-flex justify-content-around align-items-center my-4">
-              <b>Telefono {{ i + 1 }}</b>
+              <b>Teléfono {{ i + 1 }}</b>
               <button
                 mat-raised-button
                 color="warn"
@@ -434,7 +434,7 @@
               class="espaciado-formfield"
               [formGroupName]="i"
             >
-              <mat-label>Telefono</mat-label>
+              <mat-label>Teléfono</mat-label>
               <input
                 matInput
                 formControlName="telefono_contacto"
@@ -505,7 +505,7 @@
             color="primary"
             (click)="addDireccion()"
           >
-            Agregar Direccion
+            Agregar Dirección
           </button>
           <div
             *ngFor="
@@ -514,19 +514,19 @@
             "
           >
             <div class="d-flex justify-content-around align-items-center my-4">
-              <b>Direccion {{ i + 1 }}</b>
+              <b>Dirección {{ i + 1 }}</b>
               <button
                 type="button"
                 mat-raised-button
                 color="warn"
                 (click)="deleteDireccion(i)"
               >
-                Eliminar Direccion
+                Eliminar Dirección
               </button>
             </div>
             <div [formGroupName]="i">
               <mat-form-field appearance="outline" class="espaciado-formfield">
-                <mat-label>Direccion</mat-label>
+                <mat-label>Dirección</mat-label>
                 <input matInput formControlName="direccion_nombre" />
               </mat-form-field>
 

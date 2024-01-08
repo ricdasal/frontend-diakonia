@@ -403,7 +403,7 @@ export class ModalInstitucionesComponent implements OnInit {
         this.clasificaciones = res.clasificaciones;
       },
       (error: any) => {
-        alert('Ocurrio un error. Vuelve a intentar mas tarde.');
+        alert('Ocurrió un error. Vuelve a intentar más tarde.');
       }
     );
   }
@@ -412,12 +412,12 @@ export class ModalInstitucionesComponent implements OnInit {
     if (this.registerForm.valid) {
       this.api.addInstitucion(this.registerForm.value).subscribe({
         next: (res) => {
-          alert('Institucion agregada exitosamente');
+          alert('Institución agregada exitosamente');
           this.institucionForm.reset();
           this.dialogRef.close('save');
         },
         error: () => {
-          alert('Error al agregar institucion');
+          alert('Error al agregar institución');
         },
       });
     } else {
@@ -435,13 +435,13 @@ export class ModalInstitucionesComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             alert(
-              'Informacion de la institucion actualizada sastifactoriamente'
+              'Información de la institución actualizada sastifactoriamente'
             );
             this.institucionForm.reset();
             this.dialogRef.close('update');
           },
           error: (res: any) => {
-            alert('Ocurrio un error');
+            alert('Ocurrió un error');
           },
         });
     }

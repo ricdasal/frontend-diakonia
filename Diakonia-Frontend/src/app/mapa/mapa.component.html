@@ -45,7 +45,7 @@
               </ul>
             </div>
 
-            
+
 
             <div class="col-sm-6">
               <label for="address" class="form-label">Url Google Maps</label> <br>
@@ -55,7 +55,7 @@
 
             </div>
 
-            
+
             <div class="col-sm-6">
               <label for="address" class="form-label">Sectorización</label> <br>
               <ul>
@@ -72,12 +72,12 @@
 
 
             <div class="col-sm-6">
-              <label for="address" class="form-label">Telefonos Contacto</label> <br>
+              <label for="address" class="form-label">Teléfonos Contacto</label> <br>
               <ul>
                 <li *ngFor="let item of telefonosContacto">{{item}}</li>
               </ul>
             </div>
-            
+
           </div>
 
           <hr class="my-4">
@@ -99,21 +99,21 @@
               width="100%"
               [zoom]="zoom"
               (mapClick)="addMarker($event)">
-              
+
               <map-marker *ngFor="let markerPosition of markerPositions"
                           [position]="markerPosition"
                           [options]="markerOptions">
 
-                          <map-circle [center]="markerPosition" 
-                            [radius]="this.numeroBeneficiarios" 
-                            [options]="{ 
-                              fillColor: '#000000', 
-                              strokeOpacity: 0.5, 
-                              fillOpacity: 0.1, 
+                          <map-circle [center]="markerPosition"
+                            [radius]="this.numeroBeneficiarios"
+                            [options]="{
+                              fillColor: '#000000',
+                              strokeOpacity: 0.5,
+                              fillOpacity: 0.1,
                               strokeWeight: 1.5,
                             }"
                           />
-                          
+
               </map-marker>
   </google-map>
 

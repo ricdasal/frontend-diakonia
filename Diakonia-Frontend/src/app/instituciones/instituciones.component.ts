@@ -112,7 +112,7 @@ export class InstitucionesComponent implements OnInit {
           }
         },
         (err: any) => {
-          alert('Ocurrio un error. Intenta mas tarde');
+          alert('Ocurrió un error. Intenta más tarde');
         }
       );
     } else {
@@ -209,21 +209,21 @@ export class InstitucionesComponent implements OnInit {
           });
       },
       error: (err: any) => {
-        alert('Ocurrio un error intenta mas tarde.');
+        alert('Ocurrió un error intenta más tarde.');
       },
     });
   }
 
   disableInstitucion(row: any): void {
-    let res = confirm('Estas seguro de eliminar este usuario?');
+    let res = confirm('Estás seguro de inactivar esta institución?');
     if (res) {
       this.api.disableInstitucion(row.id).subscribe(
         (res: any) => {
-          alert('Institucion Desabilitada');
+          alert('Institución Desabilitada');
           this.getDataInstituciones();
         },
         (error: any) => {
-          alert('Ocurrio un error. Intenta de nuevo');
+          alert('Ocurrió un error. Intenta de nuevo');
         }
       );
     }
@@ -264,20 +264,20 @@ export class InstitucionesComponent implements OnInit {
               this.messageLog = 'Archivo Subido Correctamente!';
             } else {
               this.messageLog =
-                'Algo salio mal. Intenta subir de nuevo el archivo.';
+                'Algo salió mal. Intenta subir de nuevo el archivo.';
             }
             this.uploadedFile = false;
             this.ngOnInit();
           },
           (error) => {
-            this.messageLog = 'Ocurrio un error. Intenta mas tarde.';
+            this.messageLog = 'Ocurrió un error. Intenta más tarde.';
             this.uploadedFile = false;
           }
         );
     };
     fileReader.readAsBinaryString(file);
     fileReader.onerror = (e) => {
-      alert('Ocurrio un error');
+      alert('Ocurrió un error');
     };
   }
 }
