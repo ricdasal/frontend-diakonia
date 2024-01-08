@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -10vh;
   height: 770px;
   margin-left: -725px;
   width: 1750px;
@@ -21,7 +22,7 @@
   width: 500px;
   padding: 5px;
   box-sizing: border-box;
-  min-height: 745px; /* Ajusta este valor según tus necesidades */
+  min-height: 300px;/* Ajusta este valor según tus necesidades*/
   border-radius: 4px;
 }
 
