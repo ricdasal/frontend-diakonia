@@ -72,7 +72,8 @@ export class InformacionInstitucionesComponent implements OnInit{
     this.sharedService.changeId(row.id);
     this.dialog
       .open(ModalInfoInstitucionesComponent, {
-        width: '30%',
+        width: '80vh',
+        height: '40vh',
         data: row.id
       })
       .afterClosed()
