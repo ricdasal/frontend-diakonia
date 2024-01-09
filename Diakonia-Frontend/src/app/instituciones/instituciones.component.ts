@@ -280,4 +280,9 @@ export class InstitucionesComponent implements OnInit {
       alert('Ocurrió un error');
     };
   }
+
+  limpiarFiltro(){
+
+
+  }
 }

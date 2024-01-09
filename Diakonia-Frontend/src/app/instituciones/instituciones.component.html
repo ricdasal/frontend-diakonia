@@ -34,21 +34,21 @@
         </mat-select>
       </mat-form-field>
       <button mat-flat-button color="primary" class="boton-formulario" type="submit">
-        <mat-icon fontIcon="filter_list_alt"></mat-icon>
+        <mat-icon fontIcon="filter_list_alt" class="centrado"></mat-icon>
       </button>
 
       <button mat-flat-button color="primary" type="button" class="boton-formulario" (click)="this.getDataInstituciones()">
-        <mat-icon >replay</mat-icon>
+        <mat-icon class="centrado">replay</mat-icon>
       </button>
 
       <button mat-flat-button color="warn" (click)="openModalInstituciones()" type="button" class="boton-rojo" style="margin-left: 1rem;">
-        <mat-icon matSuffix>add</mat-icon>
+        <mat-icon matSuffix class="centrado">add</mat-icon>
       </button>
 
       <div style="display: flex; flex-direction: column; gap: 1px;">
         <input hidden type="file" #fileInput (change)="uploadFile($event)" />
         <button mat-raised-button color="warn" (click)="fileInput.click()" type="button" class="boton-rojo" >
-          <mat-icon matSuffix>archive</mat-icon>
+          <mat-icon matSuffix class="centrado">archive</mat-icon>
         </button>
         <div
         *ngIf="uploadedFile"

@@ -4,6 +4,11 @@
   background-color: white;
   margin-left: -500px;
 }
+
+.centrado{
+  margin-left: 0.5rem !important;
+}
+
 .contenedor-form-busqueda{
   display: flex;
   flex-direction: row;
