@@ -91,5 +91,11 @@ export class ApiService {
 
   }
 
+  getInstitucionesEstado(anio: any){
+
+    return this.http.get<any>(`${this.baseURL}/instituciones-estado?&anioFin=${anio}`, {headers, withCredentials: true});
+
+  }
+
 }
 

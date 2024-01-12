@@ -5,6 +5,8 @@ import { SharedService } from '../shared.service';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js/auto';
 import { MatAccordion } from '@angular/material/expansion';
+import { ChartType } from 'chart.js';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +14,8 @@ import { MatAccordion } from '@angular/material/expansion';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+
+  public lineChartType: ChartType = "pie";
 
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
@@ -24,6 +28,7 @@ export class DashboardComponent {
 
   institucionesActivas: number = 0;
   institucionesPasivas: number = 0;
+  institucionesTotales: number = 171;
 
   InstitucionesClasificacion: string[] = [];
   BeneficiariosClasificacion: number[] = [];
@@ -37,6 +42,7 @@ export class DashboardComponent {
   anioInicio = 0;
   anioFinal = 0;
   lineChart!: Chart;
+  pieChart!: Chart<"pie", number[], string>
 
   constructor(
     private http: HttpClient,
@@ -298,40 +304,45 @@ export class DashboardComponent {
 
 
   chartPieGraphic() {
-    new Chart("myPieChart", {
-        type: 'pie',
-        data: {
-            labels: ['Activas', 'Inactivas'],
-            datasets: [{
-                label: 'Cantidad total',
-                data: [this.institucionesActivas, this.institucionesPasivas],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Total De Instituciones Sociales Por Estado',
-                    font: {
-                      size: 24  // Cambia esto al tamaño de fuente que desees
-                    }
-                }
-            }
-        },
-    });
+    if (this.pieChart) {
+      this.pieChart.destroy();
+    }
+
+    this.pieChart = new Chart("myPieChart", {
+      type: 'pie',
+      data: {
+          labels: ['Activas', 'Inactivas'],
+          datasets: [{
+              label: 'Cantidad total',
+              data: [this.institucionesActivas, this.institucionesPasivas],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          plugins: {
+              legend: {
+                  position: 'top',
+              },
+              title: {
+                  display: true,
+                  text: 'Total De Instituciones Sociales Por Estado: ' + this.institucionesTotales,
+                  font: {
+                      size: 24
+                  }
+              }
+          },
+         
+          responsive: true,
+      },
+  });
 }
 
 chartLineGraphic() {
@@ -435,6 +446,27 @@ async obtenerChartPorAnios(){
     }
   })
   
+}
+
+async obtenerPiePorInstituciones(){
+  const resp: any = await this.api.getInstitucionesEstado(this.anioFinal)
+  .subscribe({
+    next: (data: any) => {
+      let obj = data;
+      if (obj) {
+        console.log(obj);
+        if(this.pieChart){
+          this.pieChart.destroy();
+        }
+        this.institucionesActivas = obj[0]['numero_instituciones_activas']
+        this.institucionesPasivas = obj[0]['numero_instituciones_pasivas']
+        this.institucionesTotales = obj[0]['numero_instituciones']
+        this.chartPieGraphic();
+      }
+
+    }
+  })
+
 }
 
 limpiarFiltroLine(){
