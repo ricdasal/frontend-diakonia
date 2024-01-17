@@ -41,8 +41,11 @@ export class DashboardComponent {
 
   anioInicio = 0;
   anioFinal = 0;
+  lista_anios: any[] = [];
+  labels_bar = ['Oro', 'Plata', ]
   lineChart!: Chart;
   pieChart!: Chart<"pie", number[], string>
+  myChart!: Chart
 
   constructor(
     private http: HttpClient,
@@ -59,6 +62,7 @@ export class DashboardComponent {
     this.getTopDataDashboard();
     this.getClassificationDataDashboard();
     this.getEstadoDataDashboard();
+    this.obtenerBarPorCategoria()
     
     // Las llamadas a chartBarGraphic() y otras funciones de gráficos se han movido a los callbacks de suscripción
   }
@@ -243,6 +247,7 @@ export class DashboardComponent {
                 this.listaBeneficiarios[1].push(i['numero_beneficiarios']);
       
               }
+              this.lista_anios = this.lista_anios.concat(this.listaBeneficiarios[0])
               console.log(this.listaBeneficiarios)
               this.chartLineGraphic();
               
@@ -345,7 +350,7 @@ export class DashboardComponent {
   });
 }
 
-chartLineGraphic() {
+  chartLineGraphic() {
   this.lineChart =  new Chart("myLineChart", {
       type: 'line',
       data: {
@@ -374,107 +379,139 @@ chartLineGraphic() {
           }
       },
   });
-}
+  }
 
 
-chartPolarAreaGraphic(labels: string[], data: number[]) {
-  new Chart("myPolarAreaChart", {
-      type: 'polarArea',
-      data: {
-          labels: labels,
-          datasets: [{
-              label: 'Total De Beneficiarios',
-              data: data,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          responsive: true,
-          plugins: {
-              legend: {
-                  position: 'top',
-              },
-              title: {
-                  display: true,
-                  text: 'Top 5 De Mejores Instituciones Sociales',
-                  font: {
-                    size: 24  // Cambia esto al tamaño de fuente que desees
-                  }
-              }
+  chartPolarAreaGraphic(labels: string[], data: number[]) {
+    new Chart("myPolarAreaChart", {
+        type: 'polarArea',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total De Beneficiarios',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Top 5 De Mejores Instituciones Sociales',
+                    font: {
+                      size: 24  // Cambia esto al tamaño de fuente que desees
+                    }
+                }
+            }
+        },
+    });
+  }
+
+  async obtenerChartPorAnios(){
+    console.log(this.anioFinal, this.anioInicio)
+    const resp: any = await this.api.getBeneficiariosRangoAnio(this.anioInicio, this.anioFinal)
+    .subscribe({
+      next: (data: any)=>{
+        // this.datosCargados = false;
+        console.log(data)
+        let obj = data;
+        if (obj) { // Asegúrate de que obj no es undefined
+          if(this.lineChart){
+            this.lineChart.destroy();
           }
-      },
-  });
-}
+          this.listaBeneficiarios = [[],[]];
+          for(let i of obj){
+            console.log(i)
+            this.listaBeneficiarios[0].push(i['anio']);
+            this.listaBeneficiarios[1].push(i['numero_beneficiarios']);
 
-async obtenerChartPorAnios(){
-  console.log(this.anioFinal, this.anioInicio)
-  const resp: any = await this.api.getBeneficiariosRangoAnio(this.anioInicio, this.anioFinal)
-  .subscribe({
-    next: (data: any)=>{
-      // this.datosCargados = false;
-      console.log(data)
-      let obj = data;
-      if (obj) { // Asegúrate de que obj no es undefined
-        if(this.lineChart){
-          this.lineChart.destroy();
-        }
-        this.listaBeneficiarios = [[],[]];
-        for(let i of obj){
-          console.log(i)
-          this.listaBeneficiarios[0].push(i['anio']);
-          this.listaBeneficiarios[1].push(i['numero_beneficiarios']);
+          }
+          this.chartLineGraphic();
 
         }
-        this.chartLineGraphic();
+        
+      }
+    })
+    
+  }
+
+  async obtenerPiePorInstituciones(){
+    const resp: any = await this.api.getInstitucionesEstado(this.anioFinal)
+    .subscribe({
+      next: (data: any) => {
+        let obj = data;
+        if (obj) {
+          console.log(obj);
+          if(this.pieChart){
+            this.pieChart.destroy();
+          }
+          this.institucionesActivas = obj[0]['numero_instituciones_activas']
+          this.institucionesPasivas = obj[0]['numero_instituciones_pasivas']
+          this.institucionesTotales = obj[0]['numero_instituciones']
+          this.chartPieGraphic();
+        }
 
       }
-      
-    }
-  })
-  
-}
+    })
 
-async obtenerPiePorInstituciones(){
-  const resp: any = await this.api.getInstitucionesEstado(this.anioFinal)
-  .subscribe({
-    next: (data: any) => {
-      let obj = data;
-      if (obj) {
-        console.log(obj);
-        if(this.pieChart){
-          this.pieChart.destroy();
+  }
+
+  obtenerBarPorCategoria(){
+    let lista_instituciones: Array<number> = []
+    let labels_instituciones: Array<string> = []
+    
+    const resp: any =  this.api.getInstitucionesCategoria(this.anioFinal)
+    .subscribe({
+      next: (data: any) => {
+        if(this.myChart){
+          this.myChart.destroy();
         }
-        this.institucionesActivas = obj[0]['numero_instituciones_activas']
-        this.institucionesPasivas = obj[0]['numero_instituciones_pasivas']
-        this.institucionesTotales = obj[0]['numero_instituciones']
-        this.chartPieGraphic();
+        // console.log('Categoria',data);
+
+        for(let i of data){
+          const resp1 = this.api.DataInstitucionesId(i['id_institucion'])
+          .subscribe({
+            next: (data1: any)=>{
+              
+              labels_instituciones = labels_instituciones.concat(data1.nombre);
+              lista_instituciones = lista_instituciones.concat(data1.numero_beneficiarios);
+              console.log('data', lista_instituciones, labels_instituciones);
+            }
+          })
+          this.chartBarGraphic(labels_instituciones, lista_instituciones);
+        }
+        
+        
+        // 
       }
+    })
 
-    }
-  })
+ }
 
-}
+  limpiarFiltroLine(){
+    this.anioInicio = 0;
+    this.anioFinal = 0;
 
-limpiarFiltroLine(){
-  this.anioInicio = 0;
-  this.anioFinal = 0;
-
-  this.getBeneficiariosXAnio();
-}
+    this.getBeneficiariosXAnio();
+  }
 
 
 

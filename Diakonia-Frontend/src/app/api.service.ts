@@ -97,5 +97,11 @@ export class ApiService {
 
   }
 
+  getInstitucionesCategoria(anio: any){
+
+    return this.http.get<any>(`${this.baseURL}/instituciones-categoria?&anioFin=${anio}`, {headers, withCredentials: true});
+
+  }
+
 }
 
