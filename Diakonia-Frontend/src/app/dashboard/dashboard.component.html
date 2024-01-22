@@ -42,10 +42,12 @@
         <mat-select [(value)]="anioFinal">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let anio of this.lista_anios" value="{{anio}}">{{anio}}</mat-option>
+          <mat-option value="2024">2024</mat-option>
+          
         </mat-select>
       </mat-form-field>
 
-      <button mat-button (click)="this.obtenerChartPorAnios();obtenerPiePorInstituciones();obtenerBarPorCategoria();" class="boton-formulario">
+      <button mat-button (click)="this.obtenerChartPorAnios();obtenerPiePorInstituciones();getTopInstituciones();getInstitucionCategoria()" class="boton-formulario">
         <mat-icon fontIcon="filter_list_alt"></mat-icon></button>
       <button mat-button (click)="this.limpiarFiltroLine()" class="boton-formulario">
         <mat-icon >replay</mat-icon>
@@ -92,11 +94,13 @@
   </div>
   <div class="box" >
     <canvas id="myPieChart"></canvas>
+    <!-- <h1 *ngIf="!this.pieChartBool">No hay datos para mostrar</h1> -->
   </div>
-  <!-- <div class="box" >
+  <div class="box" >
       <canvas id="myChart"></canvas>
   </div>
   <div class="box">
-    <canvas id="myPolarAreaChart"></canvas>
-  </div> -->
+    <canvas  id="myPolarAreaChart"></canvas>
+    <!-- <h1 *ngIf="!this.polarChartBool">No hay datos para mostrar</h1> -->
+  </div>
 </div>

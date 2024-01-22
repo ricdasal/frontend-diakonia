@@ -103,5 +103,23 @@ export class ApiService {
 
   }
 
+  getInstitucionesAuditoriaTop(anio: any){
+
+    return this.http.get<any>(`${this.baseURL}/instituciones_auditoria?&anioFin=${anio}`, {headers, withCredentials: true});
+
+  }
+
+  getInstitucionesBroncePlata(anio: any, minBeneficiarios: any, maxBeneficiarios: any){
+
+    return this.http.get<any>(`${this.baseURL}/instituciones-categoria-bronce-plata?&anioFin=${anio}&minBeneficiarios=${minBeneficiarios}&maxBeneficiarios=${maxBeneficiarios}`, {headers, withCredentials: true});
+
+  }
+
+  getInstitucionesOro(anio: any, beneficiarios: any){
+
+    return this.http.get<any>(`${this.baseURL}/instituciones-categoria-oro?&anioFin=${anio}&minBeneficiarios=${beneficiarios}`, {headers, withCredentials: true});
+
+  }
+
 }
 

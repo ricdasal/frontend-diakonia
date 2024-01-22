@@ -38,6 +38,8 @@ export class DashboardComponent {
 
   datosCargados = false
   showFiller = false;
+  minBeneficiarios: number = 0;
+  maxBeneficiarios: number = 0;
 
   anioInicio = 0;
   anioFinal = 0;
@@ -46,6 +48,10 @@ export class DashboardComponent {
   lineChart!: Chart;
   pieChart!: Chart<"pie", number[], string>
   myChart!: Chart
+  polarChart!: Chart<"polarArea", number[], string>;
+
+  pieChartBool: boolean = true;
+  polarChartBool: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -62,7 +68,9 @@ export class DashboardComponent {
     this.getTopDataDashboard();
     this.getClassificationDataDashboard();
     this.getEstadoDataDashboard();
-    this.obtenerBarPorCategoria()
+    // this.obtenerBarPorCategoria();
+    this.getTopInstituciones()
+    this.getInstitucionCategoria()
     
     // Las llamadas a chartBarGraphic() y otras funciones de gráficos se han movido a los callbacks de suscripción
   }
@@ -97,6 +105,39 @@ export class DashboardComponent {
       },
       error:(err)=>{
         alert("Error while fetching the Records!!")
+      }
+    })
+  }
+
+  getTopInstituciones(){
+
+    if(this.anioFinal == 0){
+      this.anioFinal = new Date().getFullYear();
+    }
+    this.api.getInstitucionesAuditoriaTop(this.anioFinal)
+    .subscribe({
+      next: (data: any) => {
+        console.log('auditoria', data);
+        let instituciones = data.slice(0,5);
+        let labels = [];
+        let numero_beneficiarios = [];
+        if(instituciones > 0){
+          this.polarChartBool = true;
+        }
+        else{
+          this.polarChartBool = false;
+        }
+        for(let institucion of instituciones){
+          labels.push(institucion["nombre"]);
+          numero_beneficiarios.push(institucion["numero_beneficiarios"]);;
+
+        }
+
+        console.log('labels - beneficiarios', labels, numero_beneficiarios)
+        if(this.polarChart){
+          this.polarChart.destroy();
+        }
+        this.chartPolarAreaGraphic(labels, numero_beneficiarios);
       }
     })
   }
@@ -265,8 +306,60 @@ export class DashboardComponent {
     }
   }
 
+  getInstitucionCategoria(){
+
+    let instituciones: Array<string> = [];
+    let numero_beneficiarios: Array<number>= [];
+
+    if(this.anioFinal == 0){
+      this.anioFinal = new Date().getFullYear();
+    }
+
+    this.api.getInstitucionesBroncePlata(this.anioFinal, 1, 300)
+    .subscribe({
+      next: (data: any)=>{
+        instituciones.push(data[0]["nombre"])
+        numero_beneficiarios.push(data[0]["numero_beneficiarios"])
+
+        this.api.getInstitucionesBroncePlata(this.anioFinal, 301, 700)
+        .subscribe({
+          next: (data1: any)=>{
+            instituciones.push(data1[0]["nombre"])
+            numero_beneficiarios.push(data1[0]["numero_beneficiarios"])
+
+            this.api.getInstitucionesOro(this.anioFinal, 701)
+            .subscribe({
+              next: (data2: any)=> {
+                instituciones.push(data2[0]["nombre"])
+                numero_beneficiarios.push(data2[0]["numero_beneficiarios"])
+                if(this.myChart){
+                  this.myChart.destroy();
+                }
+                this.chartBarGraphic(instituciones, numero_beneficiarios);
+
+              }
+            })
+
+
+          }
+        })
+      }
+    })
+
+    
+
+    console.log('data-instituciones', instituciones, numero_beneficiarios)
+    this.myChart.update();
+   
+
+    
+
+    
+
+  }
+
   chartBarGraphic(labels: string[], data: number[]){
-    let myChart = new Chart("myChart", {
+    this.myChart = new Chart("myChart", {
       type: 'bar',
       data: {
           labels: labels,
@@ -296,7 +389,7 @@ export class DashboardComponent {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Mejores Instituciones Sociales Oro, Plata y Bronce',
+                    text: 'Mejores Instituciones Sociales Oro, Plata y Bronce ' + this.anioFinal,
                     font: {
                       size: 24  // Cambia esto al tamaño de fuente que desees
                     }
@@ -304,9 +397,8 @@ export class DashboardComponent {
             }
       }
     });
-    myChart.update();
+    // myChart.update();
 }
-
 
   chartPieGraphic() {
     if (this.pieChart) {
@@ -338,7 +430,7 @@ export class DashboardComponent {
               },
               title: {
                   display: true,
-                  text: 'Total De Instituciones Sociales Por Estado: ' + this.institucionesTotales,
+                  text: 'Total De Instituciones Sociales Por Estado ' + this.anioFinal  + ': '  +  this.institucionesTotales,
                   font: {
                       size: 24
                   }
@@ -383,7 +475,7 @@ export class DashboardComponent {
 
 
   chartPolarAreaGraphic(labels: string[], data: number[]) {
-    new Chart("myPolarAreaChart", {
+    this.polarChart = new Chart("myPolarAreaChart", {
         type: 'polarArea',
         data: {
             labels: labels,
@@ -415,7 +507,7 @@ export class DashboardComponent {
                 },
                 title: {
                     display: true,
-                    text: 'Top 5 De Mejores Instituciones Sociales',
+                    text: 'Top 5 De Mejores Instituciones Sociales ' + this.anioFinal,
                     font: {
                       size: 24  // Cambia esto al tamaño de fuente que desees
                     }
@@ -463,10 +555,16 @@ export class DashboardComponent {
           if(this.pieChart){
             this.pieChart.destroy();
           }
-          this.institucionesActivas = obj[0]['numero_instituciones_activas']
-          this.institucionesPasivas = obj[0]['numero_instituciones_pasivas']
-          this.institucionesTotales = obj[0]['numero_instituciones']
-          this.chartPieGraphic();
+          if(obj.length > 0){
+            this.institucionesActivas = obj[0]['numero_instituciones_activas']
+            this.institucionesPasivas = obj[0]['numero_instituciones_pasivas']
+            this.institucionesTotales = obj[0]['numero_instituciones']
+            this.chartPieGraphic();
+
+          }else{
+            this.pieChartBool = false;
+          }
+          
         }
 
       }
