@@ -99,16 +99,17 @@ table {
 
 td, th {
   text-align: start;
-  /* width: 15%; */
+  /* width: 55%; */
 }
 
 td{
-  font-size: 0.75rem;
+  font-size: 0.65rem;
 }
 
 .container{
-  width: 1300px;
-  margin: auto;
+  /* width: 1300px; */
+  width: 200vh;
+  /* margin: auto; */
   background-color: white;
   margin-left: -500px;
 }

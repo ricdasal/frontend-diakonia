@@ -14,11 +14,13 @@ body {
   background: rgb(130, 106, 251);
 }
 
+
+
 .container {
   max-width: 2000px;
-  width: 1750px;
+  width: 100vh;
   background: #fff;
-  margin-left: -725px;
+  /* margin-left: -200px; */
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -118,6 +120,15 @@ body {
   accent-color :rgb(235,4,75) ;
 }
 
+.cerrar{
+  background-color: rgb(197, 97, 98) !important; 
+  color: white;
+}
+
+.enviar{
+  background-color: rgb(70, 80, 59) !important;
+  color: white;
+}
 
 /*Responsive*/
 @media screen and (max-width :600px) {

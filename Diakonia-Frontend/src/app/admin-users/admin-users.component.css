@@ -2,6 +2,23 @@
   width:200px;
 }
 
+.color-header{
+  background-color: rgb(57, 68, 45) !important;
+  color: white;
+}
+
+.boton-rojo{
+  background-color: rgb(70, 80, 59) !important;
+  color: white;
+  width: auto;
+  height: 8vh; 
+}
+
+.centrado{
+  margin-left: 0.5rem !important;
+}
+
+
 .mat-toolbar-row, .mat-toolbar-single-row {
   display: flex;
   box-sizing: border-box;
@@ -35,9 +52,9 @@ table {
   width: 100%;
 }
 
-td, th {
+/* td, th {
   width: 25%;
-}
+} */
 
 .container{
   width: 1300px;

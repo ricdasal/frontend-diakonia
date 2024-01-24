@@ -16,7 +16,7 @@
 -->
 
 <section class="container">
-  <header>Formulario de Registro</header>
+  <header>Agregar Usuario</header>
   <form class="form" [formGroup]="form" (submit)="submit()">
     <div class="input-box">
       <label>Nombres</label>
@@ -131,11 +131,14 @@
       </div>
     </div>
 
-    <button
-      style="background-color: rgba(216, 37, 37); color: white"
-      type="submit"
-    >
-      Confirmar
-    </button>
+    <div style="display: flex; flex-direction: row; gap: 1rem">
+      <button class="cerrar" type="button" >
+        Cerrar
+      </button>
+  
+      <button class="enviar" type="submit">
+        Confirmar
+      </button>
+    </div>
   </form>
 </section>

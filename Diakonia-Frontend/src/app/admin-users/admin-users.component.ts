@@ -12,6 +12,7 @@ import { ModalInstitucionesDatosComponent } from '../modal-instituciones-datos/m
 import { SharedService } from '../shared.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalAdminUsersComponent } from '../modal-admin-users/modal-admin-users.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-admin-users',
@@ -79,7 +80,7 @@ export class AdminUsersComponent implements OnInit{
 
   editUser(row:any){
     this.dialog.open(ModalAdminUsersComponent, {
-      width:'30%',
+      width:'70vh',
       data:row
     }).afterClosed().subscribe(val=>{
       if(val === 'update'){
@@ -94,6 +95,12 @@ export class AdminUsersComponent implements OnInit{
       alert("Usuario Elimado Correctamente");
       this.getDataUsers();
     }, (res: any) => {alert("Ocurrio un error. Intenta mas tarde.")})
+  }
+
+  newUser(){
+    this.dialog.open(RegisterComponent, {
+      width:'100vh',
+    })
   }
 
 }
