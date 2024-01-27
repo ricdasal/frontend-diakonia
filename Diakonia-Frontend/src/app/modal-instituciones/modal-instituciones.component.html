@@ -134,15 +134,18 @@
 
     <div mat-dialog-content class="espaciador-contenedor w-75">
       <div formGroupName="direcciones">
-        <h6>Direcciones</h6>
-        <button
+        <div class="alinear">
+          <h5>Direcciones</h5>
+          <button
           type="button"
-          mat-raised-button
-          color="primary"
+          class="boton-x-1"
           (click)="addNewDireccion()"
         >
           +
         </button>
+        </div>
+        
+        
         <div
           mat-dialog-content
           *ngFor="let direccion of registerDirecciones.controls; let i = index"
@@ -150,7 +153,7 @@
           <div class="d-flex justify-content-around align-items-center my-4">
             <b>Dirección {{ i + 1 }}</b>
 
-            <button mat-fab color="warn" type="button" (click)="deleteRegisterDireccion(i)" style="margin-bottom: 1rem;">
+            <button color="warn" type="button" (click)="deleteRegisterDireccion(i)" class="boton-x">
               x
             </button>
           </div>
@@ -182,14 +185,14 @@
 
     <div mat-dialog-content class="espaciador-contenedor" style="display: flex; flex-direction: row; gap: 2rem;">
       <div formGroupName="telefonos" style="display: flex; flex-direction: column; gap: 0.5rem; justify-content: center;">
-        <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+        <div class="alinear">
           <h6>Teléfonos</h6>
-          <button mat-raised-button color="primary" type="button" (click)="addNewTelefono()" >
+          <button class="boton-x-1" color="primary" type="button" (click)="addNewTelefono()" >
             <mat-icon >add</mat-icon>
           </button>
         </div>
         <div *ngFor="let telefono of registerTelefonos.controls; let i = index" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-          <b>{{ i + 1 }}</b>
+          <!-- <b>{{ i + 1 }}</b> -->
 
           <mat-form-field
             appearance="outline"
@@ -203,7 +206,7 @@
               maxlength="10"
             />
           </mat-form-field>
-          <button mat-fab color="warn" type="button" (click)="deleteRegisterTelefono(i)" style="margin-bottom: 1rem;">
+          <button class="boton-x" type="button" (click)="deleteRegisterTelefono(i)" style="margin-bottom: 1rem;">
             x
           </button>
 
@@ -211,18 +214,18 @@
         </div>
       </div>
 
-      <div formGroupName="correos">
+      <div formGroupName="correos" style="display: flex; flex-direction: column; gap: 0.5rem; justify-content: center;">
 
-        <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+        <div class="alinear">
           <h6>Correos</h6>
-        <button
-          mat-raised-button
-          color="primary"
-          type="button"
-          (click)="addNewCorreo()"
-        >
-         <mat-icon >add</mat-icon>
-        </button>
+          <button
+            class="boton-x-1"
+            color="primary"
+            type="button"
+            (click)="addNewCorreo()"
+          >
+          <mat-icon >add</mat-icon>
+          </button>
 
         </div>
 
@@ -234,7 +237,7 @@
           "
           style="display: flex; flex-direction: row; align-items: center;"
         >
-          <b> {{ i + 1 }}</b>
+          <!-- <b> {{ i + 1 }}</b> -->
 
           <mat-form-field
             appearance="outline"
@@ -245,7 +248,7 @@
             <input matInput formControlName="correo_contacto" />
           </mat-form-field>
 
-          <button mat-fab color="warn" type="button" (click)="deleteRegisterCorreo(i)" style="margin-bottom: 1rem;">
+          <button class="boton-x" type="button" style="margin-bottom: 1rem;" (click)="deleteRegisterCorreo(i)">
             x
           </button>
         </div>

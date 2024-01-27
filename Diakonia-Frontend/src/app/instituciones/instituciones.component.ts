@@ -43,9 +43,9 @@ export class InstitucionesComponent implements OnInit {
 
   uploadedFile: boolean = false;
   messageLog: string = '';
-  filterForm: FormGroup;
+  filterForm!: FormGroup;
 
-  nombreInstitucion = '';
+  nombreInstitucion?: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -282,6 +282,17 @@ export class InstitucionesComponent implements OnInit {
   }
 
   limpiarFiltro(){
+    this.nombreInstitucion = "";
+    const actividad = this.filterForm.get('nombre_actividad')
+    if(actividad){
+      actividad.setValue(null);
+    }
+    const tipo_poblacion = this.filterForm.get('tipo_poblacion');
+    if(tipo_poblacion){
+      tipo_poblacion.setValue(null);
+    }
+
+    this.getDataInstituciones();
 
 
   }

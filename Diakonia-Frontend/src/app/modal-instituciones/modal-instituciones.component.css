@@ -19,6 +19,7 @@
 
 .title-space{
   padding-bottom: 6px;
+
 }
 
 
@@ -37,6 +38,42 @@
   padding: 1px 24px 20px 24px;
 }
 
+.boton-x {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(197, 97, 98); /* Puedes cambiar el color según tus preferencias */
+}
+
+.boton-x-1{
+
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(96, 150, 90) ; /* Puedes cambiar el color según tus preferencias */
+
+}
+
+.alinear{
+  display: flex;
+  flex-direction: row;
+  gap: 5vh;
+  align-items: center;
+}
 
 /* Estilos para pantallas con un ancho máximo de 1024px (típicamente tablets en modo paisaje) */
 @media screen and (min-width: 1280px) and (max-width: 1280px) and (min-height: 800px) and (max-width: 800px) {

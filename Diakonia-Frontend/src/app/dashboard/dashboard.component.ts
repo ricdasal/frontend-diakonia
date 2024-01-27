@@ -389,7 +389,7 @@ export class DashboardComponent {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Mejores Instituciones Sociales Oro, Plata y Bronce ' + this.anioFinal,
+                    text: 'Mejores Instituciones Sociales Bronce, Plata y Oro ' + this.anioFinal,
                     font: {
                       size: 24  // Cambia esto al tamaño de fuente que desees
                     }
