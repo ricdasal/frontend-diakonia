@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../servicios/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -38,16 +40,14 @@ export class RegisterComponent implements OnInit {
   }
 
   submit(): void {
-    this.http
-      .post('http://localhost:8000/api/register', this.form.getRawValue())
-      .subscribe(
-        (res: any) => {
-          alert('Usuario Creado');
-        },
-        (err: any) => {
-          console.log(err);
-          alert('Ocurrio un error');
-        }
-      );
+    this.authService.register(this.form.getRawValue()).subscribe({
+      next: (res: any) => {
+        alert('Usuario Creado');
+      },
+      error: (err: any) => {
+        console.log(err);
+        alert('Ocurrio un error');
+      },
+    });
   }
 }
