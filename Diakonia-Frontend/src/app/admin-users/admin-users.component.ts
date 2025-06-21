@@ -118,8 +118,13 @@ export class AdminUsersComponent implements OnInit {
   }
 
   newUser() {
-    this.dialog.open(RegisterComponent, {
-      width: '100vh',
-    });
+    this.dialog
+      .open(RegisterComponent, {
+        width: '100vh',
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.getDataUsers();
+      });
   }
 }

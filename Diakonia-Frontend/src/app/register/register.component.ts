@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialogRef: MatDialogRef<RegisterComponent>
   ) {}
 
   ngOnInit(): void {
@@ -42,12 +44,17 @@ export class RegisterComponent implements OnInit {
   submit(): void {
     this.authService.register(this.form.getRawValue()).subscribe({
       next: (res: any) => {
-        alert('Usuario Creado');
+        alert('Usuario Creado Sastifactoriamente.');
+        this.closeDialog();
       },
       error: (err: any) => {
         console.log(err);
-        alert('Ocurrio un error');
+        alert('Ocurrio un error. Intenta de nuevo.');
       },
     });
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

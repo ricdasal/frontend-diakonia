@@ -52,7 +52,7 @@
       <div class="input-box">
         <label>Numero Teléfonico</label>
         <input
-          type="number"
+          type="text"
           placeholder="Ingrese Numero Teléfonico"
           required
           formControlName="telefono"
@@ -132,7 +132,9 @@
     </div>
 
     <div style="display: flex; flex-direction: row; gap: 1rem">
-      <button class="cerrar" type="button"  >Cerrar</button>
+      <button class="cerrar" type="button" (click)="closeDialog()">
+        Cerrar
+      </button>
 
       <button class="enviar" type="submit">Confirmar</button>
     </div>
