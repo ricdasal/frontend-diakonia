@@ -89,7 +89,6 @@ export class ApiService {
     const params = new HttpParams()
       .set('nombre_actividad', nombre_actividad)
       .set('tipo_poblacion', tipo_poblacion);
-    console.log(params);
     return this.http.get(`${this.baseURL}/filter`, {
       headers,
       withCredentials: true,

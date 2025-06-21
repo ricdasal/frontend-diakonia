@@ -68,7 +68,6 @@ export class InstitucionesComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getAllInstituciones();
     this.getDataInstituciones();
     this.api
       .getAllActividades()
@@ -120,26 +119,26 @@ export class InstitucionesComponent implements OnInit {
     }
   }
 
-  fitroPorInstitucion(){
-
-  if(this.nombreInstitucion == ''){
-    this.getDataInstituciones();
-  }
-   this.dataSource.data = this.dataSource.data.filter(
-    (item: { nombre: any; }) => {
-    return (
-      !this.nombreInstitucion || item.nombre.toLowerCase().includes(this.nombreInstitucion.toLowerCase())
+  fitroPorInstitucion() {
+    if (this.nombreInstitucion == '') {
+      this.getDataInstituciones();
+    }
+    this.dataSource.data = this.dataSource.data.filter(
+      (item: { nombre: any }) => {
+        return (
+          !this.nombreInstitucion ||
+          item.nombre
+            .toLowerCase()
+            .includes(this.nombreInstitucion.toLowerCase())
+        );
+      }
     );
-
-    })
-
   }
-
 
   getDataInstituciones() {
     this.api.DataInstituciones().subscribe({
       next: (res) => {
-        console.log('instituciones',res)
+        console.log('instituciones', res);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -281,19 +280,17 @@ export class InstitucionesComponent implements OnInit {
     };
   }
 
-  limpiarFiltro(){
-    this.nombreInstitucion = "";
-    const actividad = this.filterForm.get('nombre_actividad')
-    if(actividad){
+  limpiarFiltro() {
+    this.nombreInstitucion = '';
+    const actividad = this.filterForm.get('nombre_actividad');
+    if (actividad) {
       actividad.setValue(null);
     }
     const tipo_poblacion = this.filterForm.get('tipo_poblacion');
-    if(tipo_poblacion){
+    if (tipo_poblacion) {
       tipo_poblacion.setValue(null);
     }
 
     this.getDataInstituciones();
-
-
   }
 }

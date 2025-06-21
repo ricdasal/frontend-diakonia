@@ -14,10 +14,9 @@ import { ModalInfoInstitucionesComponent } from '../modal-info-instituciones/mod
 @Component({
   selector: 'app-informacion-instituciones',
   templateUrl: './informacion-instituciones.component.html',
-  styleUrls: ['./informacion-instituciones.component.css']
+  styleUrls: ['./informacion-instituciones.component.css'],
 })
-export class InformacionInstitucionesComponent implements OnInit{
-
+export class InformacionInstitucionesComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'nombre',
@@ -29,8 +28,8 @@ export class InformacionInstitucionesComponent implements OnInit{
 
   elemento: string = '';
 
-  tipos_actividades: string[] =[];
-  tipos_poblaciones: string[] =[];
+  tipos_actividades: string[] = [];
+  tipos_poblaciones: string[] = [];
 
   uploadedFile: boolean = false;
   messageLog: string = '';
@@ -56,11 +55,9 @@ export class InformacionInstitucionesComponent implements OnInit{
   getInfoInstituciones() {
     this.api.DataInstituciones().subscribe({
       next: (res) => {
-        console.log(res[0].tipos_poblacion);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
       },
       error: (err) => {
         alert('Error while fetching the Records!!');
@@ -74,7 +71,7 @@ export class InformacionInstitucionesComponent implements OnInit{
       .open(ModalInfoInstitucionesComponent, {
         width: '80vh',
         height: '40vh',
-        data: row.id
+        data: row.id,
       })
       .afterClosed()
       .subscribe((val) => {
@@ -88,7 +85,6 @@ export class InformacionInstitucionesComponent implements OnInit{
   getDataInstituciones() {
     this.api.DataInstituciones().subscribe({
       next: (res) => {
-        console.log('instituciones',res)
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -99,19 +95,19 @@ export class InformacionInstitucionesComponent implements OnInit{
     });
   }
 
-  fitroPorInstitucion(){
-
-    if(this.nombreInstitucion == ''){
+  fitroPorInstitucion() {
+    if (this.nombreInstitucion == '') {
       this.getDataInstituciones();
     }
-     this.dataSource.data = this.dataSource.data.filter(
-      (item: { nombre: any; }) => {
-      return (
-        !this.nombreInstitucion || item.nombre.toLowerCase().includes(this.nombreInstitucion.toLowerCase())
-      );
-  
-      })
-  
-    }
-
+    this.dataSource.data = this.dataSource.data.filter(
+      (item: { nombre: any }) => {
+        return (
+          !this.nombreInstitucion ||
+          item.nombre
+            .toLowerCase()
+            .includes(this.nombreInstitucion.toLowerCase())
+        );
+      }
+    );
+  }
 }

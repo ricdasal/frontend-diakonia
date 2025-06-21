@@ -55,8 +55,6 @@ export class AdminUsersComponent implements OnInit {
   getDataUsers() {
     this.api.DataUsers().subscribe({
       next: (res) => {
-        console.log(res);
-        //this.elemento = res
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

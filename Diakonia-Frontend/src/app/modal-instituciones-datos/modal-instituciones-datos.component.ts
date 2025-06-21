@@ -1,6 +1,13 @@
-import { Component, OnInit, Inject  } from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormBuilder} from '@angular/forms';
-import {NgIf, NgFor} from '@angular/common';
+import { Component, OnInit, Inject } from '@angular/core';
+import {
+  FormControl,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+  FormBuilder,
+} from '@angular/forms';
+import { NgIf, NgFor } from '@angular/common';
 import { ApiService } from '../api.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SharedService } from '../shared.service';
@@ -8,26 +15,26 @@ import { SharedService } from '../shared.service';
 @Component({
   selector: 'app-modal-instituciones-datos',
   templateUrl: './modal-instituciones-datos.component.html',
-  styleUrls: ['./modal-instituciones-datos.component.css']
+  styleUrls: ['./modal-instituciones-datos.component.css'],
 })
-export class ModalInstitucionesDatosComponent implements OnInit{
-  institucionForm !: FormGroup;
+export class ModalInstitucionesDatosComponent implements OnInit {
+  institucionForm!: FormGroup;
   actionBtn: string = 'Save';
-  institucionNombre: string='';
+  institucionNombre: string = '';
 
-  constructor(private formbuilder: FormBuilder,
+  constructor(
+    private formbuilder: FormBuilder,
     private api: ApiService,
     private sharedService: SharedService,
-    @Inject(MAT_DIALOG_DATA) public id: number,){}
+    @Inject(MAT_DIALOG_DATA) public id: number
+  ) {}
 
   ngOnInit() {
     this.getDataInstitucionesId();
     // this.sharedService.currentId.subscribe(id => this.id = id);
     // Ahora puedes usar este ID para hacer una nueva solicitud a tu endpoint
     // this.id = this.id;
-    // console.log(this.id);
   }
-
 
   toppings = new FormControl('');
 
@@ -42,44 +49,51 @@ export class ModalInstitucionesDatosComponent implements OnInit{
 
   toppings2 = new FormControl('');
 
-  toppingList2: string[] = ['Ballenita', 'Centro', 'Chongon', 'Daule', 'Duran', 'El laurel','El triunfo', 'La libertad', 'Lomas Sargentillo', 'Marcelino Mariduena', 'Naranjito', 'Nobol'];
-
+  toppingList2: string[] = [
+    'Ballenita',
+    'Centro',
+    'Chongon',
+    'Daule',
+    'Duran',
+    'El laurel',
+    'El triunfo',
+    'La libertad',
+    'Lomas Sargentillo',
+    'Marcelino Mariduena',
+    'Naranjito',
+    'Nobol',
+  ];
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  getDataInstitucionesId(){
-    this.api.DataInstitucionesId(this.id.toString())
-    .subscribe({
-      next:(res)=>{
-        console.log(res)
-        let obj = res.find((item: { id: string; }) => parseInt(item.id) === this.id);
-        //console.log(obj.actividades);
+  getDataInstitucionesId() {
+    this.api.DataInstitucionesId(this.id.toString()).subscribe({
+      next: (res) => {
+        let obj = res.find(
+          (item: { id: string }) => parseInt(item.id) === this.id
+        );
         this.institucionNombre = obj.nombre;
 
         for (let item of obj.actividades) {
           this.actividadList.push(item.nombre_actividad); // Añadir cada item a la lista
         }
-        //console.log(this.actividadList);
 
         for (let item of obj.caracterizacion) {
           this.caracterizacionList.push(item.nombre_caracterizacion); // Añadir cada item a la lista
         }
-        //console.log(this.caracterizacionList);
 
         for (let item of obj.tipos_poblacion) {
           this.tipoPoblacionList.push(item.tipo_poblacion); // Añadir cada item a la lista
         }
-        //console.log(this.tipoPoblacionList);
 
         for (let item of obj.estado) {
           this.estadoList.push(item.nombre_estado); // Añadir cada item a la lista
         }
-        //console.log(this.estadoList);
       },
-      error:(err)=>{
-        alert("Error while fetching the Records!!")
-      }
-    })
+      error: (err) => {
+        alert('Error while fetching the Records!!');
+      },
+    });
   }
 
   getErrorMessage() {

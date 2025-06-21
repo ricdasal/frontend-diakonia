@@ -39,25 +39,21 @@ export class ModalInfoInstitucionesComponent implements OnInit {
     this.sharedService.currentId.subscribe((id) => (this.id = id));
     // Ahora puedes usar este ID para hacer una nueva solicitud a tu endpoint
     this.id = this.id;
-    console.log(this.id);
   }
 
   getDataInstitucionesId() {
     this.api.DataInstitucionesId(this.id).subscribe({
       next: (res) => {
         let obj = res.find((item: { id: string }) => item.id === this.id);
-        //console.log(obj.actividades);
         this.institucionNombre = obj.nombre;
 
         for (let item of obj.actividades) {
           this.actividadList.push(item.nombre_actividad); // Añadir cada item a la lista
         }
-        //console.log(this.actividadList);
 
         for (let item of obj.tipos_poblacion) {
           this.tipoPoblacionList.push(item.tipo_poblacion); // Añadir cada item a la lista
         }
-        console.log(this.tipoPoblacionList);
       },
       error: (err) => {
         alert('Error while fetching the Records!!');

@@ -257,7 +257,6 @@ export class ModalInstitucionesComponent implements OnInit {
     this.obtainAllInformation();
 
     if (this.editData) {
-      console.log(this.editData.direccion);
       this.institucionForm.patchValue(this.editData);
       this.institucionForm.controls['actividades'].setValue(
         this.editData.actividades?.map((elem: Actividad) => elem.id)
@@ -474,9 +473,8 @@ export class ModalInstitucionesComponent implements OnInit {
   // }
 
   registrarInstitucion(form: any) {
-    console.log(form.value);
     this.servicios.ingresarInstitucion(form).subscribe((res: any) => {
-      console.log(res);
+      alert('Insitucion Registrada Sastifactoriamente.');
     });
   }
 }
