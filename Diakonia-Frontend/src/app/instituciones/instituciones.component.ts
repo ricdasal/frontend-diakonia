@@ -62,6 +62,7 @@ export class InstitucionesComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.filterForm = this.fb.group({
+      nombre_institucion: new FormControl(''),
       nombre_actividad: new FormControl(''),
       tipo_poblacion: new FormControl(''),
     });
@@ -99,10 +100,11 @@ export class InstitucionesComponent implements OnInit {
 
   filterSubmit(): void {
     let validFilter =
+      this.filterForm.get('nombre_institucion')?.value !== '' ||
       this.filterForm.get('nombre_actividad')?.value !== '' ||
       this.filterForm.get('tipo_poblacion')?.value !== '';
     if (validFilter) {
-      this.api.filterInstitucion(this.filterForm.value).subscribe(
+      this.api.filterInstitucion(this.filterForm.getRawValue()).subscribe(
         (res: any) => {
           this.dataSource = new MatTableDataSource(res.instituciones);
           if (!res) {
@@ -281,16 +283,7 @@ export class InstitucionesComponent implements OnInit {
   }
 
   limpiarFiltro() {
-    this.nombreInstitucion = '';
-    const actividad = this.filterForm.get('nombre_actividad');
-    if (actividad) {
-      actividad.setValue(null);
-    }
-    const tipo_poblacion = this.filterForm.get('tipo_poblacion');
-    if (tipo_poblacion) {
-      tipo_poblacion.setValue(null);
-    }
-
+    this.filterForm.reset();
     this.getDataInstituciones();
   }
 }
