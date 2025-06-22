@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../servicios/user.service';
 import { menuNagivation } from 'src/constraints/menu-rol';
 import { MenuItems } from 'src/constraints/interfaces/menu-items';
+import { environment } from 'src/environments/enviroment';
 
 type Rol = keyof typeof menuNagivation;
 const headers = new HttpHeaders({
@@ -48,7 +49,7 @@ export class NavigationComponent implements OnInit {
   logout(): void {
     this.http
       .post(
-        'http://localhost:8000/api/logout',
+        `${environment.backendUrl}/api/logout`,
         {},
         { headers: headers, withCredentials: true }
       )

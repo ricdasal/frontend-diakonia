@@ -5,6 +5,7 @@ import { UserDto } from '../servicios/user.dto';
 import { UserService } from '../servicios/user.service';
 import { menuRol } from 'src/constraints/menu-rol';
 import { MenuItems } from 'src/constraints/interfaces/menu-items';
+import { environment } from 'src/environments/enviroment';
 
 type RolKey = keyof typeof menuRol;
 const headers = new HttpHeaders({
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
     const rol: RolKey = localStorage.getItem('USER_ROLE') as RolKey;
     this.menu = menuRol[rol] as MenuItems[];
     this.http
-      .get('http://localhost:8000/api/user', {
+      .get(`${environment.backendUrl}/api/user`, {
         headers: headers,
         withCredentials: true,
       })

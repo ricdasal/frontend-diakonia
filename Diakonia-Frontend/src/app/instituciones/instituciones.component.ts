@@ -14,6 +14,7 @@ import { InstitucionDataExcel } from './models/institucion';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Actividad, TiposPoblacion } from '../modal-instituciones/models';
 import { catchError, switchMap, tap } from 'rxjs';
+import { environment } from 'src/environments/enviroment';
 
 const headersAPI = new HttpHeaders({
   Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
@@ -255,7 +256,7 @@ export class InstitucionesComponent implements OnInit {
 
       this.http
         .post(
-          'http://localhost:8000/api/readData',
+          `${environment.backendUrl}/api/readData`,
           { data: csvData },
           { withCredentials: true, headers: headersAPI }
         )
