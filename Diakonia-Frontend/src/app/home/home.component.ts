@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     const rol: RolKey = localStorage.getItem('USER_ROLE') as RolKey;
     this.menu = menuRol[rol] as MenuItems[];
     this.http
-      .get(`${environment.backendUrl}/api/user`, {
+      .get(`${environment.backendUrl}/user`, {
         headers: headers,
         withCredentials: true,
       })

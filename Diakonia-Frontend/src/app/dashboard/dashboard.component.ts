@@ -103,33 +103,40 @@ export class DashboardComponent {
   }
 
   getTopInstituciones() {
-    if (this.anioFinal == 0) {
-      this.anioFinal = new Date().getFullYear();
-    }
-    this.api.getInstitucionesAuditoriaTop(this.anioFinal).subscribe({
-      next: (data: any) => {
-        console.log('auditoria', data);
-        let instituciones = data.slice(0, 5);
-        let labels = [];
-        let numero_beneficiarios = [];
-        if (instituciones > 0) {
-          this.polarChartBool = true;
-        } else {
-          this.polarChartBool = false;
-        }
-        for (let institucion of instituciones) {
-          labels.push(institucion['nombre']);
-          numero_beneficiarios.push(institucion['numero_beneficiarios']);
-        }
-
-        console.log('labels - beneficiarios', labels, numero_beneficiarios);
-        if (this.polarChart) {
-          this.polarChart.destroy();
-        }
-        this.chartPolarAreaGraphic(labels, numero_beneficiarios);
-      },
-    });
+  if (this.anioFinal == 0) {
+    this.anioFinal = new Date().getFullYear();
   }
+
+  this.api.getInstitucionesAuditoriaTop(this.anioFinal).subscribe({
+    next: (data: any) => {
+      console.log('auditoria', data);
+
+      if (!Array.isArray(data) || data.length === 0) {
+        console.warn('No se recibieron datos válidos');
+        return;
+      }
+
+      let instituciones = data.slice(0, 5);
+      let labels: string[] = [];
+      let numero_beneficiarios: number[] = [];
+
+      for (let institucion of instituciones) {
+        if (institucion && institucion.nombre && institucion.numero_beneficiarios !== undefined) {
+          labels.push(institucion.nombre);
+          numero_beneficiarios.push(institucion.numero_beneficiarios);
+        } else {
+          console.warn('Institución inválida:', institucion);
+        }
+      }
+
+      this.polarChartBool = numero_beneficiarios.length > 0;
+      this.chartPolarAreaGraphic(labels, numero_beneficiarios);
+    },
+    error: (err) => {
+      console.error('Error en getInstitucionesAuditoriaTop:', err);
+    }
+  });
+}
 
   getTopTresInstituciones(
     nombresInstituciones: string[],
@@ -346,43 +353,43 @@ export class DashboardComponent {
   }
 
   getInstitucionCategoria() {
-    let instituciones: Array<string> = [];
-    let numero_beneficiarios: Array<number> = [];
+  let instituciones: Array<string> = [];
+  let numero_beneficiarios: Array<number> = [];
 
-    if (this.anioFinal == 0) {
-      this.anioFinal = new Date().getFullYear();
-    }
+  if (this.anioFinal == 0) {
+    this.anioFinal = new Date().getFullYear();
+  }
 
-    this.api.getInstitucionesBroncePlata(this.anioFinal, 1, 300).subscribe({
-      next: (data: any) => {
-        instituciones.push(data[0]['nombre']);
-        numero_beneficiarios.push(data[0]['numero_beneficiarios']);
+  this.api.getInstitucionesBroncePlata(this.anioFinal, 1, 300).subscribe({
+    next: (data: any) => {
+      instituciones.push(data[0]['nombre']);
+      numero_beneficiarios.push(data[0]['numero_beneficiarios']);
 
-        this.api
-          .getInstitucionesBroncePlata(this.anioFinal, 301, 700)
-          .subscribe({
-            next: (data1: any) => {
-              instituciones.push(data1[0]['nombre']);
-              numero_beneficiarios.push(data1[0]['numero_beneficiarios']);
+      this.api.getInstitucionesBroncePlata(this.anioFinal, 301, 700).subscribe({
+        next: (data1: any) => {
+          instituciones.push(data1[0]['nombre']);
+          numero_beneficiarios.push(data1[0]['numero_beneficiarios']);
 
-              this.api.getInstitucionesOro(this.anioFinal, 701).subscribe({
-                next: (data2: any) => {
-                  instituciones.push(data2[0]['nombre']);
-                  numero_beneficiarios.push(data2[0]['numero_beneficiarios']);
-                  if (this.myChart) {
-                    this.myChart.destroy();
-                  }
-                  this.chartBarGraphic(instituciones, numero_beneficiarios);
-                },
-              });
+          this.api.getInstitucionesOro(this.anioFinal, 701).subscribe({
+            next: (data2: any) => {
+              instituciones.push(data2[0]['nombre']);
+              numero_beneficiarios.push(data2[0]['numero_beneficiarios']);
+
+              if (this.myChart) {
+                this.myChart.destroy();
+              }
+
+              this.chartBarGraphic(instituciones, numero_beneficiarios);
             },
           });
-      },
-    });
+        },
+      });
+    },
+  });
 
-    console.log('data-instituciones', instituciones, numero_beneficiarios);
-    this.myChart.update();
-  }
+  // ❌ ¡NO actualices myChart aquí! → this.myChart aún no existe
+  // this.myChart.update(); ← QUITA ESTA LÍNEA
+}
 
   chartBarGraphic(labels: string[], data: number[]) {
     this.myChart = new Chart('myChart', {
@@ -476,6 +483,9 @@ export class DashboardComponent {
   }
 
   chartLineGraphic() {
+    if (this.lineChart) {
+      this.lineChart.destroy();  // ✅ importante
+    }
     this.lineChart = new Chart('myLineChart', {
       type: 'line',
       data: {
@@ -509,49 +519,53 @@ export class DashboardComponent {
   }
 
   chartPolarAreaGraphic(labels: string[], data: number[]) {
-    this.polarChart = new Chart('myPolarAreaChart', {
-      type: 'polarArea',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Total De Beneficiarios',
-            data: data,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-            ],
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Top 5 De Mejores Instituciones Sociales ' + this.anioFinal,
-            font: {
-              size: 24, // Cambia esto al tamaño de fuente que desees
-            },
+  if (this.polarChart) {
+    this.polarChart.destroy();
+  }
+
+  this.polarChart = new Chart('myPolarAreaChart', {
+    type: 'polarArea',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Total De Beneficiarios',
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Top 5 De Mejores Instituciones Sociales ' + this.anioFinal,
+          font: {
+            size: 24,
           },
         },
       },
-    });
-  }
+    },
+  });
+}
 
   async obtenerChartPorAnios() {
     console.log(this.anioFinal, this.anioInicio);

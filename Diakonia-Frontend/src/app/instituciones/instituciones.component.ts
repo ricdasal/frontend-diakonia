@@ -256,7 +256,7 @@ export class InstitucionesComponent implements OnInit {
 
       this.http
         .post(
-          `${environment.backendUrl}/api/readData`,
+          `${environment.backendUrl}/readData`,
           { data: csvData },
           { withCredentials: true, headers: headersAPI }
         )

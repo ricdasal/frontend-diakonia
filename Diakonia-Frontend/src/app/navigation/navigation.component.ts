@@ -49,7 +49,7 @@ export class NavigationComponent implements OnInit {
   logout(): void {
     this.http
       .post(
-        `${environment.backendUrl}/api/logout`,
+        `${environment.backendUrl}/logout`,
         {},
         { headers: headers, withCredentials: true }
       )
